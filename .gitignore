@@ -31,3 +31,7 @@
 # Debug files
 *.dSYM/
 *.su
+
+# CircuitMaker2000 Files
+.ckt
+.dat
