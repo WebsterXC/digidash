@@ -1,0 +1,19 @@
+date: September 12, 2016
+meeting_type: group # meeting_type can "group", "ta", or "instructor"
+attendance: [markgras, davideva, eggarwol, jhanson3, waburgin]
+absent: [mohdkhan]
+excused_absences: [
+  {ubit: mohdkhan, : reason: Had work (co-op).}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Brainstormed more ideas for project.},
+  {ubit: mohdkhan, progress: Brainstormed more ideas for project.},
+  {ubit: davideva, progress: Brainstormed more ideas for project.},
+  {ubit: eggarwol, progress: Brainstormed more ideas for project.},
+  {ubit: waburgin, progress: Brainstormed more ideas for project.},
+  {ubit: jhanson3, progress: Brainstormed more ideas for project.}
+  ]
+issues: [
+  ]
+Notes:  | 
+  Hardware design officially dropped from project. Raspberry Pi 3 Model B will be used. Time slot for TA meetings chosen. Individuals will begin ordering hardware.
