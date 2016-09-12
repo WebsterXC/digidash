@@ -33,5 +33,5 @@
 *.su
 
 # CircuitMaker2000 Files
-.ckt
-.dat
+*.ckt
+*.dat
