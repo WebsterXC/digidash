@@ -1,0 +1,19 @@
+date: September 6, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, mohdkhan, davideva, eggarwol, waburgin]
+absent: [jhanson3]
+excused_absences: [
+  {ubit: jhanson3, : reason: Was not part of group at this point in time.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: None. First real meeting.},
+  {ubit: mohdkhan, progress: None. First real meeting.},
+  {ubit: davideva, progress: None. First real meeting.},
+  {ubit: eggarwol, progress: None. First real meeting.},
+  {ubit: waburgin, progress: None. First real meeting.},
+  {ubit: jhanson3, progress: None. First real meeting.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Project officially changed from turbo controller to digital dashboard/gauge display. Brainstormed wants and needs regarding final product.
