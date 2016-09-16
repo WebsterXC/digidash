@@ -1,0 +1,21 @@
+date: September 16, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, jhanson3, waburgin]
+absent: [mohdkhan, davideva, eggarwol]
+excused_absences: [
+  {ubit: mohdkhan, : reason: Had work (co-op).},
+  {ubit: davideva, : reason: Sick (fever).},
+  {ubit: eggarwol, : reason: Had work. Changed future work schedule to avoid further TA meeting conflicts.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools.},
+  {ubit: davideva, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools.},
+  {ubit: eggarwol, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools.},
+  {ubit: waburgin, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools.},
+  {ubit: jhanson3, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Created GUI prototype.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Will meet Sunday (9/18) to film Sprint 1 video and coordinate next meeting.
