@@ -1,0 +1,20 @@
+date: September 18, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, jhanson3, waburgin, mohdkhan]
+absent: [davideva, eggarwol]
+excused_absences: [
+  {ubit: davideva, : reason: Sick (fever).},
+  {ubit: eggarwol, : reason: Had work. Changed future work schedule to avoid further TA meeting conflicts.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Added meeting minutes. Recorded video for Sprint 1.},
+  {ubit: mohdkhan, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Recorded video for Sprint 1.},
+  {ubit: davideva, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools.},
+  {ubit: eggarwol, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools.},
+  {ubit: waburgin, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Recorded video for Sprint 1.},
+  {ubit: jhanson3, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Recorded video for Sprint 1.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Recorded video for Sprint 1. Will meet Monday (9/19) for instructor meeting.
