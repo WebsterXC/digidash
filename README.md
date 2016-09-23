@@ -13,24 +13,14 @@ higher-level engine monitoring functions that run in the backgroup.
 This project is provided as open-source under the GNU GPL V3 license. Enjoy!
 
 ### Group Members ###
-Will Burgin
-David Evans
-Ed
-Khan
-Mark Grassi
-Joe Hanson
+* Will Burgin
+* David Evans
+* Ed
+* Khan
+* Mark Grassi
+* Joe Hanson
 
 ~ Most communication is done through a public and private Slack Channel. ~
 
 =====================================================================
 
-### Software Notes ###
-System Bootstrap -
-
-CAN Communication -
-
-GUI Bootstrap -
-
-GUI Rendering and Touch -
-
-Parameter Monitoring -
