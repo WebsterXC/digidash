@@ -1,0 +1,19 @@
+date: September 23, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, jhanson3, waburgin, mohdkhan, davideva, eggarwol]
+absent: []
+excused_absences: [
+  {}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Continued familiarizing self with project hardware and software tools. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: davideva, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: eggarwol, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: waburgin, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: jhanson3, progress: Continued familiarizing self with project hardware and software tools. Fixed GUI scatter bug.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Created GitHub issues. Will meet on as-needed basis until next TA meeting.
