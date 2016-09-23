@@ -3,7 +3,7 @@ meeting_type: group # meeting_type can be "group", "ta", or "instructor"
 attendance: [markgras, davideva, eggarwol, jhanson3, waburgin]
 absent: [mohdkhan]
 excused_absences: [
-  {ubit: mohdkhan, : reason: Had work (co-op).}
+  {ubit: mohdkhan, reason: Had work (co-op).}
   ]
 task_progress: [
   {ubit: markgras, progress: Brainstormed more ideas for project.},

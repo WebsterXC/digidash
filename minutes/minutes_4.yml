@@ -3,9 +3,9 @@ meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
 attendance: [markgras, jhanson3, waburgin]
 absent: [mohdkhan, davideva, eggarwol]
 excused_absences: [
-  {ubit: mohdkhan, : reason: Had work (co-op).},
-  {ubit: davideva, : reason: Sick (fever).},
-  {ubit: eggarwol, : reason: Had work. Changed future work schedule to avoid further TA meeting conflicts.}
+  {ubit: mohdkhan, reason: Had work (co-op).},
+  {ubit: davideva, reason: Sick (fever).},
+  {ubit: eggarwol, reason: Had work. Changed future work schedule to avoid further TA meeting conflicts.}
   ]
 task_progress: [
   {ubit: markgras, progress: Brainstormed more ideas for project. Began familiarizing self with project hardware and software tools. Added meeting minutes.},

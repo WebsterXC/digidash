@@ -1,0 +1,19 @@
+date: September 19, 2016
+meeting_type: instructor # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, jhanson3, waburgin, mohdkhan, davideva]
+absent: [eggarwol]
+excused_absences: [
+  {ubit: eggarwol, reason: Group miscommunication.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: None since previous day's meeting.},
+  {ubit: mohdkhan, progress: None since previous day's meeting.},
+  {ubit: davideva, progress: None since previous day's meeting.},
+  {ubit: eggarwol, progress: None since previous day's meeting.},
+  {ubit: waburgin, progress: None since previous day's meeting.},
+  {ubit: jhanson3, progress: None since previous day's meeting.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Will meet Friday (9/23) for TA meeting and to divide up tasks.
