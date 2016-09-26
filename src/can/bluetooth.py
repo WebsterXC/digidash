@@ -1,8 +1,32 @@
-# File defines methods to iteract with the OBDII bluetooth receiver.
+# File defines methods to interact with the OBDII bluetooth receiver.
+# Used https://github.com/Pbartek/pyobd-pi as a guide
 
-class Bluetooh{
+import serial
+
+class Bluetooth{
     isconnected = False
-
+	available = []		# list of available bluetooth ports
+	
+	def scan():
+		for i in range(10):
+			try:
+				s = serial.Serial("/dev/rfcomm"+str(i))
+				available.append((str(s.port)))
+				s.close()
+			except serial.SerialException:
+				pass
+	
+	def connect()
+		numAvailable = len(available)
+		if	numAvailable == 0:
+			print("No Bluetooth connections available")	
+		elif numAvailable == 1:
+			# connect here
+		else:
+			# let user choose which bluetooth device to connect to
+			# for i in available:
+				#
+	
     def __init__(self):
         if(isconnected):
             print("Error, bluetooth already connected to a device.")
