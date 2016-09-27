@@ -2,5 +2,7 @@
 
 class dtc_view:
     def __init__(self):
-        print("dtc_view class not implemented)
+        print("dtc_view class not implemented")
 
+    def get
+    

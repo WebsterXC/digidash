@@ -12,7 +12,7 @@ ABS_LOAD         = 0x43     # Absolute engine load value (0% <= x < 25700%)
 ENG_COOLTEMP     = 0x05     # Engine coolant temperature(deg. Celcius)
 ENG_RPM          = 0x0C     # Engine RPM (rpm)
 ENG_TORQUE_DMD   = 0x61     # Driver's demand engine torque (-125% <= x <= 125%)
-ENG_TORQUE_REQ   = 0x62     # Actual engine torque being delivered
+ENG_TORQUE_ACT   = 0x62     # Actual engine torque being delivered
 ENG_TORQUE_REF   = 0x63     # Engine reference torque (Newton/meters)
 ENG_TIME         = 0x7F     # Engine run time
 
@@ -30,7 +30,7 @@ OIL_TEMP         = 0x5C     # Engine oil temperature (deg. Celcius)
 ##### Fuel #####
 FUEL_PRESS       = 0x0A     # Fuel system pressure (kPa, gauge)
 FUEL_PRESS_ABS   = 0x56     # Fuel system pressure (kPa, absolute)
-FUEL_ADVAN       = 0x0E     # Fuel timing advance/retard (degrees from TDC)
+FUEL_ADVAN       = 0x0E     # Fuel timing advance/retard (degrees before TDC)
 FUEL_TIMNG       = 0x5D     # Fuel injection timing (relative crankshaft degrees)
 FUEL_LEVEL       = 0x2F     # Fuel tank remaining (%)
 FUEL_CMDED       = 0x44     # Fuel/Air commanded equivalence ratio (O <= x < 2)
@@ -48,7 +48,16 @@ FUEL_BANK_SHORT2 = 0x08     # Short term fuel bank 2
 FUEL_BANK_LONG1  = 0x07     # Long term fuel bank 1
 FUEL_BANK_LONG2  = 0x09     # Long term fuel bank 2
 
+##### Catalytic Converter Sensors #####
+
+## Cat Sensors are in front of the catalytic converter. ##
+CAT_TEMP_B1S1    = 0x3C     # Catalyst Temperature, Bank 1 Sensor 1
+CAT_TEMP_B2S1    = 0x3D
+CAT_TEMP_B1S2    = 0x3E
+CAT_TEMP_B2S2    = 0x3F
+
 ##### Oxygen Sensors #####
+## O2 sensors are behind the catalytic converter. ##
 
 # Directly read sensor voltages from 0 <= x <= 1.275
 OXSNS_COUNT      = 0x13     # Number of oxygen sensors equipped.

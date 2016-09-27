@@ -32,6 +32,5 @@
 *.dSYM/
 *.su
 
-# CircuitMaker2000 Files
-*.ckt
-*.dat
+# Python Compiled Code (WB)
+*.pyc
