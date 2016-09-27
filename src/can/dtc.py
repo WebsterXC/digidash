@@ -1,4 +1,4 @@
-# File defines methods for reading and troubleshooting DTC codes
+# File defines methods for reading and troubleshooting DTCs (Diagnostic Trouble Codes)
 
 class dtc_view:
     def __init__(self):
