@@ -3,14 +3,17 @@ meeting_type: group
 attendance: [davideva, eggarwol, jhanson3]
 absent: [waburgin, mohdkhan, markgras]
 excused_absences: [
-	{ubit: waburgin, reason: not needed for GUI submeeting}
-	{ubit: markgras, reason: not needed for GUI submeeting}
+	{ubit: waburgin, reason: not needed for GUI submeeting},
+	{ubit: markgras, reason: not needed for GUI submeeting},
 	{ubit: mohdkhan, reason: not needed for GUI submeeting}
 	]
 task_progress: [
-	{ubit: davideva, progress: Brainstormed individual tasks for GUI, added meeting minutes}
-	{ubit: eggarwol, progress: Brainstormed individual tasks for GUI}
-	{ubit: jhanson3, progress: Brainstormed individual tasks for GUI}
+	{ubit: davideva, progress: Brainstormed individual tasks for GUI, added meeting minutes},
+	{ubit: eggarwol, progress: Brainstormed individual tasks for GUI},
+	{ubit: jhanson3, progress: Brainstormed individual tasks for GUI},
+	{ubit: waburgin, progress: Not present for GUI meeting. Working on back-end programming.},
+	{ubit: markgras, progress: Not present for GUI meeting. Working on back-end programming.},
+	{ubit: mohdkhan, progress: Not present for GUI meeting. Working on back-end programming.}
 	]
 issues: []
 Notes: |
