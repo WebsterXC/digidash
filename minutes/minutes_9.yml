@@ -1,0 +1,19 @@
+date: September 30, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, mohdkhan, davideva, eggarwol]
+absent: [jhanson3]
+excused_absences: [
+  {ubit: jhanson3, reason: Sick.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Created diagnostic trouble code (DTC) directory. Started bluetooth programming. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: davideva, progress: Began working on GUI tasks.},
+  {ubit: eggarwol, progress: Wrote automath functions. Started bluetooth programming.},
+  {ubit: waburgin, progress: Began working on GUI tasks.},
+  {ubit: jhanson3, progress: Began working on GUI tasks.}
+  ]
+issues: [
+  ]
+Notes:  | 
+GUI and back-end teams shared progress with one another. Each will continue to work on their respective tasks.
