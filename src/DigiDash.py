@@ -32,7 +32,6 @@ class DigiDashApp(App):
         g3s = ScatterLayout(scale=0.5, size=g1.size, pos=(300,80))
         g3s.add_widget(g3)
         
-        
         head = Header()
         headscat = Scatter(size=head.size, pos=(0,530), do_translation=False)
         headscat.add_widget(head)
