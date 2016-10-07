@@ -21,8 +21,8 @@ class Header(Widget):
         self.add_widget(self.drop)
         self.blutooth = Image(source='Images/blutooth.png', pos=(580,15), size=(50,55))
         self.add_widget(self.blutooth)
-        self.connectbtn = Button(text='CONNECT', width=160, height=40, pos=(630,20))
-        self.add_widget(self.connectbtn)
+        self.drop = Header.settingDropdown(self)
+        self.add_widget(self.drop)
         self.size = self.bg.size
 
 
@@ -57,7 +57,22 @@ class Header(Widget):
 #        return mainbutton
 
 
-
+    def settingDropdown(self):
+    
+        Values = ['Background Image','Background Color','Header/Footer Image','Connection']
+        
+        setmenu = DropDown()
+        
+        for a in Values:
+            men = Button(text=a, size_hint_y= None, height= 40)
+            setmenu.add_widget(men)
+        
+        settingbutton = Button(text='Settings',height=40, width=160, pos=(630,20))
+        settingbutton.bind(on_release=setmenu.open)
+        setmenu.bind(on_select=lambda instance, x:setattr(settingbutton, 'text', a))
+        
+        return settingbutton
+        
     def genDropdown(self):
         """
             Fuction to be used to add possible gauge values from file. 
@@ -84,7 +99,8 @@ class Header(Widget):
         codetype.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
         #runTouchApp(mainbutton)
 
-        return mainbutton        
+        return mainbutton 
+
 
 
     
