@@ -9,11 +9,11 @@ task_progress: [
   {ubit: markgras, progress: Created diagnostic trouble code (DTC) directory. Started bluetooth programming. Added meeting minutes.},
   {ubit: mohdkhan, progress: Continued familiarizing self with project hardware and software tools.},
   {ubit: davideva, progress: Began working on GUI tasks.},
-  {ubit: eggarwol, progress: Wrote automath functions. Started bluetooth programming.},
-  {ubit: waburgin, progress: Began working on GUI tasks.},
+  {ubit: waburgin, progress: Wrote automath functions. Started bluetooth programming.},
+  {ubit: eggarwol, progress: Began working on GUI tasks.},
   {ubit: jhanson3, progress: Began working on GUI tasks.}
   ]
 issues: [
   ]
 Notes:  | 
-GUI and back-end teams shared progress with one another. Each will continue to work on their respective tasks.
+GUI and back-end teams shared progress with one another. Each will continue to work on their respective tasks.  We are having trouble connecting the bluetooth dongle to the Raspberry Pi. The Pi thinks that the dongle isn't a usable device. We will continue working to solve this problem.
