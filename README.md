@@ -15,7 +15,7 @@ This project is provided as open-source under the GNU GPL V3 license. Enjoy!
 ### Group Members ###
 * Will Burgin
 * David Evans
-* Ed
+* Ed Garwol
 * Khan
 * Mark Grassi
 * Joe Hanson
