@@ -56,16 +56,35 @@ class Header(Widget):
 
 #        return mainbutton
 
-
+        
     def settingDropdown(self):
     
+        def bibutpress(instance):
+            print('The button <%s> is being pressed' % instance.text)
+        def bcbutpress(instance):
+            print('The button <%s> is being pressed' % instance.text)
+        def hfbutpress(instance):
+            print('The button <%s> is being pressed' % instance.text)
+        def conbutpress(instance):
+            print('The button <%s> is being pressed' % instance.text)
+            
         Values = ['Background Image','Background Color','Header/Footer Image','Connection']
         
         setmenu = DropDown()
         
-        for a in Values:
-            men = Button(text=a, size_hint_y= None, height= 40)
-            setmenu.add_widget(men)
+        bibut = Button(text='Background Image', size_hint_y= None, height= 40)
+        bibut.bind(on_release=bibutpress)
+        setmenu.add_widget(bibut)
+        bcbut = Button(text='Background Color', size_hint_y= None, height= 40)
+        bcbut.bind(on_release=bcbutpress)
+        setmenu.add_widget(bcbut)
+        hfbut = Button(text='Header/Footer Color', size_hint_y= None, height= 40)
+        hfbut.bind(on_release=hfbutpress)
+        setmenu.add_widget(hfbut)
+        conbut = Button(text='Connection', size_hint_y= None, height= 40)
+        conbut.bind(on_release=conbutpress)
+        setmenu.add_widget(conbut)
+        
         
         settingbutton = Button(text='Settings',height=40, width=160, pos=(630,20))
         settingbutton.bind(on_release=setmenu.open)
