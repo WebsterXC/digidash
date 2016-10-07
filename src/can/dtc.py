@@ -2,12 +2,8 @@
 
 class dtc_view:
     def __init__(self):
-        print("dtc_view class not implemented")
+        print("dtc_view class not implemented") 
 
-<<<<<<< HEAD
-    def get
-    
-=======
 # DTC dictionary
 dtc_dict = {
     # P - Powertrain
