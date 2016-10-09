@@ -12,6 +12,4 @@ credited here.
 
 * Arduino Bluetooth communcation- 
 
-* ELM327 AT commands - 
-
 ### DOCUMENTATION RESOURCES ###
