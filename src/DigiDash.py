@@ -21,16 +21,20 @@ class DigiDashApp(App):
         bg = Image(source='Images/Metal2.jpg', pos=(0,0), size=(1500,840))
 
         g1= Gauge()
-        g1s = ScatterLayout(scale=0.5, size=g1.size, pos=(30,80))
+        g1s = Scatter(scale=0.5, size_hint=(None,None), size=(400,400), pos=(30,80))
         g1s.add_widget(g1)
+        #Gauge.setBackground(g1,'Images/Guages/GuageHead3.png')
+        
         
         g2= Gauge()
-        g2s = ScatterLayout(scale=0.5, size=g1.size, pos=(200,80))
+        g2s = Scatter(scale=0.5, size_hint=(None,None), size=(400,400), pos=(220,80))
         g2s.add_widget(g2)
+        g2.setMPH(100)
 
         g3= Gauge()
-        g3s = ScatterLayout(scale=0.5, size=g1.size, pos=(300,80))
+        g3s = Scatter(scale=0.5, size_hint=(None,None), size=(400,400), pos=(420,80))
         g3s.add_widget(g3)
+        
         
         head = Header()
         headscat = Scatter(size=head.size, pos=(0,530), do_translation=False)
