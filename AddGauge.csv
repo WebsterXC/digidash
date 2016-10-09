@@ -1,0 +1,15 @@
+Tachometer,0,9000,RPM
+Speedometer,0,300,MPH
+Boost,-30,50,PSI
+Oil Pressure,0,100,PSI
+Fuel Pressure, 0,100,PSI
+Mass Air Flow,0.0,5.0,V
+Manifold Absolute Pressure,-15,50,PSI
+A/F Ratio,11.0,18.0, 
+Absolute Throttle Position,0,100,%
+Accelerator Pedal Position,0,100,%
+Calculated Load Value,0,100,%
+Coolant Temperature,35,125,C
+Oil Temperature,35,125,C
+Ambient Air Temp,-30,60,C
+O2 Sensor,0.1,1.0,V

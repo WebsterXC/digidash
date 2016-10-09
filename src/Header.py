@@ -25,37 +25,6 @@ class Header(Widget):
         self.add_widget(self.drop)
         self.size = self.bg.size
 
-
-
-
-#    def genDropdown(self):
-#        """
-#            Fuction to be used to add possible gauge values from file. 
-#       """
-#        Values= ['Calculated Engine Load',
-#                 'Fuel Pressure',
-#                 'Engine RPM',
-#                 'Vehicle Speed',
-#                 'MAF air flow rate',
-#                 'Throttle position',]
-
-
-#        codetype = DropDown()
-
-#        for x in Values:
-#            cur = Button(text=x, height=40, width=250)
-            #cur.bind(on_release=lambda cur: codetype.select(cur.text))
-#            codetype.add_widget(cur)
-
-        
-#        mainbutton = Button(text='Add New Gauge', height=40, width=250, pos=(20,20))
-        #mainbutton = Button(text='Add New Gauge', size_hint = (None, None))
-#        mainbutton.bind(on_release=codetype.open)
-#        codetype.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
-        #runTouchApp(mainbutton)
-
-#        return mainbutton
-
         
     def settingDropdown(self):
     
