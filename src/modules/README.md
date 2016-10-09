@@ -10,4 +10,6 @@ credited here.
 
 * Kivy -
 
+* Arduino Bluetooth communcation- 
+
 ### DOCUMENTATION RESOURCES ###
