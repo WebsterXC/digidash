@@ -35,3 +35,6 @@
 # CircuitMaker2000 Files
 *.ckt
 *.dat
+
+#Python Compile Objects
+*.pyc
