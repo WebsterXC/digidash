@@ -11,7 +11,7 @@ class Bluetooth:
 
     def __init__(self):
 
-        if(isconnected):
+        if(0):
             print("Error, bluetooth already connected to a device.")
         else:
             print("Bluetooth object generated.")
@@ -20,7 +20,8 @@ class Bluetooth:
     def scan(identification):
         for i in range(256):
             try:
-                s = serial.Serial(i)
+                s = serial.Serial(str(i))
+                print("SERIAL")
                 available.append((str(s.port)))
                 s.close()
             except serial.SerialException:
@@ -29,6 +30,7 @@ class Bluetooth:
         for i in range(256):
             try:
                 s = serial.Serial("/dev/rfcomm"+str(i))
+                print("Not rfcomm")
                 available.append((str(s.port)))
                 s.close()
             except serial.SerialException:
@@ -37,6 +39,7 @@ class Bluetooth:
         for i in range(256):
             try:
                 s = serial.Serial("/dev/ttyACM"+str(i))
+                print("Not ttyACM")
                 available.append((str(s.port)))
                 s.close()
             except serial.SerialException:
@@ -45,6 +48,8 @@ class Bluetooth:
         for i in range(256):
             try:
                 s = serial.Serial("/dev/ttyUSB"+str(i))
+                print("Not ttyUSB")
+                
                 available.append((str(s.port)))
                 s.close()
             except serial.SerialException:
@@ -53,6 +58,8 @@ class Bluetooth:
         for i in range(256):
             try:
                 s = serial.Serial("/dev/ttyd"+str(i))
+                print("Not ttyd")
+                
                 available.append((str(s.port)))
                 s.close()
             except serial.SerialException:
@@ -77,8 +84,9 @@ class Bluetooth:
 
     # Break a connection with the OBDII reader.
     def disconnect(identification):
-        isconnected = False
+        # isconnected = False
         # <serial connection>.close()
         print("Bluetooth.disconnect method not implemented")
 
-scan(0)
+x = Bluetooth()
+x.scan()
