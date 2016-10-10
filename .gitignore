@@ -32,5 +32,13 @@
 *.dSYM/
 *.su
 
+<<<<<<< HEAD
 # Python Compiled Code (WB)
+=======
+# CircuitMaker2000 Files
+*.ckt
+*.dat
+
+#Python Compile Objects
+>>>>>>> c1931a660823490c800d028b4de4ad228309ed31
 *.pyc
