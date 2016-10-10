@@ -1,4 +1,4 @@
-# File defines hexadecimal PID codes to request specific data from the CAN bus.
+# File defines hexadecimal PIDs (Parameter IDs) to request specific data from the CAN bus.
 
 ##### General #####
 SPEED            = 0x0D
