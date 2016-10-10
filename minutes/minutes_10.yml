@@ -3,10 +3,10 @@ meeting_type: group # meeting_type can be "group", "ta", or "instructor"
 attendance: [davideva, jhanson3]
 absent: [eggarwol, mohdkhan, markgras, waburgin]
 excused_absences: [
-   {ubit: eggarwol, reason: Not avaliable at time of meeting.}
-{ubit: mohdkhan, reason: Not needed for GUI meeting.}
-{ubit: markgras, reason: Not needed for GUI meeting.}
-{ubit: waburgin, reason: Not needed for GUI meeting.}
+   {ubit: eggarwol, reason: Not avaliable at time of meeting.},
+   {ubit: mohdkhan, reason: Not needed for GUI meeting.},
+   {ubit: markgras, reason: Not needed for GUI meeting.},
+   {ubit: waburgin, reason: Not needed for GUI meeting.}
   ]
 task_progress: [
   {ubit: markgras, progress: Continued wrestling with Pi's bluetooth. Added meeting minutes.},
