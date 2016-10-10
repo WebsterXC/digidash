@@ -18,7 +18,7 @@ class Gauge(Widget):
     def __init__(self, **kwargs):
         super(Gauge, self).__init__(**kwargs)
         
-        #GUAGE SPECIFIC VALUES
+        #GAUGE SPECIFIC VALUES
         self.Measure = 'DEFAULT'
         self.MinValue= 0
         self.MaxValue= 80
@@ -27,7 +27,7 @@ class Gauge(Widget):
         #BACKGROUND       
         self.gauge = Image(source='Images/Guages/GuageHead5.png', size=(400,400))
         
-        #GUAGE DIAL
+        #GAUGE DIAL
         self.dialscat = Scatter(do_translation=False)
         self.dialscat.center = self.gauge.center
         self.dial = Image(source='Images/dial.png',size=(300,300), pos=(-105,-90))
