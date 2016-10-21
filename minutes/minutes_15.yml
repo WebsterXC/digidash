@@ -1,0 +1,22 @@
+date: October 20, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin]
+absent: [mohdkhan, davideva, eggarwol, jhanson3]
+excused_absences: [
+  {ubit: mohdkhan, reason: Work.},
+  {ubit: davideva, reason: Not needed for back-end meeting.},
+  {ubit: eggarwol, reason: Not needed for back-end meeting.},
+  {ubit: jhanson3, reason: Not needed for back-end meeting.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Continued working on bluetooth and backend tasks. Successfully communicated with car (no data yet though). Added meeting minutes.},
+  {ubit: mohdkhan, progress: Continued working on bluetooth and backend tasks.},
+  {ubit: davideva, progress: Continued working on GUI tasks. Wrote code to manipulate .csv files.},
+  {ubit: waburgin, progress: Continued working on bluetooth and backend tasks.},
+  {ubit: eggarwol, progress: Continued working on GUI tasks. Brainstormed settings menu programming.},
+  {ubit: jhanson3, progress: Continued working on GUI tasks. Completed digital gauge class.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Discussed how to continue with back-end programming. Will will run the practicerun.py (serial) code with his hardware and report results. Mark will try bluetooth communication via socket programming.
