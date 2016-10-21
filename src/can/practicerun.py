@@ -101,23 +101,6 @@ print("Should be echo. Buffer is:")
 print(buffer)
 
 #-------------------
-#GET RESULT
-time.sleep(0.1)
-if port:
-    buffer = ""
-    while 1:
-        c = port.read(1)
-        if c == '\r' and len(buffer) > 0:
-            break
-        else:
-            if buffer != "" or c != ">": #if something is in buffer, add everything
-                buffer = buffer + c
-else:
-    print("No Port! Can't get result.")
-print("Should say OK. Buffer is:")
-print(buffer)
-
-#-------------------
 #SEND COMMAND "0100" to ready dongle for communication
 if port:
     port.flushOutput()
@@ -146,21 +129,6 @@ else:
 print("Should say 41 00 BE 1F B8 10 or the like. Buffer is:")
 print(buffer)
 #-------------------
-#GET RESULT
-time.sleep(0.1)
-if port:
-    buffer = ""
-    while 1:
-        c = port.read(1)
-        if c == '\r' and len(buffer) > 0:
-            break
-        else:
-            if buffer != "" or c != ">": #if something is in buffer, add everything
-                buffer = buffer + c
-else:
-    print("No Port! Can't get result.")
-print("Buffer says:")
-print(buffer)
 
 #-------------------
 #RPM LOOP
@@ -187,9 +155,12 @@ while 1:
     else:
         print("No Port! Can't get result.")
     print("Should be RPM. Buffer is:")
-	print(buffer)
-    temp = eval("0x" + buffer, {}, {})
-    rpm = temp/4
+    print(buffer)
+    #temp = eval("0x" + buffer, {}, {})
+    data = buffer.split()
+    a = int(data[2], 16)
+    b = int(data[3], 16)
+    rpm = ((256*a) + b)/4
     print("RPM is %d" % rpm)
     time.sleep(1)
 
