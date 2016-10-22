@@ -1,0 +1,21 @@
+date: October 4, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [davideva, jhanson3]
+absent: [eggarwol, mohdkhan, markgras, waburgin]
+excused_absences: [
+   {ubit: eggarwol, reason: Not avaliable at time of meeting.},
+   {ubit: mohdkhan, reason: Not needed for GUI meeting.},
+   {ubit: markgras, reason: Not needed for GUI meeting.},
+   {ubit: waburgin, reason: Not needed for GUI meeting.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Continued wrestling with Pi's bluetooth. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: davideva, progress: Continued working on GUI tasks (drop-down menus and supporting file for Add Gauge functionality).},
+  {ubit: waburgin, progress: Created temporary bluetooth solution with Arduino to connect with car.},
+  {ubit: eggarwol, progress: Continued working on GUI tasks (drop-down menus).},
+  {ubit: jhanson3, progress: Continued working on GUI tasks (including a direction for the Add Gauge functionality).}
+  ]
+issues: []
+Notes:  | 
+David and Joe accomplished planning for Adding a new Gauge. Still having bluetooth issues. Will meet this weekend to wrap up feature branches for Sprint 2.

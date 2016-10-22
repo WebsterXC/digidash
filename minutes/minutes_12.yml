@@ -1,0 +1,19 @@
+date: October 7, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, mohdkhan, davideva, eggarwol, jhanson3]
+absent: []
+excused_absences: [
+  {}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Solved bluetooth connection issues. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Attempted another temporary bluetooth solution using Arduino.},
+  {ubit: davideva, progress: Created CSV file for future add gauge functionality.},
+  {ubit: waburgin, progress: Uploaded sample data for use until bluetooth communication is working.},
+  {ubit: eggarwol, progress: Recognized issues with menu functionality and reacted accordingly.},
+  {ubit: jhanson3, progress: Successfully implemented customized gauge styles and restructed gauge class.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Bluetooth connection issue solved. Video for Sprint 2 made. Some GitHub issues for Sprint 3 created. Sprint 2 release made.

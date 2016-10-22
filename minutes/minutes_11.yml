@@ -1,0 +1,19 @@
+date: October 7, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, mohdkhan, davideva, eggarwol, jhanson3]
+absent: []
+excused_absences: [
+  {}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Continued wrestling with Pi's bluetooth. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Continued familiarizing self with project hardware and software tools.},
+  {ubit: davideva, progress: Continued working on GUI tasks (drop-down menus).},
+  {ubit: waburgin, progress: Created temporary bluetooth solution with Arduino to connect with car.},
+  {ubit: eggarwol, progress: Continued working on GUI tasks (drop-down menus).},
+  {ubit: jhanson3, progress: Continued working on GUI tasks (sub-menus for gauges, gauge types, gauge helper functions, parameters for min, max, type, and units).}
+  ]
+issues: [
+  ]
+Notes:  | 
+Still having bluetooth issues. Will meet this weekend to wrap up feature branches for Sprint 2.
