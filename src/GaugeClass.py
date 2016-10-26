@@ -52,8 +52,8 @@ class Gauge(Widget):
         self.settings_open=False
         
         #GUAGE MEASUREMENTS AND UNTIS
-        self.MTitle = Label(text=self.Measure, font_size='30sp', pos=(150,40), color=(0, 0, 0, 1))
-        self.MUnits = Label(text=self.Units, font_size='26sp', pos=(150,70), color=(0, 0, 0, 1))
+        self.MTitle = Label(text=self.Measure, font_size='26sp', pos=(150,40), color=(0, 0, 0, 1))
+        self.MUnits = Label(text=self.Units, font_size='22sp', pos=(150,70), color=(0, 0, 0, 1))
         
         
         #ADDING TO WIDGET
@@ -161,22 +161,24 @@ class Gauge(Widget):
     def setGuageParameters(self, Meas, Min, Max, UnitM):
         self.Measure= Meas
         #UPDATE TEXT
+        self.MTitle.text=Meas
         
         self.Units= UnitM
+        self.MUnits.text=UnitM
         
         self.MinValue=Min
         self.MaxValue=Max
         diff = Max-Min
         inc = diff/8
-        self.L1.text=Min
-        self.L2.text=Min+(1*inc)
-        self.L3.text=Min+(2*inc)
-        self.L4.text=Min+(3*inc)
-        self.L5.text=Min+(4*inc)
-        self.L6.text=Min+(5*inc)
-        self.L7.text=Min+(6*inc)
-        self.L8.text=Min+(7*inc)
-        self.L9.text=Min+(8*inc)
+        self.L1.text=str(Min)
+        self.L2.text=str(Min+(1*inc))
+        self.L3.text=str(Min+(2*inc))
+        self.L4.text=str(Min+(3*inc))
+        self.L5.text=str(Min+(4*inc))
+        self.L6.text=str(Min+(5*inc))
+        self.L7.text=str(Min+(6*inc))
+        self.L8.text=str(Min+(7*inc))
+        self.L9.text=str(Min+(8*inc))
         
 
     def setMPH(self, mph):
