@@ -1,0 +1,19 @@
+date: October 21, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, davideva, eggarwol, jhanson3]
+absent: [mohdkhan]
+excused_absences: [
+  {ubit: mohdkhan, reason: "Stuck at work."}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Same as previous day's minutes. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Same as previous day's minutes.},
+  {ubit: davideva, progress: Same as previous day's minutes.},
+  {ubit: waburgin, progress: Same as previous day's minutes. Tested code from most recent bluetooth branch commit.},
+  {ubit: eggarwol, progress: Same as previous day's minutes.},
+  {ubit: jhanson3, progress: Same as previous day's minutes.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Shared everyone's progress. We all know what we have to do.
