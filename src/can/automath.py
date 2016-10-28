@@ -102,8 +102,8 @@ def fuel_timing_conv(byteA, byteB):
 def fuel_level_conv(data):
     return data / 2.55
 
-def fuel_cmded_conv(data):
-    return (2/65536) * ((256*byteA) + byte B)
+def fuel_cmded_conv(byteA, byteB):
+    return (2/65536) * ((256*byteA) + byteB)
 
 def fuel_rate_conv(byteA, byteB):
     return ( (256*byteA) + byteB) / 20

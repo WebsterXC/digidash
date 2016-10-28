@@ -1,84 +1,82 @@
 # File defines methods to interact with the OBDII bluetooth receiver.
-# Used https://github.com/Pbartek/pyobd-pi as a guide
+# Used https://github.com/Pbartek/pyobd-pi and https://github.com/peterh/pyobd as guides
 
 # The OBD-II bluetooth reader we are deploying uses ELM327 protocol to communicate.
 
 import serial
+import string
+import time
 
 class Bluetooth:
-    isconnected = False
-    available = []		# list of available bluetooth ports
+	baud = 9600
+	databits = 8
+	par = serial.PARITY_NONE  # parity
+	sb = 1  # stop bits
+	to = 0.5 # 500 millisecond timeout period for read()
+	ELMver = "Unknown"
+	State = 1  # state SERIAL is 1 connected, 0 disconnected (connection failed)
+	port = None
+	delay = 0.05
 
-    def __init__(self):
+	def __init__(self):
+		print("Bluetooth object generated.")
 
-        if(isconnected):
-            print("Error, bluetooth already connected to a device.")
-        else:
-            print("Bluetooth object generated.")
+	def connect(self):
+		print("Attempting to connect to vehicle.")
+		try:    #note: this next line opens port
+   			port = serial.Serial("/dev/rfcomm0", Bluetooth.baud, parity=Bluetooth.par, stopbits=Bluetooth.sb, \
+					     bytesize=Bluetooth.databits, timeout=Bluetooth.to)
 
-    # Scan for available serial bluetooth connections
-    def scan(identification):
-        for i in range(256):
-            try:
-                s = serial.Serial(i)
-                available.append((str(s.port)))
-                s.close()
-            except serial.SerialException:
-                pass
+			buff = ""
+	
+			time.sleep(0.1)
 
-        for i in range(256):
-            try:
-                s = serial.Serial("/dev/rfcomm"+str(i))
-                available.append((str(s.port)))
-                s.close()
-            except serial.SerialException:
-                pass
+			# Send ATZ to clear all
+			talk_elm(self, "atz")
+			buff = listen_elm(self)
+			#listen_elm(self)			
 
-        for i in range(256):
-            try:
-                s = serial.Serial("/dev/ttyACM"+str(i))
-                available.append((str(s.port)))
-                s.close()
-            except serial.SerialException:
-                pass
+			print(buff)
 
-        for i in range(256):
-            try:
-                s = serial.Serial("/dev/ttyUSB"+str(i))
-                available.append((str(s.port)))
-                s.close()
-            except serial.SerialException:
-                pass
+			# Disable echo via ATE0
+			talk_elm(self, "ate0")
+			buff = listen_elm(self)	
 
-        for i in range(256):
-            try:
-                s = serial.Serial("/dev/ttyd"+str(i))
-                available.append((str(s.port)))
-                s.close()
-            except serial.SerialException:
-                pass
+			print(buff)
 
-    # Establish a connection with the OBDII reader.
-   # def connect():
-    #    numAvailable = len(available)
-     #   if	numAvailable == 0:
-      #      print("No Bluetooth connections available")
-       # elif numAvailable == 1:
-        #    # connect here
-       # else:
-            # let user choose which bluetooth device to connect to
-            # for i in available:
-                #
+		except serial.SerialException as e:
+    			print e
+    			State = 0
+    			print ("Damn! Couldn't open the connection.")
 
-    # Send a list of bytes to the OBDII reader via bluetooth.
-    def send(data):
-        print("Bluetooth.send_bytes method not implemented")
+		return
 
+	def talk_elm(self, cmd):
+		if port != None:
+			port.flushOutput()
+			port.flushInput()
+			for c in cmd:
+				port.write(c)
+			port.write("\r\n")
+		else:
+			print("Unable to send")
+			print(cmd)
+		
+		time.sleep(Bluetooth.delay)
 
-    # Break a connection with the OBDII reader.
-    def disconnect(identification):
-        isconnected = False
-        # <serial connection>.close()
-        print("Bluetooth.disconnect method not implemented")
-
-scan(0)
+	def listen_elm(self):
+		buffer = ""
+		if port != None:
+			while 1:
+				c = port.read(1)
+				if c == '\r' and len(buffer) > 0:
+					break
+				else:
+					if buffer != "" or c != ">":
+						buffer = buffer + c
+		else:
+			print("No port available.")
+			print(cmd)
+	
+		time.sleep(Bluetooth.delay)
+		return buffer
