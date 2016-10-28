@@ -16,9 +16,11 @@ BlueObject = None	# Not sure if we want to implement it this way, but I did this
 class canbus(object):
     hasFaults   = False		# Are there DTC codes that need to be processed?
     mode	= "0x01"	# Realtime gathering mode
+    #BlueObject  = None
 
     # Initialize CAN data structures
     def __init__(self):
+	global BlueObject
 	BlueObject = bluetooth.Bluetooth()
 	BlueObject.connect()
 
@@ -36,11 +38,12 @@ def send_pid(pid):
 	# Process and reformat PID code
 	command = ((canbus.mode).split('x'))[1] + ((pid).split('x'))[1]
 
+	global BlueObject
 	# Send command via ELM327
 	BlueObject.talk_elm(command)	
 
 	# Gather response and return answer
-	result = BlueObect.listen_elm()
+	result = BlueObject.listen_elm()
 
 	return result
 
@@ -55,4 +58,5 @@ def send_command(cmd):
 
 # If testing standalone:
 if __name__ == "main":
-	send_pid(ENG_RPM)
+	#send_pid(ENG_RPM)
+	print("CANBUS MODULE STANDALONE")

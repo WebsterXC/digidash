@@ -7,6 +7,8 @@ import serial
 import string
 import time
 
+#port = None
+
 class Bluetooth:
 	baud = 9600
 	databits = 8
@@ -16,7 +18,7 @@ class Bluetooth:
 	ELMver = "Unknown"
 	State = 1  # state SERIAL is 1 connected, 0 disconnected (connection failed)
 	port = None
-	delay = 0.05
+	delay = 0.1
 
 	def __init__(self):
 		print("Bluetooth object generated.")
@@ -24,26 +26,23 @@ class Bluetooth:
 	def connect(self):
 		print("Attempting to connect to vehicle.")
 		try:    #note: this next line opens port
-   			port = serial.Serial("/dev/rfcomm0", Bluetooth.baud, parity=Bluetooth.par, stopbits=Bluetooth.sb, \
+   			Bluetooth.port = serial.Serial("/dev/rfcomm0", Bluetooth.baud, parity=Bluetooth.par, stopbits=Bluetooth.sb, \
 					     bytesize=Bluetooth.databits, timeout=Bluetooth.to)
-
 			buff = ""
-	
-			time.sleep(0.1)
 
 			# Send ATZ to clear all
-			talk_elm(self, "atz")
-			buff = listen_elm(self)
-			#listen_elm(self)			
+			self.talk_elm("atz")
+			buff = self.listen_elm()
+			#buff = self.listen_elm()			
 
 			print(buff)
 
 			# Disable echo via ATE0
-			talk_elm(self, "ate0")
-			buff = listen_elm(self)	
+			self.talk_elm("ate0")
+			buff = self.listen_elm()	
 
 			print(buff)
-
+	
 		except serial.SerialException as e:
     			print e
     			State = 0
@@ -52,12 +51,12 @@ class Bluetooth:
 		return
 
 	def talk_elm(self, cmd):
-		if port != None:
-			port.flushOutput()
-			port.flushInput()
+		if Bluetooth.port != None:
+			Bluetooth.port.flushOutput()
+			Bluetooth.port.flushInput()
 			for c in cmd:
-				port.write(c)
-			port.write("\r\n")
+				Bluetooth.port.write(c)
+			Bluetooth.port.write("\r\n")
 		else:
 			print("Unable to send")
 			print(cmd)
@@ -66,9 +65,9 @@ class Bluetooth:
 
 	def listen_elm(self):
 		buffer = ""
-		if port != None:
+		if Bluetooth.port != None:
 			while 1:
-				c = port.read(1)
+				c = Bluetooth.port.read(1)
 				if c == '\r' and len(buffer) > 0:
 					break
 				else:
@@ -76,7 +75,6 @@ class Bluetooth:
 						buffer = buffer + c
 		else:
 			print("No port available.")
-			print(cmd)
 	
 		time.sleep(Bluetooth.delay)
 		return buffer
