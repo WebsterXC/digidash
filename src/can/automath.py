@@ -6,12 +6,21 @@
 # Sources:
 #   - "OBD-II PIDs" Wikipedia Page
 
+def convert(pid, raw):
+	SingleByte = {SPEED : speed_conv, INTAKE_PRESS : intake_press_conv, OIL_TEMP : oil_temp_conv, FUEL_ADVAN : fuel_advan_conv, FUEL_LEVEL : fuel_level_conv}
+	DoubleByte = {ENG_RPM : eng_rpm_conv, INTAKE_MAF : intake_maf_conv, FUEL_TIMING : fuel_timing_conv, FUEL_RATE, fuel_rate_conv}
 
-##### Helpers #####
+	data = raw.split()
+	a = int(data[2], 16)
+	if len(data) > 3:
+		b = int(data[3], 16)
 
-# Function takes data in 2's complement and returns it's decimal equivalent.
-def twos_to_decimal(number):
-    return -1   #Unimplemented
+	if pid in SingleByte:
+		SingleByte[pid](a)
+	elif pid in DoubleByte:
+		DoubleByte[pid](a,b)
+	else:
+		print("Automath.convert error.")
 
 ##### General #####
 

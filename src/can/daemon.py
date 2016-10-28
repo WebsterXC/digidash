@@ -2,6 +2,7 @@
 import time
 import threading
 import csv
+import canbus
 
 csv_file = 'data/data.txt'                                  # Sample data file to open
 CANData = { }                                               # CAN Dictionary (will change once data structure is setup elsewhere)
@@ -62,22 +63,35 @@ def parser_process():
                     data_row = time_row
                     time_row = csv_reader.next()
 
+# Daemon handles gathering of engine parameters from canbus.PIDcodes
+class CANDaemon(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
 
-# Please ignore what's below.
-'''
-# Daemon is used to constantly monitor vehicle parameters to identify inconsistencies,
-# sudden DTC codes and record complex data sets (torque curves, etc).
-def daemon_monitor(self):
-    return 0
+    def run(self):
+        # Begin reading data
+        can_process()
 
-# ENTRY POINT
-daemon_parser()
+def can_process():
+	while 1:
+		readback = []
+		# Iterate through PIDcodes and get data for each. Place in CANData.
+		for pid in canbus.PIDcodes:
+			answer = canbus.send_pid(pid)
+			CANData[pid] = automath.convert(pid, answer)
+		
+		for selection in canbus.PIDcodes:
+			readback.push_back(CANData[selection])
 
-for i in range(0, 10):
-    printout = []
-    for element in inparams:
-        printout.append(CANData[element])
+		print(readback)
+		
 
-    print(printout)
-    time.sleep(0.25)
-'''
+# Daemon monitors engine parameters and notifies on a given event or mismatch.
+class ParamDaemon(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        # Initialisation
+	print("ParamDaemon")
+
