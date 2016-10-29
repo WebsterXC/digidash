@@ -7,8 +7,8 @@ import time
 import bluetooth #if you get an import error, then "sudo apt-get install python-bluez"
 
 class Blue:
-    myMAC = "00:1D:A5:00:03:4E"  # Mark's dongle (ELM v1.5 aka shit chinese clone)
-    # myMAC = ":::::" #Will's dongle (ELM v2.1 aka not CHINA CHINA CHINA)
+    #myMAC = "00:1D:A5:00:03:4E"  # Mark's dongle (ELM v1.5 aka shit chinese clone)
+    myMAC = "00:1D:A5:68:98:8A" #Will's dongle (ELM v2.1 aka not CHINA CHINA CHINA)
 
     state = 0  # state is 1 if connected, 0 if disconnected
     sock = None
@@ -53,12 +53,18 @@ class Blue:
             while 1:
                 c = self.sock.recv(1)
                 #print("c is:%s:", c)
-                if c == '\r' and len(buffer) > 0:
+                if (c == '\r' or c == '>') and len(buffer) > 0:
                     break
                 else:
-                    if buffer != "\r" and c != ">":
+                    if c != "\r" and c != ">":
                         buffer = buffer + c
             # print("Here!")
             # print(buffer)
             if buffer != "" and buffer != "\r" and buffer != cmd and buffer != (">" + cmd):
-                return buffer
+                if buffer == "SEARCHING...":
+                    continue
+                else:                
+                    sock.recv(2) # get rid of "\r>" that's still waiting to be received
+                    #print("Response is")
+                    #print(buffer)
+                    return buffer

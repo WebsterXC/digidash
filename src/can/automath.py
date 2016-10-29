@@ -40,21 +40,21 @@ def convert(pid, raw):
         
         # Fuel Bank PIDs
         fuel_pids = [pids.FUEL_BANK_SHORT1, pids.FUEL_BANK_SHORT2, pids.FUEL_BANK_LONG1, pids.FUEL_BANK_LONG2]
-        elif pid in fuel_pids:
+        if pid in fuel_pids:
             return fuel_bank_conv(a)
 
         # Cat Sensor PIDs
         cat_pids = [pids.CAT_TEMP_B1S1, pids.CAT_TEMP_B2S1, pids.CAT_TEMP_B1S2, pids.CAT_TEMP_B2S2]
-        elif pid in cat_pids:
+        if pid in cat_pids:
             return cat_temp_conv(a, b)
 
         # O2 Sensor PIDs
         oxy_volts = [pids.OXSNS_COUNT, pids.OXSNS_V1, pids.OXSNS_V2, pids.OXSNS_V3, pids.OXSNS_V4, pids.OXSNS_V5, pids.OXSNS_V6, pids.OXSNS_V7, pids.OXSNS_V8]
-        elif pid in oxy_pids:
+        if pid in oxy_pids:
             return oxsns_volts_conv(a)
                     
         oxy_fuelair = [pids.OXSNS_FA1, pids.OXSNS_FA2, pids.OXSNS_FA3, pids.OXSNS_FA4, pids.OXSNS_FA5, pids.OXSNS_FA6, pids.OXSNS_FA7, pids.OXSNS_FA8]
-        elif pid in oxy_fuelair:
+        if pid in oxy_fuelair:
             return oxsns_fa_conv(a, b)
 
 	else:
