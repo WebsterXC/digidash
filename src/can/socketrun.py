@@ -16,7 +16,7 @@ def send_recv(cmd): #send cmd parameter and return dongle response (ignores echo
                 if buffer != "\r" and c != ">":
                     buffer = buffer + c
         #print("Here!")
-        print(buffer)
+        #print(buffer)
         if buffer != "" and buffer != "\r" and buffer != cmd and buffer != (">" + cmd):
             return buffer
 
