@@ -52,16 +52,16 @@ class Bluetooth:
 
 	def talk_elm(self, cmd):
 		if Bluetooth.port != None:
-			Bluetooth.port.flushOutput()
-			Bluetooth.port.flushInput()
+			Blue.port.flushOutput()
+			Blue.port.flushInput()
 			for c in cmd:
 				Bluetooth.port.write(c)
-			Bluetooth.port.write("\r\n")
+			Blue.port.write("\r\n")
 		else:
 			print("Unable to send")
 			print(cmd)
 		
-		time.sleep(Bluetooth.delay)
+		time.sleep(Blue.delay)
 
 	def listen_elm(self):
 		buffer = ""
@@ -76,5 +76,5 @@ class Bluetooth:
 		else:
 			print("No port available.")
 	
-		time.sleep(Bluetooth.delay)
+		time.sleep(Blue.delay)
 		return buffer

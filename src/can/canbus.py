@@ -5,11 +5,12 @@
 # reader. CAN bus data is automatically gathered via the CANDaemon class in daemon.py.
 
 import pids
-import bluetooth
+import blue
 
 # Automatically updated PID codes
 PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.OIL_TEMP, pids.FUEL_RATE, pids.THROTTLE_REQ]
 CANdata = { }		# Dictionary holding all vehicle parameters + readings
+ELMdata = { }		# Dictionary holding various ELM data
 isConnected = False	# Is a bluetooth connection to vehicle available?
 BlueObject = None	# Not sure if we want to implement it this way, but I did this because it was quick and I wanted
 			# to test code.
@@ -22,7 +23,7 @@ class canbus(object):
     # Begin Bluetooth connection and initialise with auto-update PIDs
     def __init__(self):
 	global BlueObject
-	BlueObject = bluetooth.Bluetooth()
+	BlueObject = blue.Blue()
 	BlueObject.connect()
 
 	for code in PIDcodes:
