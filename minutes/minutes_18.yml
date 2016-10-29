@@ -1,0 +1,22 @@
+date: October 29, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin]
+absent: [davideva, eggarwol, jhanson3, mohdkhan]
+excused_absences: [
+  {ubit: davideva, reason: Not needed for backend programming.},
+  {ubit: eggarwol, reason: Not needed for backend programming.},
+  {ubit: jhanson3, reason: Not needed for backend programming.},
+  {ubit: mohdkhan, reason: Chose not to attend optional meeting.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Updated backend code to use bluetooth sockets instead of serial. Fixed errors and bugs. Tested and verified code. Added meeting minutes.},
+  {ubit: mohdkhan, progress: None.},
+  {ubit: davideva, progress: None.},
+  {ubit: waburgin, progress: Fixed errors and bugs. Tested and verified code.},
+  {ubit: eggarwol, progress: None.},
+  {ubit: jhanson3, progress: None.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Updated backend code to use bluetooth sockets instead of serial. Fixed errors and bugs. Tested and verified code in Mark's badass hatchback.
