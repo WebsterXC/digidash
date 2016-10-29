@@ -20,7 +20,7 @@ class ParserDaemon(threading.Thread):
     def run(self):
         # Initialisation
         for i in range(0,101):
-            CANData[i] = -1
+            CANData[i] = -1     #Optional
        
         # Begin reading data
         parser_process()
@@ -75,7 +75,6 @@ class CANDaemon(threading.Thread):
 
 def can_process():
 	while 1:
-		readback = []
 		# Iterate through PIDcodes and get data for each. Place in CANdata.
 		for pid in canbus.PIDcodes:
 			answer = canbus.send_pid(pid)

@@ -19,7 +19,7 @@ class canbus(object):
     mode	= "0x01"	# Realtime gathering mode
     #BlueObject  = None
 
-    # Initialize CAN data structures
+    # Begin Bluetooth connection and initialise with auto-update PIDs
     def __init__(self):
 	global BlueObject
 	BlueObject = bluetooth.Bluetooth()
@@ -48,16 +48,13 @@ def send_pid(pid):
 
 	return result
 
-# Sends an ELM327 specific command to the bluetooth receiver.
-# "Static" method for sending ELM327 commands since the canbus object may
-# not be ready yet.
+# Nonclass method for sending ELM327 commands to the bluetooth dongle, since the canbus object may not be ready yet.
 def send_command(cmd):
-	
-	# If it's clearly not an ELM command
+	print("Unimplemented")
 	return isConnected
 
 
 # If testing standalone:
-if __name__ == "main":
+#if __name__ == "main":
 	#send_pid(ENG_RPM)
-	print("CANBUS MODULE STANDALONE")
+#	print("CANBUS MODULE STANDALONE")

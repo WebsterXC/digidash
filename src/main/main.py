@@ -17,15 +17,15 @@
 def main():
 	# Welcome to DigiDash! #
 
-	## KIVY START CODE HERE ##
+	## KIVY START MENU HERE ##
 
 	##########################
 
 	# Test to ensure a valid bluetooth connection is even possible. #
-		## If not, display warning and options.
+		## If no, display warning and options.
 
 	# Vehicle available. Start CAN daemon.
 
 	# Check if data recording is enabled in user settings. #
-		# If so, begin Logger daemon.
+		# If yes, begin Logger daemon.
 
