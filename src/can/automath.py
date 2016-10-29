@@ -6,21 +6,28 @@
 # Sources:
 #   - "OBD-II PIDs" Wikipedia Page
 
+import pids
+
 def convert(pid, raw):
-	SingleByte = {SPEED : speed_conv, INTAKE_PRESS : intake_press_conv, OIL_TEMP : oil_temp_conv, FUEL_ADVAN : fuel_advan_conv, FUEL_LEVEL : fuel_level_conv}
-	DoubleByte = {ENG_RPM : eng_rpm_conv, INTAKE_MAF : intake_maf_conv, FUEL_TIMING : fuel_timing_conv, FUEL_RATE, fuel_rate_conv}
+	SingleByte = {pids.SPEED : speed_conv, pids.INTAKE_TEMP : intake_temp_conv, pids.INTAKE_PRESS : intake_press_conv, pids.OIL_TEMP : oil_temp_conv, pids.FUEL_ADVAN : fuel_advan_conv, pids.FUEL_LEVEL : fuel_level_conv, pids.THROTTLE_REQ : throttle_req_conv}
+	DoubleByte = {pids.ENG_RPM : eng_rpm_conv, pids.INTAKE_MAF : intake_maf_conv, pids.FUEL_TIMING : fuel_timing_conv, pids.FUEL_RATE : fuel_rate_conv}
 
 	data = raw.split()
-	a = int(data[2], 16)
+	
+	a = 0
+	b = 0
+	#print(data)	
 	if len(data) > 3:
+		a = int(data[2], 16)
 		b = int(data[3], 16)
 
 	if pid in SingleByte:
-		SingleByte[pid](a)
+		return SingleByte[pid](a)
 	elif pid in DoubleByte:
-		DoubleByte[pid](a,b)
+		return DoubleByte[pid](a,b)
 	else:
 		print("Automath.convert error.")
+		print(pid)
 
 ##### General #####
 

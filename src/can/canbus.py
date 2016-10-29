@@ -7,8 +7,9 @@
 import pids
 import bluetooth
 
+# Automatically updated PID codes
+PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.OIL_TEMP, pids.FUEL_RATE, pids.THROTTLE_REQ]
 CANdata = { }		# Dictionary holding all vehicle parameters + readings
-PIDcodes = [ ]		# Vehicle parameters automatically updated above
 isConnected = False	# Is a bluetooth connection to vehicle available?
 BlueObject = None	# Not sure if we want to implement it this way, but I did this because it was quick and I wanted
 			# to test code.
@@ -25,7 +26,7 @@ class canbus(object):
 	BlueObject.connect()
 
 	for code in PIDcodes:
-		CANdata[code] = 0.000
+		CANdata[code] = 0.00
     
 # Method retrieves a parameter from the CAN bus via the passed pid code.
 def send_pid(pid):

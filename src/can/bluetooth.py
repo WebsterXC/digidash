@@ -18,7 +18,7 @@ class Bluetooth:
 	ELMver = "Unknown"
 	State = 1  # state SERIAL is 1 connected, 0 disconnected (connection failed)
 	port = None
-	delay = 0.1
+	delay = 0.025
 
 	def __init__(self):
 		print("Bluetooth object generated.")

@@ -3,6 +3,7 @@ import time
 import threading
 import csv
 import canbus
+import automath
 
 csv_file = 'data/data.txt'                                  # Sample data file to open
 CANData = { }                                               # CAN Dictionary (will change once data structure is setup elsewhere)
@@ -75,15 +76,10 @@ class CANDaemon(threading.Thread):
 def can_process():
 	while 1:
 		readback = []
-		# Iterate through PIDcodes and get data for each. Place in CANData.
+		# Iterate through PIDcodes and get data for each. Place in CANdata.
 		for pid in canbus.PIDcodes:
 			answer = canbus.send_pid(pid)
-			CANData[pid] = automath.convert(pid, answer)
-		
-		for selection in canbus.PIDcodes:
-			readback.push_back(CANData[selection])
-
-		print(readback)
+			canbus.CANdata[pid] = automath.convert(pid, answer)
 		
 
 # Daemon monitors engine parameters and notifies on a given event or mismatch.
