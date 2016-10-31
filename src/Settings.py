@@ -42,7 +42,7 @@ class Settings(Widget):
         
         self.add_widget(self.settingbutton)
         
-    def bibutpress(instance, *largs):
+    def bibutpress(instance, *kwargs):
         print('The button <%s> is being pressed' % instance.bibut.text)
     def bcbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.bcbut.text)
