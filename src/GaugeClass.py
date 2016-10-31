@@ -11,12 +11,16 @@ from kivy.uix.label import Label
 from functools import partial
 import time
 from kivy.uix import floatlayout
-from operator import pos
+
 
 
 class Gauge(Widget):
     def __init__(self, **kwargs):
         super(Gauge, self).__init__(**kwargs)
+        
+        #REF TO MAIN CLASS
+        self.Parent = None
+        self.Scat = None;
         
         #GAUGE SPECIFIC VALUES
         self.Measure = 'DEFAULT'
@@ -74,7 +78,12 @@ class Gauge(Widget):
         self.add_widget(self.L8)
         self.add_widget(self.L9)
         
-        
+    def setParents(self, P, S):
+        self.Parent=P
+        self.Scat=S        
+    
+    def changeBGTest(self):
+        self.Parent.bg.source='Images/Metal.jpg'  
         
     def menu(self, *largs):
         """
@@ -99,14 +108,15 @@ class Gauge(Widget):
             close = Button(text='close')
             close.bind(on_release=partial(self.close_menu, menu))
             menu.add_widget(close)
-            self.add_widget(menu)
+            menu.pos=self.Scat.pos
+            self.Parent.appLayout.add_widget(menu)
             self.settings_open=True
 
     def close_menu(self, widget, *largs):
         """
             Closes open menu
         """
-        self.remove_widget(widget)
+        self.Parent.appLayout.remove_widget(widget)
         self.settings_open=False
 
     def setBackground(self, imagesrc, *largs):
