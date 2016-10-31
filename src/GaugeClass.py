@@ -11,12 +11,16 @@ from kivy.uix.label import Label
 from functools import partial
 import time
 from kivy.uix import floatlayout
-from operator import pos
+
 
 
 class Gauge(Widget):
     def __init__(self, **kwargs):
         super(Gauge, self).__init__(**kwargs)
+        
+        #REF TO MAIN CLASS
+        self.Parent = None
+        self.Scat = None;
         
         #GAUGE SPECIFIC VALUES
         self.Measure = 'DEFAULT'
@@ -52,8 +56,8 @@ class Gauge(Widget):
         self.settings_open=False
         
         #GUAGE MEASUREMENTS AND UNTIS
-        self.MTitle = Label(text=self.Measure, font_size='30sp', pos=(150,40), color=(0, 0, 0, 1))
-        self.MUnits = Label(text=self.Units, font_size='26sp', pos=(150,70), color=(0, 0, 0, 1))
+        self.MTitle = Label(text=self.Measure, font_size='26sp', pos=(150,40), color=(0, 0, 0, 1))
+        self.MUnits = Label(text=self.Units, font_size='22sp', pos=(150,70), color=(0, 0, 0, 1))
         
         
         #ADDING TO WIDGET
@@ -74,7 +78,12 @@ class Gauge(Widget):
         self.add_widget(self.L8)
         self.add_widget(self.L9)
         
-        
+    def setParents(self, P, S):
+        self.Parent=P
+        self.Scat=S        
+    
+    def changeBGTest(self):
+        self.Parent.bg.source='Images/Metal.jpg'  
         
     def menu(self, *largs):
         """
@@ -99,14 +108,15 @@ class Gauge(Widget):
             close = Button(text='close')
             close.bind(on_release=partial(self.close_menu, menu))
             menu.add_widget(close)
-            self.add_widget(menu)
+            menu.pos=self.Scat.pos
+            self.Parent.appLayout.add_widget(menu)
             self.settings_open=True
 
     def close_menu(self, widget, *largs):
         """
             Closes open menu
         """
-        self.remove_widget(widget)
+        self.Parent.appLayout.remove_widget(widget)
         self.settings_open=False
 
     def setBackground(self, imagesrc, *largs):
@@ -161,22 +171,24 @@ class Gauge(Widget):
     def setGuageParameters(self, Meas, Min, Max, UnitM):
         self.Measure= Meas
         #UPDATE TEXT
+        self.MTitle.text=Meas
         
         self.Units= UnitM
+        self.MUnits.text=UnitM
         
         self.MinValue=Min
         self.MaxValue=Max
         diff = Max-Min
         inc = diff/8
-        self.L1.text=Min
-        self.L2.text=Min+(1*inc)
-        self.L3.text=Min+(2*inc)
-        self.L4.text=Min+(3*inc)
-        self.L5.text=Min+(4*inc)
-        self.L6.text=Min+(5*inc)
-        self.L7.text=Min+(6*inc)
-        self.L8.text=Min+(7*inc)
-        self.L9.text=Min+(8*inc)
+        self.L1.text=str(Min)
+        self.L2.text=str(Min+(1*inc))
+        self.L3.text=str(Min+(2*inc))
+        self.L4.text=str(Min+(3*inc))
+        self.L5.text=str(Min+(4*inc))
+        self.L6.text=str(Min+(5*inc))
+        self.L7.text=str(Min+(6*inc))
+        self.L8.text=str(Min+(7*inc))
+        self.L9.text=str(Min+(8*inc))
         
 
     def setMPH(self, mph):
