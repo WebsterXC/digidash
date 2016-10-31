@@ -33,7 +33,8 @@ class Blue:
             except bluetooth.btcommon.BluetoothError as error:
                 self.state = 0
                 self.sock.close()
-                if ++count == 5:
+                count += 1
+                if count == 5:
                     raise Exception("Connect failed 5 times. I give up.")
                 print ("Could not connect: ", error, "; Retrying in 5 seconds...")
                 time.sleep(5)
