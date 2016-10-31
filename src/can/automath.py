@@ -1,17 +1,65 @@
-# File defines individual methods for converting raw CAN bus data to usable values.
+# File defines individual methods for converting raw CAN bus data to usable values. #
 
-# Naming convention is all lowercase, <parameter name>_conv(args)
-# Ordering of methods is the same ordering of PIDs in pids.py
+# Modifications to this file should follow the naming and order parameters of pids.py:
+    # Naming convention is all lowercase, <parameter name>_conv(args)
+    # Ordering of methods is the same ordering of PIDs in pids.py
 
 # Sources:
 #   - "OBD-II PIDs" Wikipedia Page
 
+import pids
 
-##### Helpers #####
 
-# Function takes data in 2's complement and returns it's decimal equivalent.
-def twos_to_decimal(number):
-    return -1   #Unimplemented
+# Function provides a decision-making process when the data is automatically retreived. Requires input pid and raw ELM data.
+def convert(pid, raw):
+        SingleByte = {pids.ACCEL_REQ : accell_req_conv, pids.THROTTLE_REL : throttle_rel_conv, pids.FUEL_CMDED : fuel_cmded_conv,              \
+                      pids.FUEL_PRESS : fuel_press_conv, pids.EXHST_PRESS : exhst_press_conv, pids.EVAP_CMDED : evap_cmded_conv,               \
+                      pids.ENG_TIME : eng_time_conv, pids.ENG_TORQUE_ACT : eng_torque_act_conv, pids.ENG_TORQUE_DMD : eng_torque_dmd_conv,     \
+                      pids.ENG_COOLTEMP : eng_cooltemp_conv, pids.ENG_LOAD : eng_load_conv, pids.ENVIR_TEMP : envir_temp_conv,                 \
+                      pids.ENVIR_PRESS : envir_press_conv, pids.SPEED : speed_conv, pids.INTAKE_TEMP : intake_temp_conv,                       \
+                      pids.INTAKE_PRESS : intake_press_conv, pids.OIL_TEMP : oil_temp_conv, pids.FUEL_ADVAN : fuel_advan_conv,                 \
+                      pids.FUEL_LEVEL : fuel_level_conv, pids.THROTTLE_REQ : throttle_req_conv}
+	
+        DoubleByte = {pids.FUEL_PRESS_ABS : fuel_press_abs_conv, pids.EVAP_PRESS : evap_press_conv, pids.ENG_TORQUE_REF : eng_torque_ref_conv, \
+                      pids.ABS_LOAD : abs_load_conv, pids.RTES : rtes_conv, pids.ENG_RPM : eng_rpm_conv,                                       \
+                      pids.INTAKE_MAF : intake_maf_conv, pids.FUEL_TIMING : fuel_timing_conv, pids.FUEL_RATE : fuel_rate_conv}
+
+	data = raw.split()
+	
+	a = 0
+	b = 0
+	#print(data)	
+	if len(data) > 3:
+		a = int(data[2], 16)
+		b = int(data[3], 16)
+
+	if pid in SingleByte:               # Single variable conversions
+		return SingleByte[pid](a)
+	elif pid in DoubleByte:             # Two variable conversions
+		return DoubleByte[pid](a,b)
+        
+        # Fuel Bank PIDs
+        fuel_pids = [pids.FUEL_BANK_SHORT1, pids.FUEL_BANK_SHORT2, pids.FUEL_BANK_LONG1, pids.FUEL_BANK_LONG2]
+        if pid in fuel_pids:
+            return fuel_bank_conv(a)
+
+        # Cat Sensor PIDs
+        cat_pids = [pids.CAT_TEMP_B1S1, pids.CAT_TEMP_B2S1, pids.CAT_TEMP_B1S2, pids.CAT_TEMP_B2S2]
+        if pid in cat_pids:
+            return cat_temp_conv(a, b)
+
+        # O2 Sensor PIDs
+        oxy_volts = [pids.OXSNS_COUNT, pids.OXSNS_V1, pids.OXSNS_V2, pids.OXSNS_V3, pids.OXSNS_V4, pids.OXSNS_V5, pids.OXSNS_V6, pids.OXSNS_V7, pids.OXSNS_V8]
+        if pid in oxy_pids:
+            return oxsns_volts_conv(a)
+                    
+        oxy_fuelair = [pids.OXSNS_FA1, pids.OXSNS_FA2, pids.OXSNS_FA3, pids.OXSNS_FA4, pids.OXSNS_FA5, pids.OXSNS_FA6, pids.OXSNS_FA7, pids.OXSNS_FA8]
+        if pid in oxy_fuelair:
+            return oxsns_fa_conv(a, b)
+
+	else:
+                print("Automath conversion error: PID is not defined.")
+		print(pid)
 
 ##### General #####
 
@@ -102,8 +150,8 @@ def fuel_timing_conv(byteA, byteB):
 def fuel_level_conv(data):
     return data / 2.55
 
-def fuel_cmded_conv(data):
-    return (2/65536) * ((256*byteA) + byte B)
+def fuel_cmded_conv(byteA, byteB):
+    return (2/65536) * ((256*byteA) + byteB)
 
 def fuel_rate_conv(byteA, byteB):
     return ( (256*byteA) + byteB) / 20
