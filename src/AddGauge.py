@@ -15,6 +15,9 @@ class AddGauge(Widget):
 
     def __init__(self, **kwargs):
         super(AddGauge, self).__init__(**kwargs)
+
+        #REF TO PARENT CLASS
+        self.Parent = None
     
         self.Values= ['Engine Load',
                  'Fuel Pressure',
@@ -34,4 +37,9 @@ class AddGauge(Widget):
         self.mainbutton = Button(text='New Gauge', size_hint=(None,None), size=(200,40), pos=(20,550))
         self.mainbutton.bind(on_release=self.codetype.open)
         self.add_widget(self.mainbutton)
+
+    def set_parent(self,p):
+        self.Parent = p
+
+
 
