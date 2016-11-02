@@ -9,6 +9,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
 from kivy.clock import Clock
 import time
+import sys
 
 
 class Settings(Widget):
@@ -36,7 +37,10 @@ class Settings(Widget):
         self.conbut.bind(on_release=self.conbutpress)
         self.setmenu.add_widget(self.conbut)
         
-        
+        self.exitbut = Button(text='Exit DigiDash', size_hint_y= None, height= 40)
+        self.exitbut.bind(on_release=self.exitbutpress)
+        self.setmenu.add_widget(self.exitbut)
+     
         self.settingbutton = Button(text='Settings',size_hint=(None,None), size= (200,40), pos=(580,550))
         self.settingbutton.bind(on_release=self.setmenu.open)
         
@@ -50,3 +54,7 @@ class Settings(Widget):
         print('The button <%s> is being pressed' % instance.hfbut.text)
     def conbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.conbut.text)
+    def exitbutpress(instance, *largs):
+        print('The button <%s> is being pressed' % instance.exitbut.text)
+        sys.exit()
+        
