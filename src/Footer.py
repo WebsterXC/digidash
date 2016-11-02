@@ -17,7 +17,7 @@ class Footer(Widget):
         self.bg = Image(source='Images/StatusBar.png', size=(800,80))
         self.title = Label(text='DigiDash', font_size='60sp', pos=(380,-10))
         #print(self.title.size)
-        self.date = Label(text='Friday, September 16th 2016', font_size='18sp', pos=(75,-10))
+        self.date = Label(text='Friday, September 16th 2016', font_size='18sp', pos=(85,-10))
         #print(self.date.size)
         self.time = Label(text='12:00:00 EST', font_size='24sp', pos=(650,-10))
         #print(self.time.size)

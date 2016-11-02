@@ -86,7 +86,7 @@ class GaugeDigital(Widget):
         """
         if(self.settings_open==False):
             menu = BoxLayout(
-                    size_hint=(None, None),
+                    size_hint=(None, .5),
                     orientation='vertical')
             
             B1= Button(text='Style 1')
@@ -95,10 +95,23 @@ class GaugeDigital(Widget):
             B2.bind(on_release=self.style_2)
             B3= Button(text='Style 3')
             B3.bind(on_release=self.style_3)
+            B4= Button(text='Style 4')
+            B4.bind(on_release=self.style_4)
+            B5= Button(text='Style 5')
+            B5.bind(on_release=self.style_5)
+            B6= Button(text='Style 6')
+            B6.bind(on_release=self.style_6)
+            B7= Button(text='Style 7')
+            B7.bind(on_release=self.style_7)
             
             menu.add_widget(B1)
             menu.add_widget(B2)
             menu.add_widget(B3)
+            menu.add_widget(B4)
+            menu.add_widget(B5)
+            menu.add_widget(B6)
+            menu.add_widget(B7)
+            
             
             close = Button(text='close')
             close.bind(on_release=partial(self.close_menu, menu))
@@ -131,6 +144,34 @@ class GaugeDigital(Widget):
         
     def style_3(self, *largs):
         self.setBackground('Images/Guages/GuageSquare3.png')
+        
+        self.MTitle.color=(255,255,255,1)
+        self.MUnits.color=(255,255,255,1)
+        self.VALUE.color=(255,255,255,1)
+        
+    def style_4(self, *largs):
+        self.setBackground('Images/Guages/GuageSquare4.png')
+        
+        self.MTitle.color=(0,0,0,1)
+        self.MUnits.color=(0,0,0,1)
+        self.VALUE.color=(0,0,0,1)
+        
+    def style_5(self, *largs):
+        self.setBackground('Images/Guages/GuageSquare5.png')
+        
+        self.MTitle.color=(255,255,255,1)
+        self.MUnits.color=(255,255,255,1)
+        self.VALUE.color=(255,255,255,1)
+        
+    def style_6(self, *largs):
+        self.setBackground('Images/Guages/GuageSquare6.png')
+        
+        self.MTitle.color=(0,0,0,1)
+        self.MUnits.color=(0,0,0,1)
+        self.VALUE.color=(0,0,0,1)
+    
+    def style_7(self, *largs):
+        self.setBackground('Images/Guages/GuageSquare7.png')
         
         self.MTitle.color=(255,255,255,1)
         self.MUnits.color=(255,255,255,1)
