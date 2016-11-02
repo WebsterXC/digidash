@@ -45,6 +45,7 @@ class GaugeDigital(Widget):
         self.settings= Button(text='Modify', pos=(155,40), size=(80,30), color=(51,102,255,1))
         self.settings.bind(on_release=self.menu)
         self.settings_open=False
+        self.gmenu = None
         
         #GUAGE MEASUREMENTS AND UNTIS
         self.MTitle = Label(text=self.Measure, font_size='26sp', pos=(150,40), color=(0, 0, 0, 1))
@@ -117,8 +118,12 @@ class GaugeDigital(Widget):
             close.bind(on_release=partial(self.close_menu, menu))
             menu.add_widget(close)
             menu.pos=self.Scat.pos
+            self.gmenu=menu
             self.Parent.appLayout.add_widget(menu)
             self.settings_open=True
+            self.settings.text='Close'
+        else:
+            self.close_menu(self.gmenu)
 
     def close_menu(self, widget, *largs):
         """
@@ -126,6 +131,7 @@ class GaugeDigital(Widget):
         """
         self.Parent.appLayout.remove_widget(widget)
         self.settings_open=False
+        self.settings.text='Modify'
 
     def style_1(self, *largs):
         self.setBackground('Images/Guages/GuageSquare1.png')

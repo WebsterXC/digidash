@@ -11,7 +11,7 @@ from kivy.uix.label import Label
 from functools import partial
 import time
 from kivy.uix import floatlayout
-
+from kivy.uix.behaviors import ButtonBehavior
 
 
 class Gauge(Widget):
@@ -29,7 +29,7 @@ class Gauge(Widget):
         self.Units= 'DEF'
         
 
-        #BACKGROUND       
+        #BACKGROUND   
         self.gauge = Image(source='Images/Guages/GuageHead1.png', size=(400,400))
         self.style = 1
         
@@ -58,6 +58,8 @@ class Gauge(Widget):
         self.settings= Button(text='Modify', pos=(155,40), size=(80,30), color=(51,102,255,1))
         self.settings.bind(on_release=self.menu)
         self.settings_open=False
+        #REF TO MENU
+        self.gmenu= None
         
         #GUAGE MEASUREMENTS AND UNTIS
         self.MTitle = Label(text=self.Measure, font_size='26sp', pos=(150,40), color=(0, 0, 0, 1))
@@ -131,8 +133,13 @@ class Gauge(Widget):
             close.bind(on_release=partial(self.close_menu, menu))
             menu.add_widget(close)
             menu.pos=self.Scat.pos
+            self.gmenu=menu
             self.Parent.appLayout.add_widget(menu)
             self.settings_open=True
+            self.settings.text='Close'
+        else:
+            self.close_menu(self.gmenu)
+
 
     def close_menu(self, widget, *largs):
         """
@@ -140,6 +147,7 @@ class Gauge(Widget):
         """
         self.Parent.appLayout.remove_widget(widget)
         self.settings_open=False
+        self.settings.text='Modify'
 
     def setBackground(self, imagesrc, *largs):
         self.gauge.source = imagesrc
@@ -259,7 +267,6 @@ class Gauge(Widget):
         anim = Animation(rotation=-angle, duration=6.)
         anim.start(self.dialscat)
     
-        
 
 
     
