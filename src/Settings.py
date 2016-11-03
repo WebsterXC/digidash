@@ -39,7 +39,7 @@ class Settings(Widget):
         self.conbut.bind(on_release=self.conbutpress)
         self.setmenu.add_widget(self.conbut)
 
-        self.rotbut = Button(text='Reset Rotations', size_hint_y=None, height = 20)
+        self.rotbut = Button(text='Reset Rotations', size_hint_y=None, height = 30)
         self.rotbut.bind(on_release=self.rotbutpress)
         self.setmenu.add_widget(self.rotbut)
 
