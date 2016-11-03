@@ -59,6 +59,8 @@ class Settings(Widget):
         instance.settingbutton.pos=(win_w-220,win_h-self.settingbutton.size[1])
     def bibutpress(instance, *kwargs):
         print('The button <%s> is being pressed' % instance.bibut.text)
+        #instance.Parent.appLayout.remove_widget(instance.Parent.bg)
+        instance.Parent.bg.source='Images/Metal.jpg'
     def bcbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.bcbut.text)
     def hfbutpress(instance, *largs):
