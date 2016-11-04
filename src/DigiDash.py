@@ -22,13 +22,13 @@ import ConfigParser
 
 class DigiDashApp(App):
     def build(self):
-        
+
         Config = ConfigParser.ConfigParser()
         Config.read("Settings.ini")
         GaugeList= Config.sections()[1:]
-        
+
         ActiveGauges=[]
-        
+
         #Initialize all Gauges from INI config file
         for g in GaugeList:
             gtype = Config.get(g,'type')
@@ -40,11 +40,11 @@ class DigiDashApp(App):
             gunits = Config.get(g,'units')
             gmin = int(Config.get(g,'min'))
             gmax = int(Config.get(g,'max'))
-            
+
             print(g)
             print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
-            
-            
+
+
             if(gtype == 'analog'):
                 curG = Gauge()
                 curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
@@ -52,7 +52,7 @@ class DigiDashApp(App):
                 Gauge.setParents(curG,self,curGS)
                 Gauge.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
                 ActiveGauges.append(curGS)
-            
+
             else:
                 curG = GaugeDigital()
                 curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
@@ -60,17 +60,15 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
                 ActiveGauges.append(curGS)
-            
-            
-        #print(GaugeList)
-        
+
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
 
-        #Create initial background, replace eventually with settings load from ini file
-        self.bg = Image(source='Images/Metal2.jpg', pos=(0,0), size=(1500,840))
-        
-        
+        #Background loaded from ini file
+        bg_path = Config.get('Application_Settings','Background')
+        self.bg = Image(source=bg_path, pos=(0,0), size=(Window.size[0],Window.size[1]))
+
+
         #Create header
         head = Header()
 
@@ -79,8 +77,8 @@ class DigiDashApp(App):
         Footer.updatedate(foot)
         Clock.schedule_interval(partial(Footer.updatetime, foot), 1)
         Clock.schedule_interval(partial(Footer.updatedate, foot), 3600)
-        
-        
+
+
         #Add Background Header and Footer
         self.appLayout.add_widget(self.bg)
         self.appLayout.add_widget(head)
@@ -92,17 +90,17 @@ class DigiDashApp(App):
         self.gaugeMenu = AddGauge()
         head.add_widget(self.settingMenu)
         head.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
-        
+
         #Add Guages
         for ag in ActiveGauges:
             self.appLayout.add_widget(ag)
 
-        
+
         #Change to default touchscreen resolution
-        Window.size = (800,600)
+        #Window.size = (800,600)
         return self.appLayout
-    
-    
-        
+
+
+
 if __name__ == '__main__':
     DigiDashApp().run()
