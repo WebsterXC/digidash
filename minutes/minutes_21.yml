@@ -1,0 +1,19 @@
+date: November 4, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, jhanson3, mohdkhan, davideva, eggarwol]
+absent: []
+excused_absences: [
+  {}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Continued working on backend tasks. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Created new issues.},
+  {ubit: davideva, progress: Continued working on GUI issues.},
+  {ubit: waburgin, progress: Created new issues.},
+  {ubit: eggarwol, progress: Added exit button. Printed cases.},
+  {ubit: jhanson3, progress: Fixed window sizing issues when running code on different Pi OS's.}
+  ]
+issues: [
+  ]
+Notes:  | 
+New GitHub issues for Sprint 4 made and assigned. Everyone knows what they have to do.
