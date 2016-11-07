@@ -14,18 +14,29 @@
 # Will Burgin
 # Khan
 
+import logging
+from DigiDash import DigiDashApp
+
 def main():
 	# Welcome to DigiDash! #
+	logging.info('DigiDash Starting Up...')	
+
+	# Check dependencies using Bash script #
+	# Kivy (Ver: )
+	# Kivy Dependency List:
+	#
+	#
+
 
 	## KIVY START MENU HERE ##
+    	DigiDashApp().run()
 
 	##########################
 
 	# Test to ensure a valid bluetooth connection is even possible. #
 		## If no, display warning and options.
 
-	# Vehicle available. Start CAN daemon.
+	# Vehicle available. Begin thread manager. #
 
 	# Check if data recording is enabled in user settings. #
 		# If yes, begin Logger daemon.
-

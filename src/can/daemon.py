@@ -16,6 +16,7 @@ inparams = [0x1F, 0x0C, 0x0D, 0x0F, 0x0B, 0x10, 0x11, 0x5D] # Columns in sample 
 class ParserDaemon(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+	self.setDaemon(True)
 
     def run(self):
         # Initialisation
