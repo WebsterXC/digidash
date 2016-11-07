@@ -11,7 +11,7 @@ from kivy.uix.label import Label
 from functools import partial
 import time
 from kivy.uix import floatlayout
-
+from kivy.uix.behaviors import ButtonBehavior
 
 
 class Gauge(Widget):
@@ -27,9 +27,11 @@ class Gauge(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
+        
 
-        #BACKGROUND       
-        self.gauge = Image(source='Images/Guages/GuageHead5.png', size=(400,400))
+        #BACKGROUND   
+        self.gauge = Image(source='Images/Guages/GuageHead1.png', size=(400,400))
+        self.style = 1
         
         #GAUGE DIAL
         self.dialscat = Scatter(do_translation=False)
@@ -50,10 +52,14 @@ class Gauge(Widget):
         self.L8 =Label(text='70', font_size='20sp', pos=(280,125), color=(0, 0, 0, 1))
         self.L9 =Label(text='80', font_size='20sp', pos=(240,65), color=(0, 0, 0, 1))
         
+        self.UnitScaleLabels = [self.L1,self.L2,self.L3,self.L4,self.L5,self.L6,self.L7,self.L8,self.L9]
+        
         #SETTINGS MENU BUTTON
         self.settings= Button(text='Modify', pos=(155,40), size=(80,30), color=(51,102,255,1))
         self.settings.bind(on_release=self.menu)
         self.settings_open=False
+        #REF TO MENU
+        self.gmenu= None
         
         #GUAGE MEASUREMENTS AND UNTIS
         self.MTitle = Label(text=self.Measure, font_size='26sp', pos=(150,40), color=(0, 0, 0, 1))
@@ -68,6 +74,10 @@ class Gauge(Widget):
         self.add_widget(self.MTitle)
         self.add_widget(self.MUnits)
         
+        #ADD UNIT SCALE LABELS
+        for l in self.UnitScaleLabels:
+            self.add_widget(l)
+        """
         self.add_widget(self.L1)
         self.add_widget(self.L2)
         self.add_widget(self.L3)
@@ -77,6 +87,7 @@ class Gauge(Widget):
         self.add_widget(self.L7)
         self.add_widget(self.L8)
         self.add_widget(self.L9)
+        """
         
     def setParents(self, P, S):
         self.Parent=P
@@ -91,7 +102,7 @@ class Gauge(Widget):
         """
         if(self.settings_open==False):
             menu = BoxLayout(
-                    size_hint=(None, None),
+                    size_hint=(None, .5),
                     orientation='vertical')
             
             B1= Button(text='Style 1')
@@ -100,17 +111,35 @@ class Gauge(Widget):
             B2.bind(on_release=self.style_2)
             B3= Button(text='Style 3')
             B3.bind(on_release=self.style_3)
+            B4= Button(text='Style 4')
+            B4.bind(on_release=self.style_4)
+            B5= Button(text='Style 5')
+            B5.bind(on_release=self.style_5)
+            B6= Button(text='Style 6')
+            B6.bind(on_release=self.style_6)
+            B7= Button(text='Style 7')
+            B7.bind(on_release=self.style_7)
             
             menu.add_widget(B1)
             menu.add_widget(B2)
             menu.add_widget(B3)
+            menu.add_widget(B4)
+            menu.add_widget(B5)
+            menu.add_widget(B6)
+            menu.add_widget(B7)
+            
             
             close = Button(text='close')
             close.bind(on_release=partial(self.close_menu, menu))
             menu.add_widget(close)
             menu.pos=self.Scat.pos
+            self.gmenu=menu
             self.Parent.appLayout.add_widget(menu)
             self.settings_open=True
+            self.settings.text='Close'
+        else:
+            self.close_menu(self.gmenu)
+
 
     def close_menu(self, widget, *largs):
         """
@@ -118,53 +147,93 @@ class Gauge(Widget):
         """
         self.Parent.appLayout.remove_widget(widget)
         self.settings_open=False
+        self.settings.text='Modify'
 
     def setBackground(self, imagesrc, *largs):
         self.gauge.source = imagesrc
         
     def style_1(self, *largs):
-        self.setBackground('Images/Guages/GuageHead5.png')
-        self.L1.color=(0,0,0,1)
-        self.L2.color=(0,0,0,1)
-        self.L3.color=(0,0,0,1)
-        self.L4.color=(0,0,0,1)
-        self.L5.color=(0,0,0,1)
-        self.L6.color=(0,0,0,1)
-        self.L7.color=(0,0,0,1)
-        self.L8.color=(0,0,0,1)
-        self.L9.color=(0,0,0,1)
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead1.png')
         
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(0,0,0,1)
+        
+        #String Identifiers
         self.MTitle.color=(0,0,0,1)
         self.MUnits.color=(0,0,0,1)
     
     def style_2(self, *largs):
-        self.setBackground('Images/Guages/GuageHead6.png')
-        self.L1.color=(255,255,255,1)
-        self.L2.color=(255,255,255,1)
-        self.L3.color=(255,255,255,1)
-        self.L4.color=(255,255,255,1)
-        self.L5.color=(255,255,255,1)
-        self.L6.color=(255,255,255,1)
-        self.L7.color=(255,255,255,1)
-        self.L8.color=(255,255,255,1)
-        self.L9.color=(255,255,255,1)
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead2.png')
         
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(255,255,255,1)
+        
+        #String Identifiers
         self.MTitle.color=(255,255,255,1)
         self.MUnits.color=(255,255,255,1)
         
         
     def style_3(self, *largs):
-        self.setBackground('Images/Guages/GuageHead2.png')
-        self.L1.color=(255,255,255,1)
-        self.L2.color=(255,255,255,1)
-        self.L3.color=(255,255,255,1)
-        self.L4.color=(255,255,255,1)
-        self.L5.color=(255,255,255,1)
-        self.L6.color=(255,255,255,1)
-        self.L7.color=(255,255,255,1)
-        self.L8.color=(255,255,255,1)
-        self.L9.color=(255,255,255,1)
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead3.png')
         
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(255,255,255,1)
+        
+        #String Identifiers
+        self.MTitle.color=(255,255,255,1)
+        self.MUnits.color=(255,255,255,1)
+        
+    def style_4(self, *largs):
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead4.png')
+        
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(0,0,0,1)
+        
+        #String Identifiers
+        self.MTitle.color=(0,0,0,1)
+        self.MUnits.color=(0,0,0,1)
+    
+    def style_5(self, *largs):
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead5.png')
+        
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(255,255,255,1)
+        
+        #String Identifiers
+        self.MTitle.color=(255,255,255,1)
+        self.MUnits.color=(255,255,255,1)
+        
+    def style_6(self, *largs):
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead6.png')
+        
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(0,0,0,1)
+        
+        #String Identifiers
+        self.MTitle.color=(0,0,0,1)
+        self.MUnits.color=(0,0,0,1)
+    
+    def style_7(self, *largs):
+        #Theme Background Image
+        self.setBackground('Images/Guages/GuageHead7.png')
+        
+        #Unit Measure Colors
+        for l in self.UnitScaleLabels:
+            l.color=(255,255,255,1)
+        
+        #String Identifiers
         self.MTitle.color=(255,255,255,1)
         self.MUnits.color=(255,255,255,1)
         
@@ -180,16 +249,11 @@ class Gauge(Widget):
         self.MaxValue=Max
         diff = Max-Min
         inc = diff/8
-        self.L1.text=str(Min)
-        self.L2.text=str(Min+(1*inc))
-        self.L3.text=str(Min+(2*inc))
-        self.L4.text=str(Min+(3*inc))
-        self.L5.text=str(Min+(4*inc))
-        self.L6.text=str(Min+(5*inc))
-        self.L7.text=str(Min+(6*inc))
-        self.L8.text=str(Min+(7*inc))
-        self.L9.text=str(Min+(8*inc))
         
+        #Set unit scale text values
+        for n in range(9):
+            self.UnitScaleLabels[n].text=str(Min+(n*inc))
+
 
     def setMPH(self, mph):
         angle = 360-(1.3655*mph)
@@ -203,7 +267,6 @@ class Gauge(Widget):
         anim = Animation(rotation=-angle, duration=6.)
         anim.start(self.dialscat)
     
-        
 
 
     
