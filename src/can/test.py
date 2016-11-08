@@ -1,10 +1,12 @@
-from daemon import ParserDaemon
+from daemon import CANDaemon
 import canbus
 import time
 
-d = ParserDaemon()
+c = canbus.canbus()
+
+d = CANDaemon()
 d.start()
 
 for i in range(0, 10):
-	print( d.get_data(0x0C) )
-	time.sleep(0.25)
+	print( canbus.CANdata )
+	time.sleep(0.2)

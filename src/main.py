@@ -14,12 +14,34 @@
 # Will Burgin
 # Khan
 
+import time
+import subprocess
 import logging
-from DigiDash import DigiDashApp
+from can import canbus, daemon
+
+# Initialise global logging
+logpath = 'can/data/digidash.log'
+def logger_init():
+	logger = logging.getLogger('digilogger')
+	logger.setLevel(logging.DEBUG)	
+
+	# Remove previous log file	
+	subprocess.call(['rm', logpath])
+
+	# Set log file path, message format, and threshold to DEBUG
+	fh = logging.FileHandler(logpath)
+	form = logging.Formatter('%(asctime)s | %(message)s')
+	fh.setLevel(logging.DEBUG)
+	fh.setFormatter(form)
+	logger.addHandler(fh)
+
+	logger.info('Logger started.')
 
 def main():
 	# Welcome to DigiDash! #
-	logging.info('DigiDash Starting Up...')	
+	
+	# Initialise the global logger
+	logger_init()
 
 	# Check dependencies using Bash script #
 	# Kivy (Ver: )
@@ -29,14 +51,38 @@ def main():
 
 
 	## KIVY START MENU HERE ##
-    	DigiDashApp().run()
+    	#DigiDashApp().run()
 
 	##########################
 
 	# Test to ensure a valid bluetooth connection is even possible. #
+	c = canbus.canbus()		# Might need to uncomment Blue.connect() in canbus.py
 		## If no, display warning and options.
 
-	# Vehicle available. Begin thread manager. #
+	# Vehicle available.
 
-	# Check if data recording is enabled in user settings. #
-		# If yes, begin Logger daemon.
+
+	# Kivy Main Screen ("Infinite Loop for GUI")
+
+	
+	# If you got here, DigiDash exited from either an error or user-close.
+	# Run exit routines.
+
+
+	# The following is for thread competition testing #
+'''	
+	# Parse the first 10 RPM values (for testing)
+	d = daemon.ParserDaemon()
+	d.start()
+	p = daemon.ParamDaemon()
+	p.start()
+	
+	for i in range(0, 50):
+		print(canbus.CANdata[0x0C])
+		time.sleep(0.1)
+'''	
+
+	
+
+if __name__ == "__main__":
+	main()
