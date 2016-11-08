@@ -19,6 +19,8 @@ import subprocess
 import logging
 from can import canbus, daemon
 
+from DigiDash import DigiDashApp
+
 # Initialise global logging
 logpath = 'can/data/digidash.log'
 def logger_init():
@@ -51,7 +53,8 @@ def main():
 
 
 	## KIVY START MENU HERE ##
-    	#DigiDashApp().run()
+    	
+	#DigiDashApp().run()
 
 	##########################
 

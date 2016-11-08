@@ -87,7 +87,7 @@ class Blue:
                 if buffer == "SEARCHING...":
                     continue
                 if buffer == "?":
-		    self.log.debug(str.join("Command ", cmd, " is invalid.")
+		    self.log.debug(str.join("Command ", cmd, " is invalid."))
                     raise InvalidCmdError("Command '%s' is invalid." % cmd)
                 if buffer == "NO DATA":
 		    self.log.debug(str.join("Command ", cmd, " produced NO DATA."))
