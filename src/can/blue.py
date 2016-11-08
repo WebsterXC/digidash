@@ -10,7 +10,7 @@ import bluetooth #if you get an import error, then "sudo apt-get install python-
 class ConnectFailureError(Exception):
     pass
 
-class ConnectionError(Exception):
+class StateError(Exception):
     pass
 
 class InvalidCmdError(Exception):
@@ -37,7 +37,7 @@ class Blue:
 
     def connect(self):
         if self.state == 1:
-            raise ConnectionError("Can't connect. You're already connected.")
+            raise StateError("Can't connect. You're already connected.")
 
         print("Opening Bluetooth socket...")
         count = 0
@@ -61,14 +61,14 @@ class Blue:
 
     def disconnect(self):
         if self.state == 0:
-            raise ConnectionError("Can't disconnect. You aren't connected.")
+            raise StateError("Can't disconnect. You aren't connected.")
         self.state = 0
         self.sock.close()
 	self.log.debug(str.join("Connection with ", myMAC, "closed."))
 
     def send_recv(self, cmd):  # send cmd parameter and return dongle response (ignores echoes)
         if self.state == 0:
-            raise ConnectionError("Can't send/recv. You aren't connected.")
+            raise StateError("Can't send/recv. You aren't connected.")
         self.sock.send(cmd + "\r\n")
         time.sleep(self.delay)
         while 1:
