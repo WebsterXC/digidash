@@ -1,0 +1,19 @@
+date: November 11, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, jhanson3, mohdkhan, davideva, eggarwol]
+absent: []
+excused_absences: [
+  {}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Added exception handling to bluetooth code. Added meeting minutes.},
+  {ubit: mohdkhan, progress: Played with diagnostic trouble codes.},
+  {ubit: davideva, progress: Continued working on add-gauge functionality.},
+  {ubit: waburgin, progress: Worked on data logging.},
+  {ubit: eggarwol, progress: Worked more on settings menu.},
+  {ubit: jhanson3, progress: Worked on gauge relative positioning.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Good progress has been made all around. Will meet this Sunday (11/13) to combine backend and GUI.
