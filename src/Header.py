@@ -23,7 +23,13 @@ class Header(Widget):
         if(platform.platform()=='Linux-4.1.19-v7+-armv7l-with-Ubuntu-16.04-xenial'):
             win_h= 480
 
-        self.bg = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
+        self.bg = Image(source='Images/StatusBar.png', size=(win_w,win_h/12))
+        self.bg.pos=(0,win_h-self.bg.size[1]+5)	
+
         self.add_widget(self.bg)
         
         self.size = self.bg.size
+
+    def __resize__(instance):
+        instance.bg.size=(win_w,win_h/12)
+        instance.bg.pos=(0,win_h-self.bg.size[1]+5) 

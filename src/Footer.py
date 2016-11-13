@@ -41,3 +41,7 @@ class Footer(Widget):
 
     def updatedate(self, *largs):
         self.date.text= time.strftime("%A, %B %d %Y")
+
+    def __resize__(self, inst):
+        self.bg.size=(win_w,win_h/12)
+        self.bg.pos=pos=(0,-10)
