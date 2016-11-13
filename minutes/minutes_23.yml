@@ -1,0 +1,19 @@
+date: November 13, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, jhanson3, mohdkhan, davideva]
+absent: [eggarwol]
+excused_absences: [
+  {ubit: eggarwol, reason: Work.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Added gauge rotation reset button. Added meeting minutes.},
+  {ubit: mohdkhan, progress: None.},
+  {ubit: davideva, progress: Continued working on add-gauge functionality.},
+  {ubit: waburgin, progress: Achieved live update of gauges based on backend data structure.},
+  {ubit: eggarwol, progress: None.},
+  {ubit: jhanson3, progress: Helped Mark, David, and Will with their jobs. Worked on window resizing.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Excellent progress made today. Will meet on an as-needed basis in future.
