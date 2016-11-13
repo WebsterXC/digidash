@@ -7,8 +7,6 @@ from kivy.uix.scatter import Scatter
 from kivy.animation import Animation
 from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
-from kivy.clock import Clock
-import time
 import platform
 import sys
 
@@ -21,11 +19,9 @@ class Settings(Widget):
 
         win_w = Window.size[0]
         win_h = Window.size[1]
-        if(platform.platform()=='Linux-4.1.19-v7+-armv7l-with-Ubuntu-16.04-xenial'):
-            win_h= 480
 
         self.Values = ['Background Image','Background Color','Header/Footer Image','Connection']
-
+        self.Parent = None
         self.setmenu = DropDown()
 
         self.bibut = Button(text='Background Image', size_hint_y= None, height= 20)
@@ -44,6 +40,10 @@ class Settings(Widget):
         self.conbut.bind(on_release=self.conbutpress)
         self.setmenu.add_widget(self.conbut)
 
+        self.rotbut = Button(text='Reset Rotations', size_hint_y=None, height = 20)
+        self.rotbut.bind(on_release=self.rotbutpress)
+        self.setmenu.add_widget(self.rotbut)
+
         self.exitbut = Button(text='Exit DigiDash', size_hint_y= None, height= 20)
         self.exitbut.bind(on_release=self.exitbutpress)
         self.setmenu.add_widget(self.exitbut)
@@ -61,6 +61,13 @@ class Settings(Widget):
         print('The button <%s> is being pressed' % instance.hfbut.text)
     def conbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.conbut.text)
+    def rotbutpress(instance, *largs):
+        print('The button <%s> is being pressed' % instance.rotbut.text)
+        for ker in instance.Parent.ActiveGauges:
+            ker.rotation = 0
     def exitbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.exitbut.text)
         sys.exit()
+
+    def set_parent(self, p):
+        self.Parent = p
