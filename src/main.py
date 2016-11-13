@@ -23,6 +23,7 @@ from DigiDash import DigiDashApp
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'
+log = None
 def logger_init():
 	logger = logging.getLogger('digilogger')
 	logger.setLevel(logging.DEBUG)	
@@ -37,13 +38,21 @@ def logger_init():
 	fh.setFormatter(form)
 	logger.addHandler(fh)
 
+	global log
+	log = logger
+
 	logger.info('Logger started.')
+
+def exit_routine():
+	log.critical('Exiting DigiDash...')
 
 def main():
 	# Welcome to DigiDash! #
 	
 	# Initialise the global logger
 	logger_init()
+
+	log.critical('Booting DigiDash...')
 
 	# Check dependencies using Bash script #
 	# Kivy (Ver: )
@@ -54,7 +63,6 @@ def main():
 
 	## KIVY START MENU HERE ##
     	
-	#DigiDashApp().run()
 
 	##########################
 
@@ -66,11 +74,12 @@ def main():
 
 
 	# Kivy Main Screen ("Infinite Loop for GUI")
-
 	
+	DigiDashApp().run()
+
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.
-
+	exit_routine()
 
 	# The following is for thread competition testing #
 '''	

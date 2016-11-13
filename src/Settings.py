@@ -11,7 +11,7 @@ from kivy.clock import Clock
 import time
 import platform
 import sys
-
+import GraphClass
 
 
 class Settings(Widget):
@@ -61,6 +61,7 @@ class Settings(Widget):
         print('The button <%s> is being pressed' % instance.hfbut.text)
     def conbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.conbut.text)
+	GraphClass.graph()
     def exitbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.exitbut.text)
         sys.exit()
