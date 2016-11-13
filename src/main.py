@@ -80,7 +80,7 @@ def main():
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.
 	exit_routine()
-
+	
 	# The following is for thread competition testing #
 '''	
 	# Parse the first 10 RPM values (for testing)

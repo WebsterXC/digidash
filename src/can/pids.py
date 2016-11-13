@@ -90,3 +90,9 @@ INTCOOL_TEMP     = "0x77"     # Intercooler temperature
 THROTTLE_REQ     = "0x11"     # Throttle Position (%)
 THROTTLE_REL     = "0x45"     # Relative Throttle Position (%)
 ACCEL_REQ        = "0x5A"     # Relative Accellerator Position (%)
+
+##### CAN Modes #####
+MODE_ELM	 = "0x00"
+MODE_REALTIME	 = "0x01"
+MODE_FREEZE	 = "0x02"
+MODE_DTC	 = "0x03"

@@ -63,23 +63,40 @@ def send_pid(pid):
 	result = BlueObject.send_recv(command)
 
 	canbus.log.debug(str.join("Sent PID: ", pid))
-	canbus.log.debug(str.join("Returned: ", result))	
+	canbus.log.debug(str.join("Returned: ", result))
 
 	return result
 
-# Nonclass method for sending ELM327 commands to the bluetooth dongle, since the canbus object may not be ready yet.
-def send_command(cmd):
+# Nonclass method for sending ELM327 or non-MODE 1 commands to the bluetooth dongle.
+def send_command(mode, cmd):
 	
-	global BlueObject
-	result = BlueObject.send_recv(command)
+	# Check MODE for command type. Use MODE_ELM for ELM commands
+	if mode == MODE_ELM:
+		global BlueObject
+		result = BlueObject.send_recv(command)
+		
+		canbus.log.debug(str.join("Sent ELM command: ", cmd))
+		canbus.log.debug(str.join("Returned: ", result))	
 
-	canbus.log.debug(str.join("Sent ELM command: ", cmd))
-	canbus.log.debug(str.join("Returned: ", result))	
+	else:
+		command = ((canbus.mode).split('x'))[1] + ((pid).split('x'))[1]
+	
+		global BlueObject
+		result = BlueObject.send_recv(command)
+
+		canbus.log.debug(str.join("Sent command: ", cmd, " with mode ", mode))
+		canbus.log.debug(str.join("Returned: ", result))	
 
 	return result
+
+# Send MODE3 to retrieve MIL and DTC codes
+def send_dtc():
+	global BlueObject
+	canbus.log.debug("Requested DTC codes with MODE 03.")
+	return BlueObject.send_recv(pids.MODE_DTC)
 
 
 # If testing standalone:
 #if __name__ == "main":
-#	send_pid(ENG_RPM)
+#	canbus.send_command(pids.MODE_ELM, pids.ENG_RPM)
 #	print("CANBUS MODULE STANDALONE")
