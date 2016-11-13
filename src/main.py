@@ -72,10 +72,19 @@ def main():
 
 	# Vehicle available.
 
+	d = daemon.ParserDaemon()
+	d.start()
+	#p = daemon.ParamDaemon()
+	#p.start()
 
 	# Kivy Main Screen ("Infinite Loop for GUI")
 	
 	DigiDashApp().run()
+
+	#for i in range(0, 50):
+	#	print(canbus.CANdata[0x0C])
+	#	time.sleep(0.1)
+
 
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.

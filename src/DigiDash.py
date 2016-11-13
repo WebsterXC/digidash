@@ -41,8 +41,8 @@ class DigiDashApp(App):
             gmin = int(Config.get(g,'min'))
             gmax = int(Config.get(g,'max'))
 
-            print(g)
-            print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
+            #print(g)
+            #print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
 
 
             if(gtype == 'analog'):
@@ -60,6 +60,8 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
                 ActiveGauges.append(curGS)
+	
+		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
@@ -77,7 +79,7 @@ class DigiDashApp(App):
         Footer.updatedate(foot)
         Clock.schedule_interval(partial(Footer.updatetime, foot), 1)
         Clock.schedule_interval(partial(Footer.updatedate, foot), 3600)
-
+	
 
         #Add Background Header and Footer
         self.appLayout.add_widget(self.bg)
