@@ -8,6 +8,7 @@
 #   - "OBD-II PIDs" Wikipedia Page
 
 import pids
+import math
 
 
 # Function provides a decision-making process when the data is automatically retreived. Requires input pid and raw ELM data.
@@ -203,3 +204,22 @@ def throttle_rel_conv(data):
     return data / 2.55
 def accel_req_conv(data):
     return data / 2.55
+
+## Data processing calculations for post-conversion data ##
+
+# Estimate horsepower from torque and rpm
+def horsepower_calc(torque, rpm):
+	return (torque * rpm) / 5252.0
+
+# Estimate horsepower from a quarter mile pull
+def quartermile_calc(weight, speed):
+	return  ((speed * speed * speed) / 12812904.0) * weight
+
+# Dyno correction factor for naturally aspirated engines. Generates a correction factor
+# based on current air temperature and pressure.
+def dynocorrect_calc(press, temp):
+	return 1.180 * ( (990.0/press) * sqrt((temp+273)/298.0) ) - 0.18
+
+def powerweight_calc(torque, rpm, weight):
+	return float(horsepower_calc(torque, rpm)) / float(weight)
+

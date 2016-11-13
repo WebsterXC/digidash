@@ -13,6 +13,7 @@ import time
 from kivy.uix import floatlayout
 from operator import pos
 
+from can import canbus, daemon
 
 
 class GaugeDigital(Widget):
@@ -78,8 +79,10 @@ class GaugeDigital(Widget):
         
         
 
-    def setVALUE(self, val):
-        self.VALUE.text= val
+    def setVALUE(self, *largs):
+        #self.VALUE.text= val
+	#print(canbus.CANdata["0x0C"])
+	self.VALUE.text = str(canbus.CANdata[0x0C])
 
     def menu(self, *largs):
         """
