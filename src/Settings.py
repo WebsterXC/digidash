@@ -9,7 +9,6 @@ from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
 import platform
 import sys
-import GraphClass
 
 
 class Settings(Widget):
@@ -70,7 +69,7 @@ class Settings(Widget):
             ker.rotation = 0
     def set_parent(self, p):
         self.Parent = p
-	GraphClass.graph()
+	#GraphClass.graph()
     def exitbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.exitbut.text)
         App.get_running_app().stop()
