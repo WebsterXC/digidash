@@ -37,12 +37,16 @@ class AddGauge(Widget):
         self.codetype = DropDown()
 
         for x in self.Values:
-            cur = Button(text=x, size_hint_y= None, height= 20)
+            cur = Button(text=x, size_hint_y= None, height= 30)
             self.codetype.add_widget(cur)
 
-        self.mainbutton = Button(text='New Gauge', size_hint=(None,None), size=(200,20), pos=(20,win_h-55))
+        self.mainbutton = Button(text='New Gauge', size_hint=(None,None), size=(200,30))
+        self.mainbutton.pos=(20,win_h-self.mainbutton.size[1])
         self.mainbutton.bind(on_release=self.codetype.open)
         self.add_widget(self.mainbutton)
+
+    def __resize__(instance):
+        instance.mainbutton.pos=(20,win_h-self.mainbutton.size[1])
 
     def set_parent(self,p):
         self.Parent = p

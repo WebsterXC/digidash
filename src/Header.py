@@ -56,6 +56,13 @@ class Header(Widget):
         return mainbutton            
     
         self.bg = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
+        self.bg = Image(source='Images/StatusBar.png', size=(win_w,win_h/12))
+        self.bg.pos=(0,win_h-self.bg.size[1]+5)	
+
         self.add_widget(self.bg)
         
         self.size = self.bg.size
+
+    def __resize__(instance):
+        instance.bg.size=(win_w,win_h/12)
+        instance.bg.pos=(0,win_h-self.bg.size[1]+5) 

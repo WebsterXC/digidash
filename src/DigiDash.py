@@ -27,7 +27,7 @@ class DigiDashApp(App):
         Config.read("Settings.ini")
         GaugeList= Config.sections()[1:]
 
-        ActiveGauges=[]
+        self.ActiveGauges=[]
 
         #Initialize all Gauges from INI config file
         for g in GaugeList:
@@ -41,8 +41,8 @@ class DigiDashApp(App):
             gmin = int(Config.get(g,'min'))
             gmax = int(Config.get(g,'max'))
 
-            print(g)
-            print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
+            #print(g)
+            #print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
 
 
             if(gtype == 'analog'):
@@ -51,7 +51,7 @@ class DigiDashApp(App):
                 curGS.add_widget(curG)
                 Gauge.setParents(curG,self,curGS)
                 Gauge.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
-                ActiveGauges.append(curGS)
+                self.ActiveGauges.append(curGS)
 
             else:
                 curG = GaugeDigital()
@@ -59,7 +59,7 @@ class DigiDashApp(App):
                 curGS.add_widget(curG)
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
-                ActiveGauges.append(curGS)
+                self.ActiveGauges.append(curGS)
 
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
@@ -87,18 +87,30 @@ class DigiDashApp(App):
 
         #Add Menus
         self.settingMenu = Settings(size_hint=(.3,.01))
+        Settings.set_parent(self.settingMenu, self)
         self.gaugeMenu = AddGauge()
         head.add_widget(self.settingMenu)
         head.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
 
-        #Add Guages
-        for ag in ActiveGauges:
+        #Add Gauges
+        for ag in self.ActiveGauges:
             self.appLayout.add_widget(ag)
 
 
+        #piself.bind(size=self.__resize__)
         #Change to default touchscreen resolution
         #Window.size = (800,600)
         return self.appLayout
+
+    def on_resize(width,height):
+        print('RESIZED:' + str(width) + ' ' + str(height))
+
+    def __resize__(instance, val):
+        print('RESIZE TRIGGERED: '+str(Window.size))
+        Settings.__resize__(self.settingMenu)
+        AddGauge.__resize__(self.gaugeMenu)
+        Header.__resize__(self.head)
+        Footer.__resize__(self.foot)
 
 
 
