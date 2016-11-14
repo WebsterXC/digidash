@@ -29,6 +29,7 @@ class GaugeDigital(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
+		self.PID = None #ADD THIS VALUE TO setGuageParameters
 
         #BACKGROUND       
         self.gauge = Image(source='Images/Guages/GuageSquare1.png', size=(400,400))
@@ -70,6 +71,7 @@ class GaugeDigital(Widget):
         
         
     def setGuageParameters(self, Meas, Min, Max, UnitM):
+		#ADD PID VALUE
         self.Measure= Meas
         #UPDATE TEXT
         self.MTitle.text=Meas
@@ -82,6 +84,9 @@ class GaugeDigital(Widget):
     def setVALUE(self, *largs):
         #self.VALUE.text= val
 	#print(canbus.CANdata["0x0C"])
+	#SHOULD BE:
+	#self.VALUE.text = str(canbus.CANdata[self.PID])
+	#FOR TESTING USE:
 	self.VALUE.text = str(canbus.CANdata[0x0C])
 
     def menu(self, *largs):

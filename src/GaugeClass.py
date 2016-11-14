@@ -13,6 +13,8 @@ import time
 from kivy.uix import floatlayout
 from kivy.uix.behaviors import ButtonBehavior
 
+from can import canbus, daemon
+
 
 class Gauge(Widget):
     def __init__(self, **kwargs):
@@ -27,6 +29,7 @@ class Gauge(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
+        self.PID = None #ADD THIS VALUE TO setGuageParameters
         
 
         #BACKGROUND   
@@ -238,6 +241,7 @@ class Gauge(Widget):
         self.MUnits.color=(255,255,255,1)
         
     def setGuageParameters(self, Meas, Min, Max, UnitM):
+        #ADD PID VALUE
         self.Measure= Meas
         #UPDATE TEXT
         self.MTitle.text=Meas
@@ -253,7 +257,20 @@ class Gauge(Widget):
         #Set unit scale text values
         for n in range(9):
             self.UnitScaleLabels[n].text=str(Min+(n*inc))
-
+    
+    def setVALUE(self, *largs):
+        #MIN ANGLE: 360
+        #MAX ANGLE: 250.75
+        #ANGLE RANGE: 109.25
+        val_range = self.MaxValue-self.MinValue
+        scale = 109.25/val_range
+        
+        #SHOULD BE:
+	    #val = canbus.CANdata[self.PID]
+	    #FOR TESTING USE:
+        val = canbus.CANdata[0x0C]
+        angle = 360 - (scale*val)
+        self.dialscat.rotation=angle
 
     def setMPH(self, mph):
         angle = 360-(1.3655*mph)
