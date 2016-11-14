@@ -44,7 +44,7 @@ class AddGauge(Widget):
         for x in type.keys():
             self.cur = Button(text=x, size_hint_y= None, height= 30)
             self.cur.bind(on_release = partial(self.userSelect, x))  
-            self.codetype.add_widget(self.cur)
+            self.codetype.add_widget(cur)
 
         self.mainbutton = Button(text='New Gauge', size_hint=(None,None), size=(200,30))
         self.mainbutton.pos=(20,win_h-self.mainbutton.size[1])
