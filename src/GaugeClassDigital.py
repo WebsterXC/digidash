@@ -29,7 +29,7 @@ class GaugeDigital(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
-	self.PID = None #ADD THIS VALUE TO setGuageParameters
+        self.PID = None #ADD THIS VALUE TO setGuageParameters
 
         #BACKGROUND       
         self.gauge = Image(source='Images/Guages/GuageSquare1.png', size=(400,400))
@@ -151,17 +151,17 @@ class GaugeDigital(Widget):
     def style_2(self, *largs):
         self.setBackground('Images/Guages/GuageSquare2.png')
         
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
-        self.VALUE.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
+        self.VALUE.color=(1,1,1,1)
         
         
     def style_3(self, *largs):
         self.setBackground('Images/Guages/GuageSquare3.png')
         
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
-        self.VALUE.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
+        self.VALUE.color=(1,1,1,1)
         
     def style_4(self, *largs):
         self.setBackground('Images/Guages/GuageSquare4.png')
@@ -173,9 +173,9 @@ class GaugeDigital(Widget):
     def style_5(self, *largs):
         self.setBackground('Images/Guages/GuageSquare5.png')
         
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
-        self.VALUE.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
+        self.VALUE.color=(1,1,1,1)
         
     def style_6(self, *largs):
         self.setBackground('Images/Guages/GuageSquare6.png')
@@ -187,7 +187,7 @@ class GaugeDigital(Widget):
     def style_7(self, *largs):
         self.setBackground('Images/Guages/GuageSquare7.png')
         
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
-        self.VALUE.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
+        self.VALUE.color=(1,1,1,1)
     

@@ -22,7 +22,7 @@ class Gauge(Widget):
         
         #REF TO MAIN CLASS
         self.Parent = None
-        self.Scat = None;
+        self.Scat = None
         
         #GAUGE SPECIFIC VALUES
         self.Measure = 'DEFAULT'
@@ -44,7 +44,7 @@ class Gauge(Widget):
         self.dialscat.rotation = 1
         self.dialscat.bind(on_touchdown=self.TestRotation)
         
-        #VALUE INCRIMENT LABELS
+        #VALUE INCREMENT LABELS
         self.L1 =Label(text='0', font_size='20sp', pos=(70,70), color=(0, 0, 0, 1))
         self.L2 =Label(text='10', font_size='20sp', pos=(30,125), color=(0, 0, 0, 1))
         self.L3 =Label(text='20', font_size='20sp', pos=(40,195), color=(0, 0, 0, 1))
@@ -173,11 +173,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
         
     def style_3(self, *largs):
@@ -186,11 +186,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
     def style_4(self, *largs):
         #Theme Background Image
@@ -198,7 +198,7 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(0,0,0,1)
+            l.color=(1,0,0,1)
         
         #String Identifiers
         self.MTitle.color=(0,0,0,1)
@@ -210,11 +210,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
     def style_6(self, *largs):
         #Theme Background Image
@@ -234,11 +234,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
     def setGuageParameters(self, Meas, Min, Max, UnitM):
         #ADD PID VALUE
