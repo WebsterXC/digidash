@@ -260,17 +260,21 @@ class Gauge(Widget):
     
     def setVALUE(self, *largs):
         #MIN ANGLE: 360
-        #MAX ANGLE: 250.75
-        #ANGLE RANGE: 109.25
+        #MAX ANGLE: 88
+        #ANGLE RANGE: 272
+	
         val_range = self.MaxValue-self.MinValue
-        scale = 109.25/val_range
+        scale = 272.0/val_range
         
         #SHOULD BE:
 	    #val = canbus.CANdata[self.PID]
 	    #FOR TESTING USE:
         val = canbus.CANdata[0x0C]
         angle = 360 - (scale*val)
+	print('Range:' + str(val_range) + '  Scale:' + str(scale) + '  Value:' + str(val) + '  Angle:'+ str(angle))
         self.dialscat.rotation=angle
+	
+	#self.dialscat.rotation=88
 
     def setMPH(self, mph):
         angle = 360-(1.3655*mph)
