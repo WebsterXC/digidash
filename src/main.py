@@ -72,9 +72,11 @@ def main():
 		## If no, display warning and options.
 
 	# Vehicle available.
-
-	d = daemon.ParserDaemon()
+	d = daemon.CANDaemon()
 	d.start()
+
+	#d = daemon.ParserDaemon()
+	#d.start()
 	#p = daemon.ParamDaemon()
 	#p.start()
 
