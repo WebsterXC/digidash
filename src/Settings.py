@@ -10,6 +10,8 @@ from kivy.base import runTouchApp
 import platform
 import sys
 
+# sudo apt-get install python-matplotlib
+#import matplotlib.pyplot as plt
 
 class Settings(Widget):
 
@@ -63,6 +65,11 @@ class Settings(Widget):
         print('The button <%s> is being pressed' % instance.hfbut.text)
     def conbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.conbut.text)
+
+	#plt.plot([1,2,3,4])
+	#plt.ylabel('some numbers')
+	#plt.show()
+
     def rotbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.rotbut.text)
         for ker in instance.Parent.ActiveGauges:

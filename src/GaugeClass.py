@@ -13,7 +13,7 @@ import time
 from kivy.uix import floatlayout
 from kivy.uix.behaviors import ButtonBehavior
 
-from can import canbus, daemon
+from can import canbus, daemon, pids
 
 
 class Gauge(Widget):
@@ -29,8 +29,8 @@ class Gauge(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
-        self.PID = None #ADD THIS VALUE TO setGuageParameters
-        
+        #self.PID = None #ADD THIS VALUE TO setGuageParameters
+        self.PID = pids.ENG_RPM
 
         #BACKGROUND   
         self.gauge = Image(source='Images/Guages/GuageHead1.png', size=(400,400))
@@ -267,9 +267,9 @@ class Gauge(Widget):
         scale = 272.0/val_range
         
         #SHOULD BE:
-	    #val = canbus.CANdata[self.PID]
+	val = canbus.CANdata[self.PID]
 	    #FOR TESTING USE:
-        val = canbus.CANdata[0x0C]
+        #val = canbus.CANdata[0x0C]
         angle = 360 - (scale*val)
 	print('Range:' + str(val_range) + '  Scale:' + str(scale) + '  Value:' + str(val) + '  Angle:'+ str(angle))
         self.dialscat.rotation=angle

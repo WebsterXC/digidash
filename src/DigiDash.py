@@ -19,6 +19,7 @@ import time
 from functools import partial
 import ConfigParser
 
+from can import pids
 
 class DigiDashApp(App):
     def build(self):
@@ -62,7 +63,8 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-						
+		
+		curG.PID = pids.ENG_RPM				
 		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
