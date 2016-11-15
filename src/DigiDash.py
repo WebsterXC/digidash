@@ -50,7 +50,7 @@ class DigiDashApp(App):
                 curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
                 curGS.add_widget(curG)
                 Gauge.setParents(curG,self,curGS)
-                Gauge.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
+                Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
 
 		Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
@@ -60,7 +60,7 @@ class DigiDashApp(App):
                 curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
                 curGS.add_widget(curG)
                 GaugeDigital.setParents(curG,self,curGS)
-                GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
+                GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
 						
 		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
