@@ -7,7 +7,7 @@ import automath
 import logging
 
 csv_file = 'can/data/data.txt'                                  # Sample data file to open
-inparams = [0x1F, 0x0C, 0x0D, 0x0F, 0x0B, 0x10, 0x11, 0x5D] # Columns in sample data CSV
+inparams = ["0x1F", "0x0C", "0x0D", "0x0F", "0x0B", "0x10", "0x11", "0x5D"] # Columns in sample data CSV
 
 # Parser daemon is used for DEVELOPMENT ONLY. Reads recorded data from a CSV file and
 # places it in the central data structure. It ensures data is in the structure at

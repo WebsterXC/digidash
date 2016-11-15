@@ -19,6 +19,7 @@ import time
 from functools import partial
 import ConfigParser
 
+from can import pids
 
 class DigiDashApp(App):
     def build(self):
@@ -27,7 +28,7 @@ class DigiDashApp(App):
         Config.read("Settings.ini")
         GaugeList= Config.sections()[1:]
 
-        ActiveGauges=[]
+        self.ActiveGauges=[]
 
         #Initialize all Gauges from INI config file
         for g in GaugeList:
@@ -51,7 +52,14 @@ class DigiDashApp(App):
                 curGS.add_widget(curG)
                 Gauge.setParents(curG,self,curGS)
                 Gauge.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
-                ActiveGauges.append(curGS)
+                self.ActiveGauges.append(curGS)
+
+		if gmeasure == 'Speed':
+			curG.PID = pids.SPEED
+		else:
+			curG.PID = pids.ENG_RPM
+
+		Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
 
             else:
                 curG = GaugeDigital()
@@ -59,8 +67,15 @@ class DigiDashApp(App):
                 curGS.add_widget(curG)
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
-                ActiveGauges.append(curGS)
+                self.ActiveGauges.append(curGS)
 	
+		if gmeasure == 'Throttle':
+			curG.PID = pids.THROTTLE_REQ
+		elif gmeasure == 'MAP':
+			curG.PID = pids.INTAKE_PRESS
+		else:
+			curG.PID = pids.INTAKE_MAF
+				
 		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
@@ -94,15 +109,13 @@ class DigiDashApp(App):
         head.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
 
         #Add Guages
-        for ag in ActiveGauges:
+        for ag in self.ActiveGauges:
             self.appLayout.add_widget(ag)
 
 
         #Change to default touchscreen resolution
         #Window.size = (800,600)
         return self.appLayout
-
-
 
 if __name__ == '__main__':
     DigiDashApp().run()

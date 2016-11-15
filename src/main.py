@@ -20,6 +20,7 @@ import logging
 from can import canbus, daemon
 
 from DigiDash import DigiDashApp
+import Dyno
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'
@@ -80,6 +81,8 @@ def main():
 	# Kivy Main Screen ("Infinite Loop for GUI")
 	
 	DigiDashApp().run()
+
+	#l = Dyno.dyno_pull(6000)
 
 	#for i in range(0, 50):
 	#	print(canbus.CANdata[0x0C])

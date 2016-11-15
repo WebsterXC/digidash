@@ -13,6 +13,8 @@ import time
 from kivy.uix import floatlayout
 from kivy.uix.behaviors import ButtonBehavior
 
+from can import canbus, daemon
+
 
 class Gauge(Widget):
     def __init__(self, **kwargs):
@@ -20,13 +22,14 @@ class Gauge(Widget):
         
         #REF TO MAIN CLASS
         self.Parent = None
-        self.Scat = None;
+        self.Scat = None
         
         #GAUGE SPECIFIC VALUES
         self.Measure = 'DEFAULT'
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
+        self.PID = None #ADD THIS VALUE TO setGuageParameters
         
 
         #BACKGROUND   
@@ -41,7 +44,7 @@ class Gauge(Widget):
         self.dialscat.rotation = 1
         self.dialscat.bind(on_touchdown=self.TestRotation)
         
-        #VALUE INCRIMENT LABELS
+        #VALUE INCREMENT LABELS
         self.L1 =Label(text='0', font_size='20sp', pos=(70,70), color=(0, 0, 0, 1))
         self.L2 =Label(text='10', font_size='20sp', pos=(30,125), color=(0, 0, 0, 1))
         self.L3 =Label(text='20', font_size='20sp', pos=(40,195), color=(0, 0, 0, 1))
@@ -170,11 +173,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
         
     def style_3(self, *largs):
@@ -183,11 +186,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
     def style_4(self, *largs):
         #Theme Background Image
@@ -195,7 +198,7 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(0,0,0,1)
+            l.color=(1,0,0,1)
         
         #String Identifiers
         self.MTitle.color=(0,0,0,1)
@@ -207,11 +210,11 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
     def style_6(self, *largs):
         #Theme Background Image
@@ -231,13 +234,14 @@ class Gauge(Widget):
         
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color=(255,255,255,1)
+            l.color=(1,1,1,1)
         
         #String Identifiers
-        self.MTitle.color=(255,255,255,1)
-        self.MUnits.color=(255,255,255,1)
+        self.MTitle.color=(1,1,1,1)
+        self.MUnits.color=(1,1,1,1)
         
     def setGuageParameters(self, Meas, Min, Max, UnitM):
+        #ADD PID VALUE
         self.Measure= Meas
         #UPDATE TEXT
         self.MTitle.text=Meas
@@ -253,7 +257,22 @@ class Gauge(Widget):
         #Set unit scale text values
         for n in range(9):
             self.UnitScaleLabels[n].text=str(Min+(n*inc))
+    
+    def setVALUE(self, *largs):
+        #MIN ANGLE: 360
+        #MAX ANGLE: 88
+        #ANGLE RANGE: 272
+	
+        val_range = self.MaxValue-self.MinValue
+        scale = 272.0/val_range
+        
+	val = canbus.CANdata[self.PID]
 
+        angle = 360 - (scale*val)
+	#print('Range:' + str(val_range) + '  Scale:' + str(scale) + '  Value:' + str(val) + '  Angle:'+ str(angle))
+        self.dialscat.rotation=angle
+	
+	#self.dialscat.rotation=88
 
     def setMPH(self, mph):
         angle = 360-(1.3655*mph)
@@ -265,8 +284,4 @@ class Gauge(Widget):
     def TestRotation(self, *largs):
         angle = Gauge.MPH2Angle(self,80)
         anim = Animation(rotation=-angle, duration=6.)
-        anim.start(self.dialscat)
-    
-
-
-    
+	anim.start(self.dialscat)

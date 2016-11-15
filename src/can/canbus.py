@@ -10,7 +10,7 @@ import logging
 import threading
 
 # Automatically updated PID codes
-PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.OIL_TEMP, pids.FUEL_RATE, pids.THROTTLE_REQ]
+PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.FUEL_RATE, pids.ENG_TORQUE_ACT, pids.THROTTLE_REQ]
 CANdata = { }		# Dictionary holding all vehicle parameters + readings
 CANlock = None		# Write lock for CAN dictionary
 ELMdata = { }		# Dictionary holding various ELM data
@@ -94,6 +94,19 @@ def send_dtc():
 	global BlueObject
 	canbus.log.debug("Requested DTC codes with MODE 03.")
 	return BlueObject.send_recv(pids.MODE_DTC)
+
+# Glorified list append for auto-update PIDs.
+def subscribe(pid):
+	if not isinstance(pid, basestring):
+		return
+
+	global PIDcodes
+	if pid not in PIDcodes:
+		global PIDcodes
+		PIDcodes.append(pid)
+	else:
+		global PIDcodes
+		PIDcodes.pop(PIDcodes.index(pid))
 
 
 # If testing standalone:

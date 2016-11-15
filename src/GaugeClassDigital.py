@@ -82,7 +82,7 @@ class GaugeDigital(Widget):
     def setVALUE(self, *largs):
         #self.VALUE.text= val
 	#print(canbus.CANdata["0x0C"])
-	self.VALUE.text = str(canbus.CANdata[0x0C])
+	self.VALUE.text = str(canbus.CANdata[self.PID])
 
     def menu(self, *largs):
         """
