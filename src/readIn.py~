@@ -4,12 +4,10 @@
 import csv
 import sys
 
-types = {}
+type = {}
 values = []
 
-class read:
-
-	def readIn(self, csvf):
+	def readIn(csvf):
 		count = 0
 
 		with open(csvf, 'rb') as x:
@@ -20,16 +18,16 @@ class read:
 					values.append(mow)
 			
 
-				types[values[count]] = row
+				type[values[count]] = row
 				#del values[count]
 
 				count += 4
 		
-			print types
-		return types
+			print type
+		return type
 
 
-	def assign(self, types, userPick):
+	def assign(types, userPick):
 
 		gauge = types.get(userPick)
 		#print gauge
@@ -38,10 +36,10 @@ class read:
 		minVal = gauge[1]
 		maxVal = gauge[2]
 		units = gauge[3]
-#		print gaugeType
-#		print minVal
-#		print maxVal
-#		print units
+		print gaugeType
+		print minVal
+		print maxVal
+		print units
 
 		return  
 	#if __name__ == '__main__':

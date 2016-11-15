@@ -29,10 +29,10 @@ class GaugeDigital(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
-        self.PID = None #ADD THIS VALUE TO setGaugeParameters
+        self.PID = None #ADD THIS VALUE TO setGuageParameters
 
         #BACKGROUND       
-        self.gauge = Image(source='Images/Gauges/GaugeSquare1.png', size=(400,400))
+        self.gauge = Image(source='Images/Guages/GuageSquare1.png', size=(400,400))
         
         """
         #SETTINGS MENU BUTTON
@@ -40,7 +40,7 @@ class GaugeDigital(Widget):
         self.settings.bind(on_release=self.menu)
         self.settings_open=False
         """
-        #GAUGE VALUE
+        #GUAGE VALUE
         self.VALUE = Label(text='0', font_size='120sp', pos=(150,160), color=(0, 0, 0, 1))
         
         #SETTINGS MENU BUTTON
@@ -49,7 +49,7 @@ class GaugeDigital(Widget):
         self.settings_open=False
         self.gmenu = None
         
-        #GAUGE MEASUREMENTS AND UNTIS
+        #GUAGE MEASUREMENTS AND UNTIS
         self.MTitle = Label(text=self.Measure, font_size='26sp', pos=(150,40), color=(0, 0, 0, 1))
         self.MUnits = Label(text=self.Units, font_size='22sp', pos=(150,70), color=(0, 0, 0, 1))
         
@@ -70,7 +70,7 @@ class GaugeDigital(Widget):
         self.gauge.source = imagesrc
         
         
-    def setGaugeParameters(self, Meas, Min, Max, UnitM):
+    def setGuageParameters(self, Meas, Min, Max, UnitM):
 		#ADD PID VALUE
         self.Measure= Meas
         #UPDATE TEXT
@@ -85,9 +85,9 @@ class GaugeDigital(Widget):
         #self.VALUE.text= val
 	#print(canbus.CANdata["0x0C"])
 	#SHOULD BE:
-	self.VALUE.text = str(canbus.CANdata[self.PID])
+	#self.VALUE.text = str(canbus.CANdata[self.PID])
 	#FOR TESTING USE:
-	#self.VALUE.text = str(canbus.CANdata[0x0C])
+	self.VALUE.text = str(canbus.CANdata[0x0C])
 
     def menu(self, *largs):
         """
@@ -142,14 +142,14 @@ class GaugeDigital(Widget):
         self.settings.text='Modify'
 
     def style_1(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare1.png')
+        self.setBackground('Images/Guages/GuageSquare1.png')
         
         self.MTitle.color=(0,0,0,1)
         self.MUnits.color=(0,0,0,1)
         self.VALUE.color=(0,0,0,1)
     
     def style_2(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare2.png')
+        self.setBackground('Images/Guages/GuageSquare2.png')
         
         self.MTitle.color=(1,1,1,1)
         self.MUnits.color=(1,1,1,1)
@@ -157,35 +157,35 @@ class GaugeDigital(Widget):
         
         
     def style_3(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare3.png')
+        self.setBackground('Images/Guages/GuageSquare3.png')
         
         self.MTitle.color=(1,1,1,1)
         self.MUnits.color=(1,1,1,1)
         self.VALUE.color=(1,1,1,1)
         
     def style_4(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare4.png')
+        self.setBackground('Images/Guages/GuageSquare4.png')
         
         self.MTitle.color=(0,0,0,1)
         self.MUnits.color=(0,0,0,1)
         self.VALUE.color=(0,0,0,1)
         
     def style_5(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare5.png')
+        self.setBackground('Images/Guages/GuageSquare5.png')
         
         self.MTitle.color=(1,1,1,1)
         self.MUnits.color=(1,1,1,1)
         self.VALUE.color=(1,1,1,1)
         
     def style_6(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare6.png')
+        self.setBackground('Images/Guages/GuageSquare6.png')
         
         self.MTitle.color=(0,0,0,1)
         self.MUnits.color=(0,0,0,1)
         self.VALUE.color=(0,0,0,1)
     
     def style_7(self, *largs):
-        self.setBackground('Images/Gauges/GaugeSquare7.png')
+        self.setBackground('Images/Guages/GuageSquare7.png')
         
         self.MTitle.color=(1,1,1,1)
         self.MUnits.color=(1,1,1,1)
