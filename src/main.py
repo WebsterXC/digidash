@@ -72,13 +72,15 @@ def main():
 		## If no, display warning and options.
 
 	# Vehicle available.
-	d = daemon.CANDaemon()
-	d.start()
-
-	#d = daemon.ParserDaemon()
+	#d = daemon.CANDaemon()
 	#d.start()
+
+	d = daemon.ParserDaemon()
+	d.start()
 	#p = daemon.ParamDaemon()
 	#p.start()
+
+	canbus.send_pid("0x0C")
 
 	# Kivy Main Screen ("Infinite Loop for GUI")
 	
@@ -89,7 +91,6 @@ def main():
 	#for i in range(0, 50):
 	#	print(canbus.CANdata[0x0C])
 	#	time.sleep(0.1)
-
 
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.

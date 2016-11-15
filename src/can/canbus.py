@@ -5,6 +5,7 @@
 # reader. CAN bus data is automatically gathered via the CANDaemon class in daemon.py.
 
 import pids
+from blue import Blue, StoppedError, NoDataError, InvalidCmdError, StateError, ConnectFailureError
 import blue
 import logging
 import threading
@@ -20,16 +21,15 @@ BlueObject = None	# Not sure if we want to implement it this way, but I did this
 			# to test code.
 
 class canbus(object):
-    hasFaults   = False		# Are there DTC codes that need to be processed?
-    mode	= "0x01"	# Realtime gathering mode
-    #BlueObject  = None
+    hasFaults   = False			# Are there DTC codes that need to be processed?
+    mode	= pids.MODE_REALTIME	# Realtime gathering mode
     log		= None
 
     # Begin Bluetooth connection, logging, and initialise with auto-update PIDs
     def __init__(self):
-	self.log = logging.getLogger('digilogger')
+	canbus.log = logging.getLogger('digilogger')
 	
-	if self.log == None:
+	if canbus.log == None:
 		logging.warning("Logger file not found.")
 	
 	global CANlock
@@ -40,10 +40,17 @@ class canbus(object):
 
 	global BlueObject
 	BlueObject = blue.Blue()
-	#BlueObject.connect()
 	
-	self.log.debug('CAN connection established.')
+	try:
+		print("Fake connection!")
+		#BlueObject.connect()
+	except ConnectFailureError:
+		canbus.log.error("Unable establish a CAN connection.")	
+		return
 
+	canbus.log.debug('CAN connection established.')
+
+	# Initial value for all auto-update codes
 	for code in PIDcodes:
 		CANdata[code] = 0.00
     
@@ -55,45 +62,62 @@ def send_pid(pid):
 		print(" PID must be a hexidecimal string.")
 		return
 
-	# Process and reformat PID code
+	# Process and reformat PID code, then send it.
 	command = ((canbus.mode).split('x'))[1] + ((pid).split('x'))[1]
 
-	# Send pid as ELM command
-	global BlueObject
-	result = BlueObject.send_recv(command)
+	try:
+		global BlueObject
+		result = BlueObject.send_recv(command)
+	except StateError:
+		canbus.log.error(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
+		return
+	except InvalidCmdError:
+		canbus.log.info(''.join(("Sent invalid PID ", pid)) ) 
+		return
+	except StoppedError:
+		canbus.log.error(''.join(("Connection STOPPED after sending: ", pid)) )
+		return
+	except NoDataError:
+		canbus.log.info(''.join(("Sending PID ", pid, " return NO DATA.")) )
+		return
 
-	canbus.log.debug(str.join("Sent PID: ", pid))
-	canbus.log.debug(str.join("Returned: ", result))
+	canbus.log.debug(''.join(("Sent PID: ", pid)) )
+	canbus.log.debug(''.join(("Returned: ", result)) )
 
 	return result
 
 # Nonclass method for sending ELM327 or non-MODE 1 commands to the bluetooth dongle.
 def send_command(mode, cmd):
 	
-	# Check MODE for command type. Use MODE_ELM for ELM commands
+	# ELM commands and DTC commands are formatted differently
 	if mode == MODE_ELM:
-		global BlueObject
-		result = BlueObject.send_recv(command)
-		
-		canbus.log.debug(str.join("Sent ELM command: ", cmd))
-		canbus.log.debug(str.join("Returned: ", result))	
-
+		command = cmd
+	elif mode == MODE_DTC:
+		command = mode		# cmd arguement doesn't matter if mode is 0x03
 	else:
 		command = ((canbus.mode).split('x'))[1] + ((pid).split('x'))[1]
-	
-		global BlueObject
-		result = BlueObject.send_recv(command)
+		
 
-		canbus.log.debug(str.join("Sent command: ", cmd, " with mode ", mode))
-		canbus.log.debug(str.join("Returned: ", result))	
+	# Send / Receive the result
+	try:
+		result = BlueObject.send_recv(command)
+	except StateError:
+		canbus.log.error(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
+		return
+	except InvalidCmdError:
+		canbus.log.info(''.join(("Sent invalid PID ", pid)) ) 
+		return
+	except StoppedError:
+		canbus.log.error(''.join(("Connection STOPPED after sending: ", pid)) )
+		return
+	except NoDataError:
+		canbus.log.info(''.join(("Sending PID ", pid, " return NO DATA.")) )
+		return
+	
+	canbus.log.debug(''.join(("Sent command: ", command, " in mode ", mode)) )
+	canbus.log.debug(''.join(("Returned: ", result)) )
 
 	return result
-
-# Send MODE3 to retrieve MIL and DTC codes
-def send_dtc():
-	global BlueObject
-	canbus.log.debug("Requested DTC codes with MODE 03.")
-	return BlueObject.send_recv(pids.MODE_DTC)
 
 # Glorified list append for auto-update PIDs.
 def subscribe(pid):
