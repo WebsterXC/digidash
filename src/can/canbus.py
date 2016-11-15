@@ -87,15 +87,15 @@ def send_pid(pid):
 	return result
 
 # Nonclass method for sending ELM327 or non-MODE 1 commands to the bluetooth dongle.
-def send_command(mode, cmd):
+def send_command(mode, pid):
 	
 	# ELM commands and DTC commands are formatted differently
 	if mode == MODE_ELM:
-		command = cmd
+		command = pid
 	elif mode == MODE_DTC:
 		command = mode		# cmd arguement doesn't matter if mode is 0x03
 	else:
-		command = ((canbus.mode).split('x'))[1] + ((pid).split('x'))[1]
+		command = ((mode).split('x'))[1] + ((pid).split('x'))[1]
 		
 
 	# Send / Receive the result
