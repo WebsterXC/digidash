@@ -3,7 +3,9 @@ from kivy.uix.button import Button
 from kivy.uix.image import Image
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.scatter import Scatter
+from kivy.uix.floatlayout import FloatLayout
 from kivy.animation import Animation
 from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
@@ -14,7 +16,7 @@ from GaugeClass import Gauge
 from GaugeClassDigital import GaugeDigital 
 import time
 import platform
-
+import ConfigParser
 
 
 class AddGauge(Widget):
@@ -31,8 +33,10 @@ class AddGauge(Widget):
         #REF TO PARENT CLASS
         self.Parent = None
 
+        self.appLayout = FloatLayout(size=(800,600))
+
         reads = read()
-        typeDict = read.readIn(reads,"AddGauge.csv")
+        self.typeDict = read.readIn(reads,"AddGauge.csv")
         #print type
 
         #self.Values= ['Engine Load',
@@ -46,9 +50,9 @@ class AddGauge(Widget):
 
         self.codetype = DropDown()
 
-        for x in typeDict.keys():
+        for x in self.typeDict.keys():
             self.cur = Button(text=x, size_hint_y= None, height= 30)
-            self.cur.bind(on_release = partial(self.userSelect, x, typeDict))  
+            self.cur.bind(on_release = partial(self.userSelect, x))  
             self.codetype.add_widget(self.cur)
 
         self.mainbutton = Button(text='New Gauge', size_hint=(None,None), size=(200,30))
@@ -62,28 +66,30 @@ class AddGauge(Widget):
     def set_parent(self,p):
         self.Parent = p
 
-    def userSelect(instance, val, typeDict, *largs):
+    def userSelect(instance, val, *largs):
         
         #print(val)
-        
         gtype = 'digital' #WHAT DO WE DO HERE?
         #print(gtype)
-        gstyle = 1 #WHAT DO WE DO HERE?
+        gstyle = 1
         gposx = 50
         gposy = 150
         gscale = 0.35
-        gmeasure = typeDict.get(val)[0]
-        gunits = typeDict.get(val)[3]
-        gmin = float(typeDict.get(val)[1])
-        gmax = float(typeDict.get(val)[2])
-
+        gmeasure = instance.typeDict.get(val)[0]
+        print(gmeasure)
+        gunits = instance.typeDict.get(val)[3]
+        print(gunits)
+        gmin = float(instance.typeDict.get(val)[1])
+        print(gmin)
+        gmax = float(instance.typeDict.get(val)[2])
+        print(gmax)
        
-        #newG = GaugeDigital()
-        #newGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
-        #newGS.add_widget(newG)
-        #GaugeDigital.setParents(newG,self.Parent,newGS)
-        #GaugeDigital.setGaugeParameters(newG, gmeasure, gmin, gmax, gunits)
-        #self.Parent.ActiveGauges.append(newGS)
-        #self.Parent.add_widget(newGS)
+        newG = GaugeDigital()
+        newGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+        newGS.add_widget(newG)
+        GaugeDigital.setParents(newG,instance.Parent,newGS)
+        GaugeDigital.setGaugeParameters(newG, gmeasure, gmin, gmax, gunits)
+        #Parent.ActiveGauges.append(newGS)
+        #self.Parent.appLayout.add_widget(newGS)
                         
-        #Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.0625)
+        Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.0625)

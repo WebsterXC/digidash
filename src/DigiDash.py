@@ -18,7 +18,7 @@ from kivy.uix.dropdown import DropDown
 import time
 from functools import partial
 import ConfigParser
-
+                                                                                                                                                                        
 
 class DigiDashApp(App):
     def build(self):
@@ -52,8 +52,7 @@ class DigiDashApp(App):
                 Gauge.setParents(curG,self,curGS)
                 Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-
-		Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
 
             else:
                 curG = GaugeDigital()
@@ -62,8 +61,7 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-						
-		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
