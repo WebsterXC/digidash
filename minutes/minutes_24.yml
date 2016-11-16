@@ -1,0 +1,19 @@
+date: November 14, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, jhanson3, mohdkhan, davideva]
+absent: [mohdkhan]
+excused_absences: [
+  {ubit: mohdkhan, reason: Chose not to attend optional meeting.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Fixed font color issues. Added meeting minutes.},
+  {ubit: mohdkhan, progress: None.},
+  {ubit: davideva, progress: Made changes to AddGauge.py.},
+  {ubit: waburgin, progress: Connected backend code with GUI.},
+  {ubit: eggarwol, progress: Ran into personal hardware problems.},
+  {ubit: jhanson3, progress: Made adjustments to gauge classes.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Excellent progress made today. Will meet on an as-needed basis in future.
