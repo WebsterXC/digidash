@@ -20,7 +20,6 @@ import logging
 from can import canbus, daemon
 
 from DigiDash import DigiDashApp
-import Dyno
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'
@@ -46,6 +45,16 @@ def logger_init():
 
 def exit_routine():
 	log.critical('Exiting DigiDash...')
+ 
+	# Close bluetooth socket
+	try:
+		# Leave commented for development with no vehicle
+		#canbus.BlueObject.disconnect()
+	except StateError:
+		log.debug("Tried to close an already closed socket.")
+
+	# Close logging
+	logging.shutdown()
 
 def main():
 	# Welcome to DigiDash! #
@@ -80,13 +89,9 @@ def main():
 	#p = daemon.ParamDaemon()
 	#p.start()
 
-	canbus.send_pid("0x0C")
-
 	# Kivy Main Screen ("Infinite Loop for GUI")
 	
 	DigiDashApp().run()
-
-	#l = Dyno.dyno_pull(6000)
 
 	#for i in range(0, 50):
 	#	print(canbus.CANdata[0x0C])

@@ -16,7 +16,6 @@ CANdata = { }		# Dictionary holding all vehicle parameters + readings
 CANlock = None		# Write lock for CAN dictionary
 ELMdata = { }		# Dictionary holding various ELM data
 ELMlock = None		# Write lock for ELM data dictionary
-isConnected = False	# Is a bluetooth connection to vehicle available?
 BlueObject = None	# Not sure if we want to implement it this way, but I did this because it was quick and I wanted
 			# to test code.
 
@@ -47,6 +46,9 @@ class canbus(object):
 	except ConnectFailureError:
 		canbus.log.error("Unable establish a CAN connection.")	
 		return
+	except StateError:
+		canbus.log.info("Tried to reconnect with an open connection?")
+		return	
 
 	canbus.log.debug('CAN connection established.')
 

@@ -205,6 +205,20 @@ def throttle_rel_conv(data):
 def accel_req_conv(data):
     return data / 2.55
 
+## Unit Conversions to Imperial ##
+
+# kPa to PSI
+def units_psi(value):
+	return value * 0.14503773773
+
+# km/h to Mi/h
+def units_kmh(value):
+	return value / 1.609344
+
+# Celcius to fahrenheit
+def units_celcius(value):
+	return (value * 1.8) + 32
+
 ## Data processing calculations for post-conversion data ##
 
 # Estimate horsepower from torque and rpm
