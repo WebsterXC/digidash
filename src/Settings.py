@@ -11,7 +11,7 @@ from kivy.clock import Clock
 import time
 import platform
 import sys
-import GraphClass
+#import GraphClass
 
 
 class Settings(Widget):
