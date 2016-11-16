@@ -45,6 +45,21 @@ def logger_init():
 
 def exit_routine():
 	log.critical('Exiting DigiDash...')
+ 
+	# Close bluetooth socket
+	try:
+		print("Disconnect bluetooth")
+		# Leave commented for development with no vehicle
+		#canbus.BlueObject.disconnect()
+	except StateError:
+		log.debug("Tried to close an already closed socket.")
+
+	# Remove previous log file	
+	subprocess.call(['rm', logpath])
+	# UNCOMMENT above for deployment
+
+	# Close logging
+	logging.shutdown()
 
 def main():
 	# Welcome to DigiDash! #
@@ -71,6 +86,8 @@ def main():
 		## If no, display warning and options.
 
 	# Vehicle available.
+	#d = daemon.CANDaemon()
+	#d.start()
 
 	d = daemon.ParserDaemon()
 	d.start()
@@ -84,7 +101,6 @@ def main():
 	#for i in range(0, 50):
 	#	print(canbus.CANdata[0x0C])
 	#	time.sleep(0.1)
-
 
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.

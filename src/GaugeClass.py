@@ -15,7 +15,6 @@ from kivy.uix.behaviors import ButtonBehavior
 
 from can import canbus, daemon, pids
 
-
 class Gauge(Widget):
     def __init__(self, **kwargs):
         super(Gauge, self).__init__(**kwargs)
@@ -29,8 +28,8 @@ class Gauge(Widget):
         self.MinValue= 0
         self.MaxValue= 80
         self.Units= 'DEF'
-        self.PID = None #ADD THIS VALUE TO setGaugeParameters
-
+        self.PID = None #ADD THIS VALUE TO setGuageParameters
+        
         #BACKGROUND   
         self.gauge = Image(source='Images/Gauges/GaugeHead1.png', size=(400,400))
         self.style = 1
@@ -268,7 +267,7 @@ class Gauge(Widget):
         #SHOULD BE:
 	val = canbus.CANdata[self.PID]
         angle = 360 - (scale*val)
-	print('Range:' + str(val_range) + '  Scale:' + str(scale) + '  Value:' + str(val) + '  Angle:'+ str(angle))
+	#print('Range:' + str(val_range) + '  Scale:' + str(scale) + '  Value:' + str(val) + '  Angle:'+ str(angle))
         self.dialscat.rotation=angle
 	
 	#self.dialscat.rotation=88
@@ -283,8 +282,4 @@ class Gauge(Widget):
     def TestRotation(self, *largs):
         angle = Gauge.MPH2Angle(self,80)
         anim = Animation(rotation=-angle, duration=6.)
-        anim.start(self.dialscat)
-    
-
-
-    
+	anim.start(self.dialscat)

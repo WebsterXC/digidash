@@ -54,6 +54,11 @@ class DigiDashApp(App):
                 Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
 
+		if gmeasure == 'Speed':
+			curG.PID = pids.SPEED
+		else:
+			curG.PID = pids.ENG_RPM
+
 		Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
 
             else:
@@ -63,8 +68,14 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-		
-		curG.PID = pids.ENG_RPM				
+			
+		if gmeasure == 'Throttle':
+			curG.PID = pids.THROTTLE_REQ
+		elif gmeasure == 'MAP':
+			curG.PID = pids.INTAKE_PRESS
+		else:
+			curG.PID = pids.INTAKE_MAF
+				
 		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
@@ -117,7 +128,6 @@ class DigiDashApp(App):
         AddGauge.__resize__(self.gaugeMenu)
         Header.__resize__(self.head)
         Footer.__resize__(self.foot)
-
 
 
 if __name__ == '__main__':

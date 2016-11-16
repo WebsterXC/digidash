@@ -57,14 +57,14 @@ class Blue:
                 print ("Could not connect: ", error, "; Retrying in 5 seconds...")
                 time.sleep(5)
         print("Socket successfully opened!")
-	self.log.debug(str.join("Socket connected with ", myMAC))
+	self.log.debug(''.join(("Socket connected with ", myMAC)) )
 
     def disconnect(self):
         if self.state == 0:
             raise StateError("Can't disconnect. You aren't connected.")
         self.state = 0
         self.sock.close()
-	self.log.debug(str.join("Connection with ", myMAC, "closed."))
+	self.log.debug(''.join(("Connection with ", myMAC, "closed.")) )
 
     def send_recv(self, cmd):  # send cmd parameter and return dongle response (ignores echoes)
         if self.state == 0:
@@ -87,13 +87,13 @@ class Blue:
                 if buffer == "SEARCHING...":
                     continue
                 if buffer == "?":
-		    self.log.debug(str.join("Command ", cmd, " is invalid."))
+		    self.log.debug(''.join(("Command ", cmd, " is invalid.")) )
                     raise InvalidCmdError("Command '%s' is invalid." % cmd)
                 if buffer == "NO DATA":
-		    self.log.debug(str.join("Command ", cmd, " produced NO DATA."))
+		    self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")) )
                     raise NoDataError("Dongle returned 'NO DATA'.")
                 if buffer == "STOPPED":
-		    self.log.warning(str.join("ELM returned STOPPED"))
+		    self.log.warning(''.join(("ELM returned STOPPED")) )
                     raise StoppedError("Dongle returned 'STOPPED'.")
                 sock.recv(2) # get rid of "\r>" that's still waiting to be received
                 #print("Response is")
