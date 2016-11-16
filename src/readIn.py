@@ -2,7 +2,7 @@
 #reads .csv into dictionary
 
 import csv
-import sys
+
 
 types = {}
 values = []
