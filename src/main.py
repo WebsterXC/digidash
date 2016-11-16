@@ -48,6 +48,7 @@ def exit_routine():
  
 	# Close bluetooth socket
 	try:
+		print("Disconnect bluetooth")
 		# Leave commented for development with no vehicle
 		#canbus.BlueObject.disconnect()
 	except StateError:
