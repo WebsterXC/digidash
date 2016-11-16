@@ -1,0 +1,306 @@
+************* Module GaugeClass
+C: 19, 0: Trailing whitespace (trailing-whitespace)
+C: 21, 0: Line too long (88/80) (line-too-long)
+C: 23, 0: Line too long (86/80) (line-too-long)
+C: 26, 0: Trailing whitespace (trailing-whitespace)
+C: 29, 0: Trailing whitespace (trailing-whitespace)
+C: 45, 0: Line too long (82/80) (line-too-long)
+C: 51, 0: Line too long (85/80) (line-too-long)
+C: 57, 0: Line too long (85/80) (line-too-long)
+C: 58, 0: Line too long (87/80) (line-too-long)
+C: 59, 0: Line too long (87/80) (line-too-long)
+C: 60, 0: Line too long (87/80) (line-too-long)
+C: 61, 0: Line too long (88/80) (line-too-long)
+C: 62, 0: Line too long (88/80) (line-too-long)
+C: 63, 0: Line too long (88/80) (line-too-long)
+C: 64, 0: Line too long (88/80) (line-too-long)
+C: 65, 0: Line too long (87/80) (line-too-long)
+C: 67, 0: Line too long (112/80) (line-too-long)
+C: 70, 0: Line too long (100/80) (line-too-long)
+C: 78, 0: Line too long (99/80) (line-too-long)
+C: 79, 0: Line too long (97/80) (line-too-long)
+C:376, 0: Line too long (116/80) (line-too-long)
+C:430, 0: Line too long (92/80) (line-too-long)
+C:431, 0: Line too long (81/80) (line-too-long)
+C:434, 0: Line too long (88/80) (line-too-long)
+C:618, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C:622, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C:626, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C:630, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C:634, 0: Unnecessary parens after 'print' keyword (superfluous-parens)
+C:  1, 0: Missing module docstring (missing-docstring)
+R: 17, 0: Too many instance attributes (26/7) (too-many-instance-attributes)
+C: 67, 8: Invalid attribute name "UnitScaleLabels" (invalid-name)
+C: 41, 8: Invalid attribute name "Units" (invalid-name)
+C: 34, 8: Invalid attribute name "Parent" (invalid-name)
+C: 42, 8: Invalid attribute name "PID" (invalid-name)
+C: 39, 8: Invalid attribute name "MinValue" (invalid-name)
+C: 62, 8: Invalid attribute name "L6" (invalid-name)
+C: 63, 8: Invalid attribute name "L7" (invalid-name)
+C: 60, 8: Invalid attribute name "L4" (invalid-name)
+C: 61, 8: Invalid attribute name "L5" (invalid-name)
+C: 58, 8: Invalid attribute name "L2" (invalid-name)
+C: 59, 8: Invalid attribute name "L3" (invalid-name)
+C: 57, 8: Invalid attribute name "L1" (invalid-name)
+C: 64, 8: Invalid attribute name "L8" (invalid-name)
+C: 65, 8: Invalid attribute name "L9" (invalid-name)
+C: 79, 8: Invalid attribute name "MUnits" (invalid-name)
+C: 78, 8: Invalid attribute name "MTitle" (invalid-name)
+C: 40, 8: Invalid attribute name "MaxValue" (invalid-name)
+C: 38, 8: Invalid attribute name "Measure" (invalid-name)
+C: 35, 8: Invalid attribute name "Scat" (invalid-name)
+C: 91,12: Invalid variable name "l" (invalid-name)
+W:109,-1: String statement has no effect (pointless-string-statement)
+C:111, 4: Missing method docstring (missing-docstring)
+C:117,12: Invalid variable name "PST" (invalid-name)
+C:120,12: Invalid variable name "GBG" (invalid-name)
+C:123,12: Invalid variable name "GDB" (invalid-name)
+C:126,12: Invalid variable name "GRB" (invalid-name)
+C:129,12: Invalid variable name "GTC" (invalid-name)
+W:111, 0: Unused argument 'largs' (unused-argument)
+C:161, 8: Invalid variable name "B1" (invalid-name)
+C:163, 8: Invalid variable name "B2" (invalid-name)
+C:165, 8: Invalid variable name "B3" (invalid-name)
+C:167, 8: Invalid variable name "B4" (invalid-name)
+C:169, 8: Invalid variable name "B5" (invalid-name)
+C:171, 8: Invalid variable name "B6" (invalid-name)
+C:173, 8: Invalid variable name "B7" (invalid-name)
+W:153, 0: Unused argument 'largs' (unused-argument)
+C:205, 8: Invalid variable name "BG1" (invalid-name)
+C:207, 8: Invalid variable name "BG2" (invalid-name)
+C:209, 8: Invalid variable name "BG3" (invalid-name)
+C:211, 8: Invalid variable name "BG4" (invalid-name)
+C:213, 8: Invalid variable name "BG5" (invalid-name)
+C:215, 8: Invalid variable name "BG6" (invalid-name)
+C:217, 8: Invalid variable name "BG7" (invalid-name)
+W:197, 0: Unused argument 'largs' (unused-argument)
+C:249, 8: Invalid variable name "BD1" (invalid-name)
+C:251, 8: Invalid variable name "BD2" (invalid-name)
+C:253, 8: Invalid variable name "BD3" (invalid-name)
+C:255, 8: Invalid variable name "BD4" (invalid-name)
+C:257, 8: Invalid variable name "BD5" (invalid-name)
+C:259, 8: Invalid variable name "BD6" (invalid-name)
+C:261, 8: Invalid variable name "BD7" (invalid-name)
+W:241, 0: Unused argument 'largs' (unused-argument)
+C:293, 8: Invalid variable name "GD1" (invalid-name)
+C:295, 8: Invalid variable name "GD2" (invalid-name)
+C:297, 8: Invalid variable name "GD3" (invalid-name)
+C:299, 8: Invalid variable name "GD4" (invalid-name)
+C:301, 8: Invalid variable name "GD5" (invalid-name)
+W:285, 0: Unused argument 'largs' (unused-argument)
+C:331, 8: Invalid variable name "GT1" (invalid-name)
+C:333, 8: Invalid variable name "GT2" (invalid-name)
+W:323, 0: Unused argument 'largs' (unused-argument)
+W:359,-1: String statement has no effect (pointless-string-statement)
+C:361, 4: Invalid method name "setVALUE" (invalid-name)
+W:361, 0: Unused argument 'largs' (unused-argument)
+C:380, 4: Invalid method name "setParents" (invalid-name)
+C:380, 4: Invalid argument name "P" (invalid-name)
+C:380, 4: Invalid argument name "S" (invalid-name)
+C:387, 4: Invalid method name "setGaugeParameters" (invalid-name)
+C:387, 4: Invalid argument name "Meas" (invalid-name)
+C:387, 4: Invalid argument name "Min" (invalid-name)
+C:387, 4: Invalid argument name "Max" (invalid-name)
+C:387, 4: Invalid argument name "UnitM" (invalid-name)
+C:404,12: Invalid variable name "n" (invalid-name)
+W:407, 0: Unused argument 'largs' (unused-argument)
+W:414, 0: Unused argument 'largs' (unused-argument)
+C:422, 4: Invalid method name "setBackground" (invalid-name)
+W:422, 0: Unused argument 'largs' (unused-argument)
+C:428, 4: Invalid method name "deleteGauge" (invalid-name)
+W:428, 0: Unused argument 'largs' (unused-argument)
+W:447,-1: String statement has no effect (pointless-string-statement)
+C:454,12: Invalid variable name "l" (invalid-name)
+W:449, 0: Unused argument 'largs' (unused-argument)
+C:465,12: Invalid variable name "l" (invalid-name)
+W:460, 0: Unused argument 'largs' (unused-argument)
+C:476,12: Invalid variable name "l" (invalid-name)
+W:471, 0: Unused argument 'largs' (unused-argument)
+C:487,12: Invalid variable name "l" (invalid-name)
+W:482, 0: Unused argument 'largs' (unused-argument)
+C:498,12: Invalid variable name "l" (invalid-name)
+W:493, 0: Unused argument 'largs' (unused-argument)
+C:509,12: Invalid variable name "l" (invalid-name)
+W:504, 0: Unused argument 'largs' (unused-argument)
+C:520,12: Invalid variable name "l" (invalid-name)
+W:515, 0: Unused argument 'largs' (unused-argument)
+W:534,-1: String statement has no effect (pointless-string-statement)
+W:536, 0: Unused argument 'largs' (unused-argument)
+W:541, 0: Unused argument 'largs' (unused-argument)
+W:546, 0: Unused argument 'largs' (unused-argument)
+W:550, 0: Unused argument 'largs' (unused-argument)
+W:554, 0: Unused argument 'largs' (unused-argument)
+W:558, 0: Unused argument 'largs' (unused-argument)
+W:562, 0: Unused argument 'largs' (unused-argument)
+W:574,-1: String statement has no effect (pointless-string-statement)
+W:576, 0: Unused argument 'largs' (unused-argument)
+W:580, 0: Unused argument 'largs' (unused-argument)
+W:584, 0: Unused argument 'largs' (unused-argument)
+W:588, 0: Unused argument 'largs' (unused-argument)
+W:592, 0: Unused argument 'largs' (unused-argument)
+W:596, 0: Unused argument 'largs' (unused-argument)
+W:600, 0: Unused argument 'largs' (unused-argument)
+W:613,-1: String statement has no effect (pointless-string-statement)
+R:615, 4: Method could be a function (no-self-use)
+W:615, 0: Unused argument 'largs' (unused-argument)
+R:620, 4: Method could be a function (no-self-use)
+W:620, 0: Unused argument 'largs' (unused-argument)
+R:624, 4: Method could be a function (no-self-use)
+W:624, 0: Unused argument 'largs' (unused-argument)
+R:628, 4: Method could be a function (no-self-use)
+W:628, 0: Unused argument 'largs' (unused-argument)
+R:632, 4: Method could be a function (no-self-use)
+W:632, 0: Unused argument 'largs' (unused-argument)
+W:646,-1: String statement has no effect (pointless-string-statement)
+C:652,12: Invalid variable name "l" (invalid-name)
+W:648, 0: Unused argument 'largs' (unused-argument)
+C:662,12: Invalid variable name "l" (invalid-name)
+W:658, 0: Unused argument 'largs' (unused-argument)
+R: 17, 0: Too many public methods (76/20) (too-many-public-methods)
+W: 11, 0: Unused import partial (unused-import)
+W:  8, 0: Unused import Clock (unused-import)
+W: 12, 0: Unused import time (unused-import)
+W: 14, 0: Unused import daemon (unused-import)
+W:  5, 0: Unused import Window (unused-import)
+W:  7, 0: Unused import Animation (unused-import)
+W: 13, 0: Unused import floatlayout (unused-import)
+W:  4, 0: Unused import App (unused-import)
+
+
+Report
+======
+355 statements analysed.
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |428    |71.45 |429      |-1.00      |
++----------+-------+------+---------+-----------+
+|docstring |80     |13.36 |80       |=          |
++----------+-------+------+---------+-----------+
+|comment   |19     |3.17  |19       |=          |
++----------+-------+------+---------+-----------+
+|empty     |72     |12.02 |72       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |105    |105      |=          |
++-----------+-------+---------+-----------+
+|refactor   |7      |7        |=          |
++-----------+-------+---------+-----------+
+|warning    |54     |55       |-1.00      |
++-----------+-------+---------+-----------+
+|error      |0      |2        |-2.00      |
++-----------+-------+---------+-----------+
+
+
+
+Messages
+--------
+
++-----------------------------+------------+
+|message id                   |occurrences |
++=============================+============+
+|invalid-name                 |74          |
++-----------------------------+------------+
+|unused-argument              |39          |
++-----------------------------+------------+
+|line-too-long                |21          |
++-----------------------------+------------+
+|unused-import                |8           |
++-----------------------------+------------+
+|pointless-string-statement   |7           |
++-----------------------------+------------+
+|superfluous-parens           |5           |
++-----------------------------+------------+
+|no-self-use                  |5           |
++-----------------------------+------------+
+|trailing-whitespace          |3           |
++-----------------------------+------------+
+|missing-docstring            |2           |
++-----------------------------+------------+
+|too-many-public-methods      |1           |
++-----------------------------+------------+
+|too-many-instance-attributes |1           |
++-----------------------------+------------+
+
+
+
+Global evaluation
+-----------------
+Your code has been rated at 5.32/10 (previous run: 5.03/10, +0.30)
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |1      |1          |=          |0.00        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |1      |1          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |42     |42         |=          |97.62       |11.90    |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |0          |=          |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+External dependencies
+---------------------
+::
+
+    can 
+      \-canbus (GaugeClass)
+      \-daemon (GaugeClass)
+    kivy 
+      \-animation 
+      | \-Animation (GaugeClass)
+      \-app 
+      | \-App (GaugeClass)
+      \-clock 
+      | \-Clock (GaugeClass)
+      \-core 
+      | \-window 
+      |   \-Window (GaugeClass)
+      \-uix 
+        \-boxlayout 
+        | \-BoxLayout (GaugeClass)
+        \-button 
+        | \-Button (GaugeClass)
+        \-floatlayout (GaugeClass)
+        \-image 
+        | \-Image (GaugeClass)
+        \-label 
+        | \-Label (GaugeClass)
+        \-scatter 
+        | \-Scatter (GaugeClass)
+        \-widget 
+          \-Widget (GaugeClass)
+
+
+
