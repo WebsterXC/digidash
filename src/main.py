@@ -54,6 +54,10 @@ def exit_routine():
 	except StateError:
 		log.debug("Tried to close an already closed socket.")
 
+	# Remove previous log file	
+	subprocess.call(['rm', logpath])
+	# UNCOMMENT above for deployment
+
 	# Close logging
 	logging.shutdown()
 
