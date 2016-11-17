@@ -207,13 +207,25 @@ class GaugeDigital(Widget):
 			Changes font color of gauge
 		"""
 		text_menu = BoxLayout(
-					size_hint=(0.25, (0.05*4)),
+					size_hint=(0.25, (0.05*10)),
 					orientation='vertical')
 
 		GT1 = Button(text='BLACK')
 		GT1.bind(on_release=self.black_font)
 		GT2 = Button(text='WHITE')
 		GT2.bind(on_release=self.white_font)
+		GT3 = Button(text='GREEN')
+		GT3.bind(on_release=self.green_font)
+		GT4 = Button(text='RED')
+		GT4.bind(on_release=self.red_font)
+		GT5 = Button(text='BLUE')
+		GT5.bind(on_release=self.blue_font)
+		GT6 = Button(text='ORANGE')
+		GT6.bind(on_release=self.orange_font)
+		GT7 = Button(text='YELLOW')
+		GT7.bind(on_release=self.yellow_font)
+		GT8 = Button(text='PURPLE')
+		GT8.bind(on_release=self.purple_font)
 
 		back = Button(text='[ BACK ]')
 		back.bind(on_release=self.back_to_menu)
@@ -223,9 +235,15 @@ class GaugeDigital(Widget):
 		text_menu.add_widget(back)
 		text_menu.add_widget(GT1)
 		text_menu.add_widget(GT2)
+		text_menu.add_widget(GT3)
+		text_menu.add_widget(GT4)
+		text_menu.add_widget(GT5)
+		text_menu.add_widget(GT6)
+		text_menu.add_widget(GT7)
+		text_menu.add_widget(GT8)
 		text_menu.add_widget(close)
 
- 		text_menu.pos = self.Scat.pos
+		text_menu.pos = self.Scat.pos
 
 		self.Parent.appLayout.remove_widget(self.gmenu)
 		self.gmenu = text_menu
@@ -431,3 +449,63 @@ class GaugeDigital(Widget):
 		#String Identifiers
 		self.MTitle.color = (1, 1, 1, 1)
 		self.MUnits.color = (1, 1, 1, 1)
+
+	def green_font(self, *largs):
+		"""
+    		Change font to the color white
+		"""
+		#Main Value
+		self.VALUE.color = (0, 1, 0, 1)
+		#String Identifiers
+		self.MTitle.color = (0, 1, 0, 1)
+		self.MUnits.color = (0, 1, 0, 1)
+
+	def red_font(self, *largs):
+		"""
+    		Change font to the color white
+		"""
+		#Main Value
+		self.VALUE.color = (1, 0, 0, 1)
+		#String Identifiers
+		self.MTitle.color = (1, 0, 0, 1)
+		self.MUnits.color = (1, 0, 0, 1)
+
+	def blue_font(self, *largs):
+		"""
+    		Change font to the color white
+		"""
+		#Main Value
+		self.VALUE.color = (0, 0, 1, 1)
+		#String Identifiers
+		self.MTitle.color = (0, 0, 1, 1)
+		self.MUnits.color = (0, 0, 1, 1)
+
+	def orange_font(self, *largs):
+		"""
+    		Change font to the color white
+		"""
+		#Main Value
+		self.VALUE.color = (1, 0.5, 0, 1)
+		#String Identifiers
+		self.MTitle.color = (1, 0.5, 0, 1)
+		self.MUnits.color = (1, 0.5, 0, 1)
+
+	def yellow_font(self, *largs):
+		"""
+			Change font to the color white
+		"""
+		#Main Value
+		self.VALUE.color = (1, 0.8, 0, 1)
+		#String Identifiers
+		self.MTitle.color = (1, 0.8, 0, 1)
+		self.MUnits.color = (1, 0.8, 0, 1)
+
+	def purple_font(self, *largs):
+		"""
+		    Change font to the color white
+		"""
+		#Main Value
+		self.VALUE.color = (0.4, 0, 1, 1)
+		#String Identifiers
+		self.MTitle.color = (0.4, 0, 1, 1)
+		self.MUnits.color = (0.4, 0, 1, 1)
