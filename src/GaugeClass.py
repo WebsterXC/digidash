@@ -17,17 +17,17 @@ from can import canbus, daemon, pids
 
 class Gauge(Widget):
     """Class Gauge is a kivy widget to implement an analog Gauge
-    
+
     Important Attributes:
         self.Parent (DigiDash): This is the reference to the parent class of DigiDash.py
         self.Scat (Scatter): This is the scatter that holds current Gauge class
         self.PID (number): This is the defined PID which the Gauge uses to obtain data
         self.MinValue (int): The minimum value this gauge should be able to read
         self.MaxValue (int): The maximum value this gauge should be able to read
-        self.gmenu (BoxLayout): The reference to the current open menu. 
+        self.gmenu (BoxLayout): The reference to the current open menu.
 
     """
-    
+
     def __init__(self, **kwargs):
         super(Gauge, self).__init__(**kwargs)
 
@@ -41,15 +41,15 @@ class Gauge(Widget):
         self.MaxValue= 80
         self.Units= 'DEF'
         self.PID = None #ADD THIS VALUE TO setGuageParameters
-        
-        #BACKGROUND   
+
+        #BACKGROUND
         self.gauge = Image(source='Images/Gauges/GaugeHead1.png', size=(400,400))
         self.style = 1
 
         #GAUGE DIAL
         self.dialscat = Scatter(do_translation=False)
         self.dialscat.center = self.gauge.center
-        self.dial = Image(source='Images/dial.png', size=(300, 300), pos=(-105, -90))
+        self.dial = Image(source='Images/Gauges/dial_red.png', size=(300, 300), pos=(-105, -90))
         self.dialscat.add_widget(self.dial)
         self.dialscat.rotation = 1
         #self.dialscat.bind(on_touchdown=self.TestRotation)
@@ -223,7 +223,7 @@ class Gauge(Widget):
         close = Button(text='[ CLOSE ]')
         close.bind(on_release=self.close_menus)
 
-
+	bg_menu.add_widget(back)
         bg_menu.add_widget(BG1)
         bg_menu.add_widget(BG2)
         bg_menu.add_widget(BG3)
@@ -261,6 +261,8 @@ class Gauge(Widget):
         BD6.bind(on_release=self.dial_6)
         BD7 = Button(text='RED')
         BD7.bind(on_release=self.dial_7)
+        BD8 = Button(text='ORANGE')
+        BD8.bind(on_release=self.dial_8)
 
         back = Button(text='[ BACK ]')
         back.bind(on_release=self.back_to_menu)
@@ -275,6 +277,7 @@ class Gauge(Widget):
         dial_menu.add_widget(BD5)
         dial_menu.add_widget(BD6)
         dial_menu.add_widget(BD7)
+	dial_menu.add_widget(BD8)
         dial_menu.add_widget(close)
 
         dial_menu.pos = self.Scat.pos
@@ -429,7 +432,7 @@ class Gauge(Widget):
             Gauges are stored in the scatter in the main class in both the active gauge list
             and the appLayout visually. Remove from both to delete current gauge.
         """
-	self.Parent.appLayout.remove_widget(self.gmenu)        
+	self.Parent.appLayout.remove_widget(self.gmenu)
 	self.Parent.appLayout.remove_widget(self.Scat)
 	self.Parent.ActiveGauges.remove(self.Scat)
 
@@ -571,32 +574,36 @@ class Gauge(Widget):
     """
 
     def dial_1(self, *largs):
-        """ Dial 1 """
-        self.dial.source = 'Images/dial.png'
+        """ Dial 1: """
+        self.dial.source = 'Images/Gauges/dial_white.png'
 
     def dial_2(self, *largs):
         """ Dial 2 """
-        self.dial.source = 'Images/dial.png'
+        self.dial.source = 'Images/Gauges/dial_purple.png'
 
     def dial_3(self, *largs):
         """ Dial 3 """
-        self.dial.source = 'Images/dial.png'
+        self.dial.source = 'Images/Gauges/dial_black.png'
 
     def dial_4(self, *largs):
         """ Dial 4 """
-        self.dial.source = 'Images/dial.png'
+        self.dial.source = 'Images/Gauges/dial_yellow.png'
 
     def dial_5(self, *largs):
         """ Dial 5 """
-        self.dial.source = 'Images/dial.png'
+        self.dial.source = 'Images/Gauges/dial_blue.png'
 
     def dial_6(self, *largs):
         """ Dial 6 """
-        self.dial.source = 'Images/dial.png'
+        self.dial.source = 'Images/Gauges/dial_green.png'
 
     def dial_7(self, *largs):
         """ Dial 7 """
-        self.dial.source = 'Images/dial.png'
+        self.dial.source = 'Images/Gauges/dial_red.png'
+
+    def dial_8(self, *largs):
+        """ Dial 7 """
+        self.dial.source = 'Images/Gauges/dial_orange.png'
 
 
     """
