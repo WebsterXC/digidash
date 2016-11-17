@@ -299,6 +299,7 @@ class GaugeDigital(Widget):
 		self.Parent.appLayout.remove_widget(self.gmenu)
         	self.Parent.appLayout.remove_widget(self.Scat)
 		self.Parent.ActiveGauges.remove(self.Scat)
+		print(len(self.Parent.ActiveGauges))
 
 
 	"""

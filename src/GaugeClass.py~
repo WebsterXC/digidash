@@ -429,9 +429,12 @@ class Gauge(Widget):
             Gauges are stored in the scatter in the main class in both the active gauge list
             and the appLayout visually. Remove from both to delete current gauge.
         """
+
+        #self.Parent.ActiveGauges.remove(self.Scat) #For some resaon this gives an error
 	self.Parent.appLayout.remove_widget(self.gmenu)        
 	self.Parent.appLayout.remove_widget(self.Scat)
 	self.Parent.ActiveGauges.remove(self.Scat)
+
 
     """
      ____________________________________________________________
