@@ -226,7 +226,7 @@ class GaugeDigital(Widget):
 		text_menu.add_widget(close)
 
  		text_menu.pos = self.Scat.pos
-       
+
 		self.Parent.appLayout.remove_widget(self.gmenu)
 		self.gmenu = text_menu
 		self.Parent.appLayout.add_widget(text_menu)
@@ -247,7 +247,7 @@ class GaugeDigital(Widget):
 		#print(canbus.CANdata["0x0C"])
 		#SHOULD BE:
 		self.VALUE.text = str(canbus.CANdata[self.PID])
-		
+
 
 		# STOP DOING THIS. YOURE NOT EVEN ADDRESSING THE DICTIONARY RIGHT: WB
 		#self.VALUE.text = str(canbus.CANdata[0x0C])
@@ -309,7 +309,7 @@ class GaugeDigital(Widget):
 	|    THEME DEFINES BACKGROUND, DIAL, FONT COLOR, AND RIM     |
 	|                                                            |
 	|____________________________________________________________|
-	""" 
+	"""
 
 	def style_1(self, *largs):
 		""" Theme style 1 """
@@ -392,7 +392,7 @@ class GaugeDigital(Widget):
 	def bg_5(self, *largs):
 		""" Background 5 """
 		self.setBackground('Images/Gauges/GaugeSquare5.png')
- 
+
 	def bg_6(self, *largs):
 		""" Background 6 """
 		self.setBackground('Images/Gauges/GaugeSquare6.png')
@@ -416,6 +416,8 @@ class GaugeDigital(Widget):
 		"""
 			Change font to the color black
 		"""
+		#Main Value
+		self.VALUE.color = (0, 0, 0, 1)
 		#String Identifiers
 		self.MTitle.color = (0, 0, 0, 1)
 		self.MUnits.color = (0, 0, 0, 1)
@@ -424,6 +426,8 @@ class GaugeDigital(Widget):
 		"""
 			Change font to the color white
 		"""
+		#Main Value
+		self.VALUE.color = (1 , 1, 1, 1)
 		#String Identifiers
 		self.MTitle.color = (1, 1, 1, 1)
 		self.MUnits.color = (1, 1, 1, 1)
