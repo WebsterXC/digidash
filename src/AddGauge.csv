@@ -1,15 +1,19 @@
-Tachometer,0,9000,RPM
-Speedometer,0,300,MPH
-Boost,-30,50,PSI
-Oil Pressure,0,100,PSI
-Fuel Pressure, 0,100,PSI
-Mass Air Flow,0.0,5.0,V
-Manifold Absolute Pressure,-15,50,PSI
-A/F Ratio,11.0,18.0, 
-Absolute Throttle Position,0,100,%
-Accelerator Pedal Position,0,100,%
-Calculated Load Value,0,100,%
-Coolant Temperature,35,125,C
-Oil Temperature,35,125,C
-Ambient Air Temp,-30,60,C
-O2 Sensor,0.1,1.0,V
+Tachometer,0,9000,RPM,ENG_RPM
+Speedometer,0,300,MPH,SPEED 
+Boost,-30,50,PSI,TURBO_PRES
+Ambient Air Pres,-40,100,kPa,ENVIR_PRESS 
+Fuel Pres,0,100,kPa,FUEL_PRESS
+MAF,0.0,500.0,g/s,INTAKE_MAF
+MAP,-15,50,kPa,INTAKE_PRESS
+F/A Ratio,0.0,2.0, ,OXSNS_FA1
+F/A Ratio 2,0.0,2.0, ,OXSNS_FA2
+Throttle Pos,0,100,%,THROTTLE_REQ
+Accel Pedal Pos,0,100,%,ACCEL_REQ
+Calc Load Val,0,100,%,ENG_LOAD
+Intake Temp,35,125,C,INTAKE_TEMP
+Coolant Temp,35,125,C,ENG_COOLTEMP
+Oil Temp,35,125,C,OIL_TEMP
+Ambient Air Temp,-30,60,C,ENVIR_TEMP
+O2 Sensor,0.1,1.0,V,OXSNS_V1
+O2 Sensor 2,0.1,1.0,V,OXSNS_V2
+Engine Torque,0,1500,N/m,ENG_TORQUE_ACT

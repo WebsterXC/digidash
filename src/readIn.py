@@ -14,18 +14,18 @@ class read:
 
 		with open(csvf, 'rb') as x:
 			worddup = csv.reader(x)
-
+			
 			for row in worddup:
 				for mow in row:
 					values.append(mow)
-			
+					#print(mow)
 
 				types[values[count]] = row
 				#del values[count]
 
-				count += 4
+				count += 5
 		
-			print types
+			#print(types)
 		return types
 
 

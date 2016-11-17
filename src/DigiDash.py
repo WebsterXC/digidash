@@ -54,12 +54,12 @@ class DigiDashApp(App):
                 Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
 
-		if gmeasure == 'Speed':
-			curG.PID = pids.SPEED
-		else:
-			curG.PID = pids.ENG_RPM
+                if gmeasure == 'Speed':
+                    curG.PID = pids.SPEED
+                else:
+                    curG.PID = pids.ENG_RPM
 
-		Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
 
             else:
                 curG = GaugeDigital()
@@ -68,15 +68,16 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-			
-		if gmeasure == 'Throttle':
-			curG.PID = pids.THROTTLE_REQ
-		elif gmeasure == 'MAP':
-			curG.PID = pids.INTAKE_PRESS
-		else:
-			curG.PID = pids.INTAKE_MAF
+			     
+                #curG.PID = pids.ENG_RPM 
+                if gmeasure == 'Throttle':
+                    curG.PID = pids.THROTTLE_REQ
+                elif gmeasure == 'MAP':
+                    curG.PID = pids.INTAKE_PRESS
+                else:
+                    curG.PID = pids.INTAKE_MAF 
 				
-		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
@@ -106,6 +107,7 @@ class DigiDashApp(App):
         self.settingMenu = Settings(size_hint=(.3,.01))
         Settings.set_parent(self.settingMenu, self)
         self.gaugeMenu = AddGauge()
+        AddGauge.set_parent(self.gaugeMenu, self)
         head.add_widget(self.settingMenu)
         head.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
 
