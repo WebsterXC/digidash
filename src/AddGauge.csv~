@@ -1,5 +1,5 @@
 Tachometer,0,9000,RPM,0x0C
-Speedometer,0,300,KMH,0x0D
+Speedometer,0,300,KMH,0x0D 
 Boost,-30,50,kPa,0x6F
 Ambient Air Pres,-40,100,kPa,0x33 
 Fuel Pres,0,100,kPa,0x0A

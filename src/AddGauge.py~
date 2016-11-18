@@ -141,7 +141,7 @@ class AddGauge(Widget):
             gmax = float(instance.typeDict.get(val)[2])
             #print(gmax)
             gcode = str(instance.typeDict.get(val)[4])
-            canbus.subscribe(gcode)
+            canbus.subscribe(str(instance.typeDict.get(val)[4]))
             #print(gcode)
 
             newG = Gauge()
