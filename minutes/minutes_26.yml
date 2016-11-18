@@ -1,0 +1,20 @@
+date: November 18, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, davideva, eggarwol]
+absent: [jhanson3, mohdkhan]
+excused_absences: [
+  {ubit: jhanson3, reason: Flat tire.},
+  {ubit: mohdkhan, reason: Work.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Found solution to DigiDash mounting issue. Added meeting minutes. Fixed errors in previous two meeting minutes.},
+  {ubit: mohdkhan, progress: None.},
+  {ubit: davideva, progress: Made more changes to add-gauge functionality.},
+  {ubit: waburgin, progress: Fixed more backend bugs.},
+  {ubit: eggarwol, progress: Added background button to settings dropdown menu.},
+  {ubit: jhanson3, progress: Made various GUI fixes and modifications.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Went over everyone's progress. Will meet this weekend to wrap up Sprint 4.

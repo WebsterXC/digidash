@@ -1,6 +1,6 @@
 date: November 16, 2016
 meeting_type: group # meeting_type can be "group", "ta", or "instructor"
-attendance: [markgras, waburgin, jhanson3, mohdkhan, davideva]
+attendance: [markgras, waburgin, jhanson3, eggarwol, davideva]
 absent: [mohdkhan]
 excused_absences: [
   {ubit: mohdkhan, reason: Chose not to attend optional meeting.}
