@@ -55,6 +55,8 @@ class canbus(object):
 	# Initial value for all auto-update codes
 	for code in PIDcodes:
 		CANdata[code] = 0.00
+
+	print(CANdata)
     
 # Method retrieves a parameter from the CAN bus via the passed pid code.
 def send_pid(pid):
@@ -121,7 +123,7 @@ def send_command(mode, pid):
 
 	return result
 
-# Glorified list append for auto-update PIDs.
+# Glorified list append for auto-update PIDs. If PID doesn't exist, it's added. If it does, it's removed.
 def subscribe(pid):
 	if not isinstance(pid, basestring):
 		return

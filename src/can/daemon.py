@@ -23,10 +23,6 @@ class ParserDaemon(threading.Thread):
 	self.log = logging.getLogger('digilogger')
 
     def run(self):
-        # Initialisation
-        for i in range(0,101):
-            canbus.CANdata[i] = -1     #Optional
-      
 	self.log.debug('Parser process starting...')            
  
         # Begin reading data
