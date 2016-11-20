@@ -9,6 +9,7 @@ from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
 import platform
 import sys
+import subprocess
 
 # sudo apt-get install python-matplotlib
 #import matplotlib.pyplot as plt
@@ -274,8 +275,9 @@ class Settings(Widget):
         instance.setmenu.open
             
     def bcbutpress(instance, *largs):
-    
-        def brightbut0press(instance,*largs):
+
+        def brightbut00press(instance,*largs):
+            sm.remove_widget(brightbut00)
             sm.remove_widget(brightbut0)
             sm.remove_widget(brightbut1)
             sm.remove_widget(brightbut2)
@@ -287,8 +289,25 @@ class Settings(Widget):
             sm.add_widget(con)
             sm.add_widget(rot)
             sm.add_widget(ex)
+            subprocess.call(['sudo','./brightness.sh','24'])
+            print('The button <%s> is being pressed' % brightbut00.text)
+        def brightbut0press(instance,*largs):
+            sm.remove_widget(brightbut00)
+            sm.remove_widget(brightbut0)
+            sm.remove_widget(brightbut1)
+            sm.remove_widget(brightbut2)
+            sm.remove_widget(brightbut3)
+            sm.remove_widget(brightbut4)
+            sm.add_widget(bi)
+            sm.add_widget(bc)
+            sm.add_widget(hf)
+            sm.add_widget(con)
+            sm.add_widget(rot)
+            sm.add_widget(ex)
+            subprocess.call(['sudo','./brightness.sh','64'])
             print('The button <%s> is being pressed' % brightbut0.text)
         def brightbut1press(instance,*largs):
+            sm.remove_widget(brightbut00)
             sm.remove_widget(brightbut0)
             sm.remove_widget(brightbut1)
             sm.remove_widget(brightbut2)
@@ -300,8 +319,10 @@ class Settings(Widget):
             sm.add_widget(con)
             sm.add_widget(rot)
             sm.add_widget(ex)
+            subprocess.call(['sudo','./brightness.sh','128'])
             print('The button <%s> is being pressed' % brightbut1.text)         
         def brightbut2press(instance,*largs):
+            sm.remove_widget(brightbut00)
             sm.remove_widget(brightbut0)
             sm.remove_widget(brightbut1)
             sm.remove_widget(brightbut2)
@@ -313,8 +334,10 @@ class Settings(Widget):
             sm.add_widget(con)
             sm.add_widget(rot)
             sm.add_widget(ex)
+            subprocess.call(['sudo','./brightness.sh','196'])
             print('The button <%s> is being pressed' % brightbut2.text)
         def brightbut3press(instance,*largs):
+            sm.remove_widget(brightbut00)
             sm.remove_widget(brightbut0)
             sm.remove_widget(brightbut1)
             sm.remove_widget(brightbut2)
@@ -326,8 +349,10 @@ class Settings(Widget):
             sm.add_widget(con)
             sm.add_widget(rot)
             sm.add_widget(ex)
+            subprocess.call(['sudo','./brightness.sh','254'])
             print('The button <%s> is being pressed' % brightbut3.text)
         def brightbut4press(instance,*largs):
+            sm.remove_widget(brightbut00)
             sm.remove_widget(brightbut0)
             sm.remove_widget(brightbut1)
             sm.remove_widget(brightbut2)
@@ -362,6 +387,8 @@ class Settings(Widget):
         instance.setmenu.remove_widget(instance.exitbut)
         
         #add submenu buttons
+        brightbut00 = Button(text='0%', size_hint_y= None, height= 30)
+        brightbut00.bind(on_release=brightbut00press)
         brightbut0 = Button(text='25%', size_hint_y= None, height= 30)
         brightbut0.bind(on_release=brightbut0press)
         brightbut1 = Button(text='50%', size_hint_y= None, height= 30)
@@ -372,6 +399,7 @@ class Settings(Widget):
         brightbut3.bind(on_release=brightbut3press)
         brightbut4 = Button(text='[Back]', size_hint_y= None, height= 30)
         brightbut4.bind(on_release=brightbut4press)
+        instance.setmenu.add_widget(brightbut00)
         instance.setmenu.add_widget(brightbut0)
         instance.setmenu.add_widget(brightbut1)
         instance.setmenu.add_widget(brightbut2)
