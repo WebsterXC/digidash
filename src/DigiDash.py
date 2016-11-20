@@ -88,7 +88,10 @@ class DigiDashApp(App):
 
 
         #Create header
-        head = Header()
+        #head = Header()
+	#win_w = Window.size[0]
+        #win_h = Window.size[1]
+	#head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
 
         #Create footer and schedule clock and date functions
         foot = Footer()
@@ -98,8 +101,8 @@ class DigiDashApp(App):
 	
 
         #Add Background Header and Footer
+	#self.appLayout.add_widget(head)
         self.appLayout.add_widget(self.bg)
-        self.appLayout.add_widget(head)
         self.appLayout.add_widget(foot)
 
 
@@ -108,8 +111,8 @@ class DigiDashApp(App):
         Settings.set_parent(self.settingMenu, self)
         self.gaugeMenu = AddGauge()
         AddGauge.set_parent(self.gaugeMenu, self)
-        head.add_widget(self.settingMenu)
-        head.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
+        self.appLayout.add_widget(self.settingMenu)
+        self.appLayout.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
 
         #Add Gauges
         for ag in self.ActiveGauges:
