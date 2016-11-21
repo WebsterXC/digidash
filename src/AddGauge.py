@@ -114,7 +114,6 @@ class AddGauge(Widget):
             #print(gmax)
             gcode = str(instance.typeDict.get(val)[4])
             canbus.subscribe(gcode)
-            #print(gcode)
 
             newG = GaugeDigital()
             newG.PID = gcode
@@ -142,7 +141,6 @@ class AddGauge(Widget):
             #print(gmax)
             gcode = str(instance.typeDict.get(val)[4])
             canbus.subscribe(gcode)
-            #print(gcode)
 
             newG = Gauge()
             newG.PID = gcode

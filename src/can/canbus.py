@@ -56,8 +56,7 @@ class canbus(object):
 	for code in PIDcodes:
 		CANdata[code] = 0.00
 
-	print(CANdata)
-    
+ 
 # Method retrieves a parameter from the CAN bus via the passed pid code.
 def send_pid(pid):
 
@@ -130,12 +129,11 @@ def subscribe(pid):
 
 	global PIDcodes
 	if pid not in PIDcodes:
+		global CANdata
+		CANdata[pid] = 0.00;
+
 		global PIDcodes
 		PIDcodes.append(pid)
-	else:
-		global PIDcodes
-		PIDcodes.pop(PIDcodes.index(pid))
-
 
 # If testing standalone:
 #if __name__ == "main":

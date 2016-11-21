@@ -261,14 +261,8 @@ class GaugeDigital(Widget):
 		"""
 			Actually sets the value of the current gauge
 		"""
-		#self.VALUE.text= val
-		#print(canbus.CANdata["0x0C"])
-		#SHOULD BE:
 		self.VALUE.text = str(canbus.CANdata[self.PID])
 
-
-		# STOP DOING THIS. YOURE NOT EVEN ADDRESSING THE DICTIONARY RIGHT: WB
-		#self.VALUE.text = str(canbus.CANdata[0x0C])
 
 	def setParents(self, P, S):
 		"""
