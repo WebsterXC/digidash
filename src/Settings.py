@@ -316,13 +316,13 @@ class Settings(Widget):
         
         #add submenu buttons
         brightbut0 = Button(text='25%', size_hint_y= None, height= 30)
-        brightbut0.bind(on_release=brightbut0)
+        brightbut0.bind(on_release=brightbut0press)
         brightbut1 = Button(text='50%', size_hint_y= None, height= 30)
-        brightbut1.bind(on_release=brightbut1)
+        brightbut1.bind(on_release=brightbut1press)
         brightbut2 = Button(text='75%', size_hint_y= None, height= 30)
-        brightbut2.bind(on_release=brightbut2)
+        brightbut2.bind(on_release=brightbut2press)
         brightbut3 = Button(text='100%', size_hint_y= None, height= 30)
-        brightbut3.bind(on_release=brightbut3)
+        brightbut3.bind(on_release=brightbut3press)
         instance.setmenu.add_widget(brightbut0)
         instance.setmenu.add_widget(brightbut1)
         instance.setmenu.add_widget(brightbut2)
