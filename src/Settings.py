@@ -7,6 +7,7 @@ from kivy.uix.scatter import Scatter
 from kivy.animation import Animation
 from kivy.uix.dropdown import DropDown
 from kivy.base import runTouchApp
+from functools import partial
 import platform
 import sys
 import subprocess
@@ -25,6 +26,8 @@ class Settings(Widget):
         self.Values = ['Background Image','Background Color','Header/Footer Image','Connection']
         self.Parent = None
         self.setmenu = DropDown()
+
+        self.imagebuttons = []
 
         self.bibut = Button(text='Background Image', size_hint_y= None, height= 30)
         self.bibut.bind(on_release=self.bibutpress)
@@ -58,173 +61,22 @@ class Settings(Widget):
         
     def __resize__(instance):
         instance.settingbutton.pos=(win_w-220,win_h-self.settingbutton.size[1])
-    
-    def bibutpress(instance, *kwargs):
-        #functions for background color submenu buttons
-        def imgbut0press(instance,*largs):
-            par.bg.source='Images/Metal.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut0.text)
-        def imgbut1press(instance,*largs):
-            par.bg.source='Images/Metal2.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut1.text)
-        def imgbut2press(instance,*largs):
-            par.bg.source='Images/bgcblue.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut2.text)
-        def imgbut3press(instance,*largs):
-            par.bg.source='Images/bgcblack.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut3.text)
-        def imgbut4press(instance,*largs):
-            par.bg.source='Images/bgcred.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut4.text)
-        def imgbut5press(instance,*largs):
-            par.bg.source='Images/bgcyellow.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut5.text)
-        def imgbut6press(instance,*largs):
-            par.bg.source='Images/bgcgreen.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut6.text)
-        def imgbut7press(instance,*largs):
-            par.bg.source='Images/bgcwhite.jpg'
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut7.text)
-        def imgbut8press(instance,*largs):
-            sm.remove_widget(imgbut0)
-            sm.remove_widget(imgbut1)
-            sm.remove_widget(imgbut2)
-            sm.remove_widget(imgbut3)
-            sm.remove_widget(imgbut4)
-            sm.remove_widget(imgbut5)
-            sm.remove_widget(imgbut6)
-            sm.remove_widget(imgbut7)
-            sm.remove_widget(imgbut8)
-            sm.add_widget(bi)
-            sm.add_widget(bc)
-            sm.add_widget(hf)
-            sm.add_widget(con)
-            sm.add_widget(rot)
-            sm.add_widget(ex)
-            print('The button <%s> is being pressed' % imgbut8.text)
-            
-        print('The button <%s> is being pressed' % instance.bibut.text)
         
+    def imgbutpress(instance, sourceimg, *largs):
+            instance.Parent.bg.source=str(sourceimg)
+            
+            for but in instance.imagebuttons:
+                instance.setmenu.remove_widget(but)
+            
+            instance.setmenu.add_widget(instance.bibut)
+            instance.setmenu.add_widget(instance.bcbut)
+            instance.setmenu.add_widget(instance.hfbut)
+            instance.setmenu.add_widget(instance.conbut)
+            instance.setmenu.add_widget(instance.rotbut)
+            instance.setmenu.add_widget(instance.exitbut)
+            
+    def bibutpress(instance, *kwargs):
+               
         #create instances of main menu buttons
         par = instance.Parent
         sm = instance.setmenu
@@ -246,23 +98,26 @@ class Settings(Widget):
         #add submenu buttons
         instance.setmenu.dismiss
         imgbut0 = Button(text='Metal 1', size_hint_y= None, height= 30)
-        imgbut0.bind(on_release=imgbut0press)
+        imgbut0.bind(on_release=partial(instance.imgbutpress, 'Images/Metal.jpg'))
         imgbut1 = Button(text='Metal 2', size_hint_y= None, height= 30)
-        imgbut1.bind(on_release=imgbut1press)
+        imgbut1.bind(on_release=partial(instance.imgbutpress, 'Images/Metal2.jpg'))
         imgbut2 = Button(text='Blue', size_hint_y= None, height= 30)
-        imgbut2.bind(on_release=imgbut2press)
+        imgbut2.bind(on_release=partial(instance.imgbutpress, 'Images/bgcblue.jpg'))
         imgbut3 = Button(text='Black', size_hint_y= None, height= 30)
-        imgbut3.bind(on_release=imgbut3press)
+        imgbut3.bind(on_release=partial(instance.imgbutpress, 'Images/bgcblack.jpg'))
         imgbut4 = Button(text='Red', size_hint_y= None, height= 30)
-        imgbut4.bind(on_release=imgbut4press)
+        imgbut4.bind(on_release=partial(instance.imgbutpress, 'Images/bgcred.jpg'))
         imgbut5 = Button(text='Yellow', size_hint_y= None, height= 30)
-        imgbut5.bind(on_release=imgbut5press)
+        imgbut5.bind(on_release=partial(instance.imgbutpress, 'Images/bgcyellow.jpg'))
         imgbut6 = Button(text='Green', size_hint_y= None, height= 30)
-        imgbut6.bind(on_release=imgbut6press)
+        imgbut6.bind(on_release=partial(instance.imgbutpress, 'Images/bgcgreen.jpg'))
         imgbut7 = Button(text='White', size_hint_y= None, height= 30)
-        imgbut7.bind(on_release=imgbut7press)
+        imgbut7.bind(on_release=partial(instance.imgbutpress, 'Images/bgcwhite.jpg'))
         imgbut8 = Button(text='[Back]', size_hint_y= None, height= 30)
-        imgbut8.bind(on_release=imgbut8press)
+        imgbut8.bind(on_release=partial(instance.imgbutpress, 'none'))
+
+        instance.imagebuttons = [imgbut0,imgbut1,imgbut2,imgbut3,imgbut4,imgbut5,imgbut6,imgbut7,imgbut8]
+        
         instance.setmenu.add_widget(imgbut0)
         instance.setmenu.add_widget(imgbut1)
         instance.setmenu.add_widget(imgbut2)
