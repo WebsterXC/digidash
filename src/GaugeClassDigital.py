@@ -186,6 +186,7 @@ class GaugeDigital(Widget):
 		close.bind(on_release=self.close_menus)
 
 
+		bg_menu.add_widget(back)		
 		bg_menu.add_widget(BG1)
 		bg_menu.add_widget(BG2)
 		bg_menu.add_widget(BG3)
