@@ -231,7 +231,7 @@ class Settings(Widget):
         instance.setmenu.add_widget(imgbut1)
         instance.setmenu.add_widget(imgbut2)
         instance.setmenu.add_widget(imgbut3)
-		instance.setmenu.add_widget(imgbut4)
+        instance.setmenu.add_widget(imgbut4)
         instance.setmenu.add_widget(imgbut5)
         instance.setmenu.add_widget(imgbut6)
         instance.setmenu.add_widget(imgbut7)
