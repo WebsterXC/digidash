@@ -28,6 +28,7 @@ class AddGauge(Widget):
     def __init__(self, **kwargs):
         super(AddGauge, self).__init__(**kwargs)
 
+
         win_w = Window.size[0]
         win_h = Window.size[1]
         if(platform.platform()=='Linux-4.1.19-v7+-armv7l-with-Ubuntu-16.04-xenial'):
@@ -35,6 +36,9 @@ class AddGauge(Widget):
 
         #REF TO PARENT CLASS
         self.Parent = None
+        
+        self.dButton = None
+        self.aButton = None
 
         self.appLayout = FloatLayout(size=(800,600))
 
@@ -83,20 +87,25 @@ class AddGauge(Widget):
         self.Parent = p
 
     def userSelect(instance, val, *largs):
-        
-        instance.digi = Button(text='Digital Gauge', size_hint_y = None, size = (150,20))
-        instance.digi.pos=(250,570)
-        instance.digi.bind(on_release = partial(instance.makeGauge, val, 'digital'))
-        instance.add_widget(instance.digi)
+        win_h = Window.size[1]
+
+        digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,20))
+        digi.pos=(250,win_h-digi.size[1]-10)
+        digi.bind(on_release = partial(instance.makeGauge, val, 'digital'))
+        instance.dButton = digi
+        instance.Parent.appLayout.add_widget(digi)
             
-        instance.analo = Button(text='Analog Gauge', size_hint_y = None, size = (150,20))
-        instance.analo.pos=(400,570)
-        instance.analo.bind(on_release = partial(instance.makeGauge, val, 'analog'))
-        instance.add_widget(instance.analo)
+        analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,20))
+        analo.pos=(400,win_h-analo.size[1]-10)
+        analo.bind(on_release = partial(instance.makeGauge, val, 'analog'))
+        instance.aButton = analo
+        instance.Parent.appLayout.add_widget(analo)
 
         #gtype = 'digital'
         #print(gtype)
     def makeGauge(instance, val, diana, *largs):
+        instance.Parent.appLayout.remove_widget(instance.aButton)
+        instance.Parent.appLayout.remove_widget(instance.dButton)
 
         if (diana == 'digital'):
             
