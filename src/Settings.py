@@ -57,7 +57,9 @@ class Settings(Widget):
         
     def __resize__(instance):
         instance.settingbutton.pos=(win_w-220,win_h-self.settingbutton.size[1])
+    
     def bibutpress(instance, *kwargs):
+        #functions for background color submenu buttons
         def imgbut0press(instance,*largs):
             par.bg.source='Images/Metal.jpg'
             sm.remove_widget(imgbut0)
@@ -196,6 +198,8 @@ class Settings(Widget):
             print('The button <%s> is being pressed' % imgbut7.text)
             
         print('The button <%s> is being pressed' % instance.bibut.text)
+        
+        #create instances of main menu buttons
         par = instance.Parent
         sm = instance.setmenu
         bi = instance.bibut
@@ -204,13 +208,16 @@ class Settings(Widget):
         con = instance.conbut
         rot = instance.rotbut
         ex = instance.exitbut
-        #instance.Parent.bg.source='Images/Metal.jpg'
+        
+        #remove main menu buttons from dropdown
         instance.setmenu.remove_widget(instance.bibut)
         instance.setmenu.remove_widget(instance.bcbut)
         instance.setmenu.remove_widget(instance.hfbut)
         instance.setmenu.remove_widget(instance.conbut)
         instance.setmenu.remove_widget(instance.rotbut)
         instance.setmenu.remove_widget(instance.exitbut)
+        
+        #add submenu buttons
         imgbut0 = Button(text='Metal 1', size_hint_y= None, height= 30)
         imgbut0.bind(on_release=imgbut0press)
         imgbut1 = Button(text='Metal 2', size_hint_y= None, height= 30)
@@ -237,7 +244,89 @@ class Settings(Widget):
         instance.setmenu.add_widget(imgbut7)
             
     def bcbutpress(instance, *largs):
+    
+        def brightbut0press(instance,*largs):
+            print('The button <%s> is being pressed' % brightbut0.text)
+            sm.remove_widget(brightbut0)
+            sm.remove_widget(brightbut1)
+            sm.remove_widget(brightbut2)
+            sm.remove_widget(brightbut3)
+            sm.add_widget(bi)
+            sm.add_widget(bc)
+            sm.add_widget(hf)
+            sm.add_widget(con)
+            sm.add_widget(rot)
+            sm.add_widget(ex)
+        def brightbut1press(instance,*largs):
+            print('The button <%s> is being pressed' % brightbut1.text)
+            sm.remove_widget(brightbut0)
+            sm.remove_widget(brightbut1)
+            sm.remove_widget(brightbut2)
+            sm.remove_widget(brightbut3)
+            sm.add_widget(bi)
+            sm.add_widget(bc)
+            sm.add_widget(hf)
+            sm.add_widget(con)
+            sm.add_widget(rot)
+            sm.add_widget(ex)
+        def brightbut2press(instance,*largs):
+            print('The button <%s> is being pressed' % brightbut2.text)
+            sm.remove_widget(brightbut0)
+            sm.remove_widget(brightbut1)
+            sm.remove_widget(brightbut2)
+            sm.remove_widget(brightbut3)
+            sm.add_widget(bi)
+            sm.add_widget(bc)
+            sm.add_widget(hf)
+            sm.add_widget(con)
+            sm.add_widget(rot)
+            sm.add_widget(ex)
+        def brightbut3press(instance,*largs):
+            print('The button <%s> is being pressed' % brightbut3.text)
+            sm.remove_widget(brightbut0)
+            sm.remove_widget(brightbut1)
+            sm.remove_widget(brightbut2)
+            sm.remove_widget(brightbut3)
+            sm.add_widget(bi)
+            sm.add_widget(bc)
+            sm.add_widget(hf)
+            sm.add_widget(con)
+            sm.add_widget(rot)
+            sm.add_widget(ex)
+        
         print('The button <%s> is being pressed' % instance.bcbut.text)
+        
+        #create instances of main menu buttons
+        par = instance.Parent
+        sm = instance.setmenu
+        bi = instance.bibut
+        bc = instance.bcbut
+        hf = instance.hfbut
+        con = instance.conbut
+        rot = instance.rotbut
+        ex = instance.exitbut
+        
+        #remove main menu buttons from dropdown
+        instance.setmenu.remove_widget(instance.bibut)
+        instance.setmenu.remove_widget(instance.bcbut)
+        instance.setmenu.remove_widget(instance.hfbut)
+        instance.setmenu.remove_widget(instance.conbut)
+        instance.setmenu.remove_widget(instance.rotbut)
+        instance.setmenu.remove_widget(instance.exitbut)
+        instance.setmenu.add_widget(brightbut0)
+        instance.setmenu.add_widget(brightbut1)
+        instance.setmenu.add_widget(brightbut2)
+        instance.setmenu.add_widget(brightbut3)
+        
+        #add submenu buttons
+        brightbut0 = Button(text='25%', size_hint_y= None, height= 30)
+        brightbut0.bind(on_release=brightbut0)
+        brightbut1 = Button(text='50%', size_hint_y= None, height= 30)
+        brightbut1.bind(on_release=brightbut1)
+        brightbut2 = Button(text='75%', size_hint_y= None, height= 30)
+        brightbut2.bind(on_release=brightbut2)
+        brightbut3 = Button(text='100%', size_hint_y= None, height= 30)
+        brightbut3.bind(on_release=brightbut3)
     def hfbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.hfbut.text)
     def conbutpress(instance, *largs):
