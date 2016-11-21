@@ -313,10 +313,6 @@ class Settings(Widget):
         instance.setmenu.remove_widget(instance.conbut)
         instance.setmenu.remove_widget(instance.rotbut)
         instance.setmenu.remove_widget(instance.exitbut)
-        instance.setmenu.add_widget(brightbut0)
-        instance.setmenu.add_widget(brightbut1)
-        instance.setmenu.add_widget(brightbut2)
-        instance.setmenu.add_widget(brightbut3)
         
         #add submenu buttons
         brightbut0 = Button(text='25%', size_hint_y= None, height= 30)
@@ -327,6 +323,11 @@ class Settings(Widget):
         brightbut2.bind(on_release=brightbut2)
         brightbut3 = Button(text='100%', size_hint_y= None, height= 30)
         brightbut3.bind(on_release=brightbut3)
+        instance.setmenu.add_widget(brightbut0)
+        instance.setmenu.add_widget(brightbut1)
+        instance.setmenu.add_widget(brightbut2)
+        instance.setmenu.add_widget(brightbut3)
+        
     def hfbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.hfbut.text)
     def conbutpress(instance, *largs):
