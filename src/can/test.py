@@ -1,24 +1,23 @@
-import canbus
-import daemon
+from daemon import CANDaemon
+import canbus, pids
 import time
 
-# NOTE: This test requires sudo rfcomm0 <:mac:> (see Slack).
-
-# Create canbus object. This also initiates a connection with the bluetooth receiver.
 c = canbus.canbus()
 
-# Create CAN daemon and start it.
-d = daemon.CANDaemon()
-d.start()
+# Uncomment for automatically grabbed pids
+#d = CANDaemon()
+#d.start()
 
-# Read vehicle data from the canbus dictionary that the CANDaemon is updating in the background.
-while 1:
-	print(canbus.CANdata)
+for i in range(0, 100):
+	# Grab automatically updated PID
+	rpm = canbus.CANdata[pids.ENG_RPM]
+
+	# Manually request PID
+	demand = canbus.send_pid(pids.ENG_TORQUE_DMD)
+	actual = canbus.send_pid(pids.ENG_TORQUE_ACT)
+	reference = canbus.send_pid(pids.ENG_TORQUE_REF)
+
+	print( rpm )
+	print( [demand, actual, reference] )
+
 	time.sleep(0.1)
-
-        # Known Bugs: Only 2-3 runs of this program (test.py) are possible before needing to restart. This is probably because I never formally
-        #             close the connection between the RPi and Bluetooth dongle.
-
-        #             Eventually, this while loop will secretly time-out. After about 20-30 seconds, the CANDaemon starts receiving constant 'NO DATA'
-        #             bytes from the Bluetooth dongle, but won't notify you in any way, so the data stream being printed to the screen eventually becomes
-        #             stale. I'm 99% confident socket programming will solve this bug, which is the planned implementation.
