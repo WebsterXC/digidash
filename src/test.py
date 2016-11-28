@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+plt.plot([1, 2, 3, 4])
+plt.axis([0, 6, 0, 20])
+plt.ylabel('Numbers')
+=======
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -34,5 +42,6 @@ for add in np.arange(15):
 #im_ani = animation.ArtistAnimation(fig2, ims, interval=50, repeat_delay=3000, blit=True)
 #im_ani.save('im.mp4', metadata={'artist':'Guido'})
 
+>>>>>>> data-processing
 plt.show()
 

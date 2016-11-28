@@ -101,6 +101,8 @@ def main():
 	
 	#DigiDashApp().run()
 
+	#print(canbus.CANdata)
+
 	#for i in range(0, 50):
 	#	print(canbus.CANdata[0x0C])
 	#	time.sleep(0.1)

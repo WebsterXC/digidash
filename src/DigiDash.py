@@ -51,32 +51,33 @@ class DigiDashApp(App):
                 curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
                 curGS.add_widget(curG)
                 Gauge.setParents(curG,self,curGS)
-                Gauge.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
+                Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
 
-		if gmeasure == 'Speed':
-			curG.PID = pids.SPEED
-		else:
-			curG.PID = pids.ENG_RPM
+                if gmeasure == 'Speed':
+                    curG.PID = pids.SPEED
+                else:
+                    curG.PID = pids.ENG_RPM
 
-		Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
 
             else:
                 curG = GaugeDigital()
                 curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
                 curGS.add_widget(curG)
                 GaugeDigital.setParents(curG,self,curGS)
-                GaugeDigital.setGuageParameters(curG, gmeasure, gmin, gmax, gunits)
+                GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-	
-		if gmeasure == 'Throttle':
-			curG.PID = pids.THROTTLE_REQ
-		elif gmeasure == 'MAP':
-			curG.PID = pids.INTAKE_PRESS
-		else:
-			curG.PID = pids.INTAKE_MAF
+			     
+                #curG.PID = pids.ENG_RPM 
+                if gmeasure == 'Throttle':
+                    curG.PID = pids.THROTTLE_REQ
+                elif gmeasure == 'MAP':
+                    curG.PID = pids.INTAKE_PRESS
+                else:
+                    curG.PID = pids.INTAKE_MAF 
 				
-		Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
@@ -87,7 +88,10 @@ class DigiDashApp(App):
 
 
         #Create header
-        head = Header()
+        #head = Header()
+	#win_w = Window.size[0]
+        #win_h = Window.size[1]
+	#head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
 
         #Create footer and schedule clock and date functions
         foot = Footer()
@@ -97,25 +101,39 @@ class DigiDashApp(App):
 	
 
         #Add Background Header and Footer
+	#self.appLayout.add_widget(head)
         self.appLayout.add_widget(self.bg)
-        self.appLayout.add_widget(head)
         self.appLayout.add_widget(foot)
 
 
         #Add Menus
         self.settingMenu = Settings(size_hint=(.3,.01))
+        Settings.set_parent(self.settingMenu, self)
         self.gaugeMenu = AddGauge()
-        head.add_widget(self.settingMenu)
-        head.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
+        AddGauge.set_parent(self.gaugeMenu, self)
+        self.appLayout.add_widget(self.settingMenu)
+        self.appLayout.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
 
-        #Add Guages
+        #Add Gauges
         for ag in self.ActiveGauges:
             self.appLayout.add_widget(ag)
 
 
+        #piself.bind(size=self.__resize__)
         #Change to default touchscreen resolution
         #Window.size = (800,600)
         return self.appLayout
+
+    def on_resize(width,height):
+        print('RESIZED:' + str(width) + ' ' + str(height))
+
+    def __resize__(instance, val):
+        print('RESIZE TRIGGERED: '+str(Window.size))
+        Settings.__resize__(self.settingMenu)
+        AddGauge.__resize__(self.gaugeMenu)
+        Header.__resize__(self.head)
+        Footer.__resize__(self.foot)
+
 
 if __name__ == '__main__':
     DigiDashApp().run()

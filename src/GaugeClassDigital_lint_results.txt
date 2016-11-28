@@ -1,0 +1,2 @@
+************* Module GaugeClassDigital
+E:260, 0: unindent does not match any outer indentation level (syntax-error)
