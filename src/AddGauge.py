@@ -89,19 +89,25 @@ class AddGauge(Widget):
     def userSelect(instance, val, *largs):
         win_h = Window.size[1]
 
-        if (instance.dButton == None):
-            digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,20))
-            digi.pos=(250,win_h-digi.size[1]-10)
-            digi.bind(on_release = partial(instance.makeGauge, val, 'digital'))
-            instance.dButton = digi
-            instance.Parent.appLayout.add_widget(digi)
-            
-        if (instance.aButton == None):
-            analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,20))
-            analo.pos=(400,win_h-analo.size[1]-10)
-            analo.bind(on_release = partial(instance.makeGauge, val, 'analog'))
-            instance.aButton = analo
-            instance.Parent.appLayout.add_widget(analo)
+        if (instance.dButton != None):
+            instance.Parent.appLayout.remove_widget(instance.dButton)
+            instance.dButton = None
+
+        digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,20))
+        digi.pos=(250,win_h-digi.size[1]-10)
+        digi.bind(on_release = partial(instance.makeGauge, val, 'digital'))
+        instance.dButton = digi
+        instance.Parent.appLayout.add_widget(digi)
+          
+        if (instance.aButton != None):
+            instance.Parent.appLayout.remove_widget(instance.aButton)
+            instance.aButton = None
+
+        analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,20))
+        analo.pos=(400,win_h-analo.size[1]-10)
+        analo.bind(on_release = partial(instance.makeGauge, val, 'analog'))
+        instance.aButton = analo
+        instance.Parent.appLayout.add_widget(analo)
 
         #gtype = 'digital'
         #print(gtype)
