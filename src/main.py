@@ -17,9 +17,9 @@
 import time
 import subprocess
 import logging
-from can import canbus, daemon
+from can import canbus, daemon, pids, automath
 
-from DigiDash import DigiDashApp
+#from DigiDash import DigiDashApp
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'
@@ -67,7 +67,7 @@ def main():
 	# Initialise the global logger
 	logger_init()
 
-	log.critical('Booting DigiDash...')
+	#log.critical('Booting DigiDash...')
 
 	# Check dependencies using Bash script #
 	# Kivy (Ver: )
@@ -94,8 +94,8 @@ def main():
 	#p = daemon.ParamDaemon()
 	#p.start()
 
-	l = daemon.LoggerDaemon()
-	l.start()
+	#l = daemon.LoggerDaemon()
+	#l.start()
 
 	# Kivy Main Screen ("Infinite Loop for GUI")
 	
@@ -103,27 +103,17 @@ def main():
 
 	#print(canbus.CANdata)
 
-	#for i in range(0, 50):
-	#	print(canbus.CANdata[0x0C])
-	#	time.sleep(0.1)
+	while 1:
+		data = []
+		for pid in canbus.PIDcodes:
+			data.append(automath.convert(pid, canbus.send_pid(pid)) )
+	
+		print(data)
+		time.sleep(0.001)
 
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.
 	#exit_routine()
-	
-	# The following is for thread competition testing #
-'''	
-	# Parse the first 10 RPM values (for testing)
-	d = daemon.ParserDaemon()
-	d.start()
-	p = daemon.ParamDaemon()
-	p.start()
-	
-	for i in range(0, 50):
-		print(canbus.CANdata[0x0C])
-		time.sleep(0.1)
-'''	
-
 	
 
 if __name__ == "__main__":

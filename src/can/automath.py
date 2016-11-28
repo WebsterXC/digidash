@@ -25,13 +25,16 @@ def convert(pid, raw):
                       pids.ABS_LOAD : abs_load_conv, pids.RTES : rtes_conv, pids.ENG_RPM : eng_rpm_conv,                                       \
                       pids.INTAKE_MAF : intake_maf_conv, pids.FUEL_TIMING : fuel_timing_conv, pids.FUEL_RATE : fuel_rate_conv}
 
+
 	data = raw.split()
 	
 	a = 0
 	b = 0
-	#print(data)	
-	if len(data) > 3:
+	
+	if len(data) > 2:
 		a = int(data[2], 16)
+
+	if len(data) > 3:
 		b = int(data[3], 16)
 
 	if pid in SingleByte:               # Single variable conversions

@@ -6,7 +6,8 @@ import canbus, pids
 import automath
 import logging
 
-csv_file = 'can/data/data.txt'                                  # Sample data file to open
+#csv_file = 'can/data/data.txt'                                  # Sample data file to open
+csv_file = 'can/data/runtime.txt'
 inparams = ["0x1F", "0x0C", "0x0D", "0x0F", "0x0B", "0x10", "0x11", "0x5D"] # Columns in sample data CSV
 
 #inparams = [pids.ENG_RPM, pids.SPEED, pids.THROTTLE_REQ, pids.ENG_TORQUE_REF, pids.ENG_TORQUE_ACT]
@@ -90,10 +91,13 @@ def can_process():
 		for pid in canbus.PIDcodes:
 			answer = canbus.send_pid(pid)
 
-			canbus.CANlock.acquire()
+			if answer == None or answer == "":
+				continue
+
+			#canbus.CANlock.acquire()
 			canbus.CANdata[pid] = automath.convert(pid, answer)
-			canbus.CANlock.release()
-			time.sleep(0)	# Yield
+			#canbus.CANlock.release()
+			#time.sleep(0)	# Yield
 
 # Daemon logs engine data to a CSV .txt file
 class LoggerDaemon(threading.Thread):
@@ -108,17 +112,21 @@ class LoggerDaemon(threading.Thread):
 def canlogging_process():
 	log_data_to_file = "can/data/runtime.txt"
 	#ms_to_record = 60000 * 3			# 3 Minutes
-	ms_to_record = 1
-	
+	ms_to_record = 30
+	records = []
+
+	while (ms_to_record - time.clock()) > 0:
+		data = []
+		#print(ms_to_record - time.clock())
+		data.append(time.clock())
+		# Grab a "line" of data
+		for param in canbus.PIDcodes:
+			data.append(canbus.CANdata[param])
+		
+		records.append(data)
+		
 	with open(log_data_to_file, 'wb') as csvfile:
-        	csv_writer = csv.writer(csvfile, delimiter=",", quotechar="|")
-
-		while (ms_to_record - time.clock()) > 0:
-			data = []
-			# Grab a "line" of data
-			for param in canbus.PIDcodes:
-				data.append(canbus.CANdata[param])
-
-			# Write to CSV
-			csv_writer.writerow(data)
-			time.sleep(0.001)		# LEL
+       		csv_writer = csv.writer(csvfile, delimiter=",", quotechar="|")
+	
+		for line in records:
+			csv_writer.writerow(line)
