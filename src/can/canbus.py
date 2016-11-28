@@ -11,7 +11,7 @@ import logging
 import threading
 
 # Automatically updated PID codes
-PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.FUEL_RATE, pids.ENG_TORQUE_ACT, pids.THROTTLE_REQ]
+PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.ENG_TORQUE_ACT, pids.THROTTLE_REQ]
 CANdata = { }		# Dictionary holding all vehicle parameters + readings
 CANlock = None		# Write lock for CAN dictionary
 ELMdata = { }		# Dictionary holding various ELM data

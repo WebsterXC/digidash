@@ -13,7 +13,7 @@ import math
 
 # Function provides a decision-making process when the data is automatically retreived. Requires input pid and raw ELM data.
 def convert(pid, raw):
-        SingleByte = {pids.ACCEL_REQ : accell_req_conv, pids.THROTTLE_REL : throttle_rel_conv, pids.FUEL_CMDED : fuel_cmded_conv,              \
+        SingleByte = {pids.ACCEL_REQ : accel_req_conv, pids.THROTTLE_REL : throttle_rel_conv, pids.FUEL_CMDED : fuel_cmded_conv,              \
                       pids.FUEL_PRESS : fuel_press_conv, pids.EXHST_PRESS : exhst_press_conv, pids.EVAP_CMDED : evap_cmded_conv,               \
                       pids.ENG_TIME : eng_time_conv, pids.ENG_TORQUE_ACT : eng_torque_act_conv, pids.ENG_TORQUE_DMD : eng_torque_dmd_conv,     \
                       pids.ENG_COOLTEMP : eng_cooltemp_conv, pids.ENG_LOAD : eng_load_conv, pids.ENVIR_TEMP : envir_temp_conv,                 \

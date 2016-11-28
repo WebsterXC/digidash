@@ -100,16 +100,28 @@ def can_process():
 			time.sleep(0)	# Yield
 
 # Daemon logs engine data to a CSV .txt file
-class ParamDaemon(threading.Thread):
+class LoggerDaemon(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-	self.setDaemon(True)
+	#self.setDaemon(True)
 
     def run(self):
-	param_process()
+	canlogging_process()
 
-def param_process():
-	# Testing thread competition
-	while 1:
-		print("test")
-		time.sleep(0.1)
+# Grab data and store in CSV
+def canlogging_process():
+	log_data_to_file = "can/data/runtime.txt"
+	#ms_to_record = 60000 * 3			# 3 Minutes
+	ms_to_record = 1
+	
+	with open(log_data_to_file, 'wb') as csvfile:
+        	csv_writer = csv.writer(csvfile, delimiter=",", quotechar="|")
+
+		while (ms_to_record - time.clock()) > 0:
+			data = []
+			# Grab a "line" of data
+			for param in canbus.PIDcodes:
+				data.append(canbus.CANdata[param])
+
+			# Write to CSV
+			csv_writer.writerow(data)	
