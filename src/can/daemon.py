@@ -120,4 +120,5 @@ def canlogging_process():
 				data.append(canbus.CANdata[param])
 
 			# Write to CSV
-			csv_writer.writerow(data)	
+			csv_writer.writerow(data)
+			time.sleep(0.001)		# LEL
