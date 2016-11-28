@@ -1,0 +1,52 @@
+Hello. This file steps you through how to setup a Raspberry Pi running Raspbian Jessie to use DigiDash.
+
+First, the following is a list of required hardware:
+-Raspberry Pi 3 Model B
+-Official Raspberry Pi 7" Touchscreen Display
+-MicroSD card (Preferably at least 8GB)
+-ELM327 OBDII Bluetooth Adapter (Preferably running the ELM327 v2.1 protocol)
+-Micro USB cable (for powering the Pi)
+-USB Keyboard (for setup only)
+
+The following is a list of useful, additional hardware:
+-12V to USB Car Adapter (required if your car does not already have a USB port. Preferably at least 2 Amps.)
+-iOttie Easy One Touch 2 Car Mount for iPhone & Smartphones
+-Case for Raspberry Pi Official 7" Touchscreen Display (3D printer files included in DigiDash repository)
+-8 M3x6 screws
+
+Once all hardware is gathered and assembled, it's time to setup the Pi. If this is your first time using your Pi, you must first install the Raspbian Jessie OS on your MicroSD card. If you want the fastest possible boot time for your Pi, it is highly recommended that you do not use NOOBS to install Raspbian.
+Once Raspbian is installed, it will presumably boot into its desktop GUI. If it does not, simply enter the following line into the command line interface to boot the GUI:
+    startx
+If your screen is upside-down, edit the file /boot/config.txt and add this line:
+    lcd_rotate=2
+If you see an undervoltage warning on the top-right of your screen and would like to make it disappear, add this line to the same file:
+    avoid_warnings=1
+For these changes take effect, you must reboot your system by entering the following command:
+    sudo reboot
+
+Next, you must install the packages that DigiDash requires to run. Make sure that your Pi is connected to the internet. Then, open the terminal and enter the following lines:
+    sudo apt-get install git
+    sudo apt-get install python-bluez
+
+
+
+To install Kivy:
+    sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev cython
+    sudo pip install --upgrade cython
+    sudo pip install git+https://github.com/kivy/kivy.git@master
+To configure Kivy to use the touchscreen as an input source, edit the file ~/.kivy/config.ini and go to the [input] section. Add this:
+    mouse = mouse
+    mtdev_%(name)s = probesysfs,provider=mtdev
+    hid_%(name)s = probesysfs,provider=hidinput
+
+
+To download DigiDash itself:
+    cd
+    mkdir repositories
+    cd repositories
+    git clone https://github.com/WebsterXC/digidash.git
+
+-download repository, how to run
+	
+Optional:
+-set digidash to auto-start
