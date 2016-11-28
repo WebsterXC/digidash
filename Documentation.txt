@@ -24,6 +24,8 @@ If you see an undervoltage warning on the top-right of your screen and would lik
 For these changes take effect, you must reboot your system by entering the following command:
     sudo reboot
 
+Next, you should make sure that your Pi's localization settings are correct (otherwise, you may have trouble typing in later commands). Open the Pi's home dropdown menu, then choose Preferences->Raspberry Pi Configuration. Choose the Localization tab, then ensure that all options match your preferences.
+
 Next, you must install the packages that DigiDash requires to run. Make sure that your Pi is connected to the internet. Then, open the terminal and enter the following lines:
     sudo apt-get install git
     sudo apt-get install python-bluez
@@ -38,7 +40,16 @@ To configure Kivy to use the touchscreen as an input source, edit the file ~/.ki
     mouse = mouse
     mtdev_%(name)s = probesysfs,provider=mtdev
     hid_%(name)s = probesysfs,provider=hidinput
+Please note: If this file doesn't exist, then save this step for later. After running DigiDash (or any other program that uses Kivy), the file will be created.
 
+All required packages have now been installed! To ensure that everything on your Pi is up-to-date, enter the following commands in your terminal:
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get dist-upgrade
+    sudo apt-get autoremove
+    sudo rpi-update
+Then reboot:
+    sudo reboot
 
 To download DigiDash itself:
     cd
@@ -46,7 +57,7 @@ To download DigiDash itself:
     cd repositories
     git clone https://github.com/WebsterXC/digidash.git
 
--download repository, how to run
+-how to run
 	
 Optional:
 -set digidash to auto-start
