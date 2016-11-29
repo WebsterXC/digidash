@@ -70,16 +70,6 @@ def main():
 	log.critical('Booting DigiDash...')
 
 	# Check dependencies using Bash script #
-	# Kivy (Ver: )
-	# Kivy Dependency List:
-	#
-	#
-
-
-	## KIVY START MENU HERE ##
-    	
-
-	##########################
 
 	# Test to ensure a valid bluetooth connection is even possible. #
 	c = canbus.canbus()		# Might need to uncomment Blue.connect() in canbus.py
@@ -98,30 +88,11 @@ def main():
 	
 	DigiDashApp().run()
 
-	#print(canbus.CANdata)
-
-	#for i in range(0, 50):
-	#	print(canbus.CANdata[0x0C])
-	#	time.sleep(0.1)
-
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.
 	exit_routine()
 	
 	# The following is for thread competition testing #
-'''	
-	# Parse the first 10 RPM values (for testing)
-	d = daemon.ParserDaemon()
-	d.start()
-	p = daemon.ParamDaemon()
-	p.start()
-	
-	for i in range(0, 50):
-		print(canbus.CANdata[0x0C])
-		time.sleep(0.1)
-'''	
-
-	
 
 if __name__ == "__main__":
 	main()
