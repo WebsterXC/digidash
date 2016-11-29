@@ -48,7 +48,8 @@ def parser_process():
 
                 # Read the second line for time reference
                 time_row = csv_reader.next()
-
+		
+		linenum = 0
                 # While time_row is not an empty list
                 while time_row:
                     
@@ -71,7 +72,12 @@ def parser_process():
 
                     # Iterative housekeeping
                     data_row = time_row
-                    time_row = csv_reader.next()
+		    if linenum < 1130:
+			time_row = csv_reader.next()
+			linenum += 1
+		    else:
+			csvf.seek(0)
+			linenum = 0
 
 # Daemon handles gathering of engine parameters from canbus.PIDcodes
 class CANDaemon(threading.Thread):
