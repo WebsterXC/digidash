@@ -89,17 +89,17 @@ def main():
 	#d = daemon.CANDaemon()
 	#d.start()
 
-	#d = daemon.ParserDaemon()
-	#d.start()
+	d = daemon.ParserDaemon()
+	d.start()
 	#p = daemon.ParamDaemon()
 	#p.start()
 
-	l = daemon.LoggerDaemon()
-	l.start()
+	#l = daemon.LoggerDaemon()
+	#l.start()
 
 	# Kivy Main Screen ("Infinite Loop for GUI")
 	
-	#DigiDashApp().run()
+	DigiDashApp().run()
 
 	#print(canbus.CANdata)
 

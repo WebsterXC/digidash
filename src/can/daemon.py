@@ -62,9 +62,12 @@ def parser_process():
 			
 
                     # Establish time quantum and wait
-                    time_now = float(data_row[0])
-                    time_later = float(time_row[0])
-                    time.sleep(time_later - time_now)
+                    #time_now = float(data_row[0])
+                    #time_later = float(time_row[0])
+                    #time.sleep(time_later - time_now)
+
+		    # Override static time quantum for CS Ed Week Demo
+		    time.sleep(0.085)
 
                     # Iterative housekeeping
                     data_row = time_row
