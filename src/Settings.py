@@ -11,15 +11,20 @@ from functools import partial
 import platform
 import sys
 import subprocess
+import ConfigParser
 
 # sudo apt-get install python-matplotlib
 #import matplotlib.pyplot as plt
 
 class Settings(Widget):
-
+    
     def __init__(self, **kwargs):
         super(Settings, self).__init__(**kwargs)
-
+        
+        global Config
+        Config = ConfigParser.ConfigParser()
+        Config.read("Settings.ini")
+        
         win_w = Window.size[0]
         win_h = Window.size[1]
 
@@ -64,7 +69,11 @@ class Settings(Widget):
         instance.settingbutton.pos=(win_w-220,win_h-self.settingbutton.size[1])
         
     def imgbutpress(instance, sourceimg, *largs):
-            instance.Parent.bg.source=str(sourceimg)
+            if sourceimg != 'none':
+                instance.Parent.bg.source=str(sourceimg)
+                Config.set('Application_Settings','Background',sourceimg)
+                with open('Settings.ini', 'wb') as configfile:
+                    Config.write(configfile)
             
             for but in instance.imagebuttons:
                 instance.setmenu.remove_widget(but)
@@ -79,7 +88,7 @@ class Settings(Widget):
     def brightbutpress(instance, brightstr, *largs):
         if brightstr != 'back':
             subprocess.call(['sudo','./brightness.sh',str(brightstr)])
-        
+			
         for but in instance.brightbuttons:
                 instance.setmenu.remove_widget(but)
     
