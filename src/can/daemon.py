@@ -67,7 +67,7 @@ def parser_process():
                     #time.sleep(time_later - time_now)
 
 		    # Override RTES quantum with static delay for CS Ed Week Demo
-		    time.sleep(0.085)
+		    time.sleep(0.075)
 
                     # Iterative housekeeping
                     data_row = time_row

@@ -74,6 +74,10 @@ class DigiDashApp(App):
                     curG.PID = pids.THROTTLE_REQ
                 elif gmeasure == 'MAP':
                     curG.PID = pids.INTAKE_PRESS
+		elif gmeasure == 'IntakeTemp':
+		    curG.PID = pids.INTAKE_TEMP
+		elif gmeasure == 'Fuel Advance':
+		    curG.PID = pids.FUEL_TIMING
                 else:
                     curG.PID = pids.INTAKE_MAF 
 				
