@@ -53,7 +53,18 @@ To download DigiDash itself, open the terminal and enter the following commands:
     cd
     mkdir repositories
     cd repositories
-    git clone https://github.com/WebsterXC/digidash.git	
+    git clone https://github.com/WebsterXC/digidash.git
+
+Next, it's time to pair your bluetooth dongle to your Pi and add its MAC address to DigiDash (this step requires you to be in or near a car). First, plug your dongle into your car's OBDII port. If you don't see any LEDs on your dongle light up, then either your dongle is broken or your car's battery is dead. Now on your Pi, click on the bluetooth icon in the taskbar, then select "Add Device..." Your dongle should pop up (most likely as "OBDII"), and you should now select the dongle and hit "Pair." If you're prompted for a pairing code, enter it (it's most likely either "1234" or "0000"). If you now get a message saying that your dongle is paired but unusable, just ignore it.
+Now, keep this terminal open and open another. In the first terminal, enter:
+    bluetoothctl
+This lists the bluetooth devices saved on your Pi. Look for your dongle in this list and note its MAC address. Now in the second terminal, enter the following:
+    nano ~/repositories/digidash/src/can/blue.py
+In line 26, you should see something similar to 'myMAC = "XX:XX:XX:XX:XX:XX"' where these X's are some alphanumeric characters. Alter this line to include your own dongle's MAC address. Save your changes and exit this terminal with the following command:
+    exit
+You should now be back in your first terminal. Enter the following command to exit bluetoothctl:
+    quit
+
 It's now time to add a custom shell command to run DigiDash:
     cd /usr/local/bin
     sudo nano digidash
