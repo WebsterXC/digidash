@@ -1,0 +1,20 @@
+date: November 28, 2016
+meeting_type: group # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, davideva, eggarwol, jhanson3]
+absent: [mohdkhan, waburgin]
+excused_absences: [
+  {ubit: mohdkhan, reason: Chose not to attend optional meeting.},
+  {ubit: waburgin, reason: Sick.}
+  ]
+task_progress: [
+  {ubit: markgras, progress: Worked more on documentation. Added meeting minutes.},
+  {ubit: mohdkhan, progress: None.},
+  {ubit: davideva, progress: None.},
+  {ubit: waburgin, progress: None.},
+  {ubit: eggarwol, progress: Made changes to simplify settings menu code.},
+  {ubit: jhanson3, progress: Helped Ed make settings menu code changes.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Worked on various aspects of project. Will meet up tomorrow (11/29) for CS Ed Week competition.

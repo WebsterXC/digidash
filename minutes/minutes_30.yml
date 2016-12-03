@@ -1,0 +1,18 @@
+date: December 2, 2016
+meeting_type: ta # meeting_type can be "group", "ta", or "instructor"
+attendance: [markgras, waburgin, davideva, eggarwol, jhanson3, mohdkhan]
+absent: []
+excused_absences: [
+  ]
+task_progress: [
+  {ubit: markgras, progress: More-or-less finished documentation. Added meeting minutes.},
+  {ubit: mohdkhan, progress: None.},
+  {ubit: davideva, progress: None.},
+  {ubit: waburgin, progress: Finished better .csv file.},
+  {ubit: eggarwol, progress: Made more changes to settings menu code.},
+  {ubit: jhanson3, progress: Worked on functionality to save gauge positions between sessions. Worked on dependency bash script.}
+  ]
+issues: [
+  ]
+Notes:  | 
+Went over Sprint 5 requirements with TA Troy.
