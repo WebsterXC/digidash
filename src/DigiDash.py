@@ -16,6 +16,7 @@ from Header import Header
 from Footer import Footer
 from kivy.uix.dropdown import DropDown
 import time
+import ast
 from functools import partial
 import ConfigParser
 
@@ -34,13 +35,17 @@ class DigiDashApp(App):
         for g in GaugeList:
             gtype = Config.get(g,'type')
             gstyle = int(Config.get(g,'style'))
-            gposx = int(Config.get(g,'posx'))
-            gposy = int(Config.get(g,'posy'))
+            gposx = float(Config.get(g,'posx'))
+            gposy = float(Config.get(g,'posy'))
             gscale = float(Config.get(g,'scale'))
             gmeasure = Config.get(g,'measure')
             gunits = Config.get(g,'units')
-            gmin = int(Config.get(g,'min'))
-            gmax = int(Config.get(g,'max'))
+            gmin = float(Config.get(g,'min'))
+            gmax = float(Config.get(g,'max'))
+
+            bg = Config.get(g,'background')
+            tc = ast.literal_eval(str(Config.get(g,'textcolor')))
+            dl = Config.get(g,'dialcolor')
 
             #print(g)
             #print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
@@ -53,6 +58,16 @@ class DigiDashApp(App):
                 Gauge.setParents(curG,self,curGS)
                 Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
+                curG.gauge.source = bg
+                curG.dial.source = dl
+
+                for l in curG.UnitScaleLabels:
+                    l.color = tc
+                
+                curG.MTitle.color = tc
+                curG.MUnits.color = tc
+
+
 
                 if gmeasure == 'Speed':
                     curG.PID = pids.SPEED
@@ -68,16 +83,22 @@ class DigiDashApp(App):
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
                 self.ActiveGauges.append(curGS)
-			     
+                curG.gauge.source = bg
+
+
+                curG.MTitle.color = tc
+                curG.MUnits.color = tc
+                curG.VALUE.color = tc
+
                 #curG.PID = pids.ENG_RPM 
                 if gmeasure == 'Throttle':
                     curG.PID = pids.THROTTLE_REQ
                 elif gmeasure == 'MAP':
                     curG.PID = pids.INTAKE_PRESS
-		elif gmeasure == 'IntakeTemp':
-		    curG.PID = pids.INTAKE_TEMP
-		elif gmeasure == 'Fuel Advance':
-		    curG.PID = pids.FUEL_TIMING
+                elif gmeasure == 'IntakeTemp':
+                    curG.PID = pids.INTAKE_TEMP
+                elif gmeasure == 'Fuel Advance':
+                    curG.PID = pids.FUEL_TIMING
                 else:
                     curG.PID = pids.INTAKE_MAF 
 				
@@ -126,6 +147,7 @@ class DigiDashApp(App):
         #piself.bind(size=self.__resize__)
         #Change to default touchscreen resolution
         #Window.size = (800,600)
+        self.Config = Config #Create a class reff to Config Parser used in startup
         return self.appLayout
 
     def on_resize(width,height):
@@ -137,6 +159,65 @@ class DigiDashApp(App):
         AddGauge.__resize__(self.gaugeMenu)
         Header.__resize__(self.head)
         Footer.__resize__(self.foot)
+
+    def save_settings(instance):
+        confile = open("Settings.ini",'w') #might want to be one in home directory so ini doesnt write over in commits
+        
+        n = len(instance.ActiveGauges)
+        c = len(instance.Config.sections())-1 #Number of gauge sections
+        if(n<c):
+            diff = c-(c-n)
+            remove_sec = instance.Config.sections()[diff:]
+            for sec in remove_sec:
+                instance.Config.remove_section(sec)
+
+        i=0 #COUNTER FOR SECTION NAME
+        for ga in instance.ActiveGauges:
+            g = ga.children[0]  #Get the gauge class from the scatter
+            i+=1
+
+            #DEFINITIONS FOR SAVING
+            gname = 'Gauge_'+str(i)
+            bg = g.gauge.source
+            tc = g.MTitle.color
+            if isinstance(g, Gauge):
+                dl = g.dial.source
+                tp = 'analog'
+            else:
+                dl = 'None'
+                tp = 'digital'
+
+            posx = ga.pos[0]
+            posy = ga.pos[1]
+            scale = ga.scale
+            measure = g.Measure
+            units = g.Units
+            minv = g.MinValue
+            maxv = g.MaxValue
+            PID = g.PID
+
+
+            #INI SECTION CREATION 
+            if not instance.Config.has_section(gname):
+                instance.Config.add_section(gname)
+            
+            #SET INI VALUES FROM VARIABLE
+            instance.Config.set(gname,'type',tp)
+            instance.Config.set(gname,'style',1)
+            instance.Config.set(gname,'posx',posx)
+            instance.Config.set(gname,'posy',posy)
+            instance.Config.set(gname,'scale',scale)
+            instance.Config.set(gname,'measure',measure)
+            instance.Config.set(gname,'units',units)
+            instance.Config.set(gname,'min',minv)
+            instance.Config.set(gname,'max',maxv)
+
+            instance.Config.set(gname,'background',bg)
+            instance.Config.set(gname,'textcolor',tc)
+            instance.Config.set(gname,'dialcolor',dl)
+
+        instance.Config.write(confile)
+        confile.close()
 
 
 if __name__ == '__main__':

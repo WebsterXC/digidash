@@ -297,6 +297,7 @@ class GaugeDigital(Widget):
         	self.Parent.appLayout.remove_widget(self.gmenu)
         	self.settings_open = False
         	self.settings.text = 'Modify'
+        	self.Parent.save_settings()
 
 	def setBackground(self, imagesrc, *largs):
 		"""

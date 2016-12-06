@@ -11,7 +11,6 @@ from kivy.uix.label import Label
 from functools import partial
 import time
 from kivy.uix import floatlayout
-from kivy.uix.behaviors import ButtonBehavior
 
 from can import canbus, daemon, pids
 
@@ -150,6 +149,8 @@ class Gauge(Widget):
             self.settings.text = 'Close'
         else:
             self.close_menus()
+
+        
 
     def preset_themes_menu(self, *largs):
         """
@@ -438,6 +439,7 @@ class Gauge(Widget):
         self.Parent.appLayout.remove_widget(self.gmenu)
         self.settings_open = False
         self.settings.text = 'Modify'
+        self.Parent.save_settings()
 
     def setBackground(self, imagesrc, *largs):
         """
