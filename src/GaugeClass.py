@@ -67,7 +67,7 @@ class Gauge(Widget):
         self.UnitScaleLabels = [self.L1, self.L2, self.L3, self.L4, self.L5, self.L6, self.L7, self.L8, self.L9]
 
         #SETTINGS MENU BUTTON
-        self.settings = Button(text='Modify', pos=(155, 40), size=(80, 30), color=(51, 102, 255, 1))
+        self.settings = Button(text='EDIT', pos=(120, 30), size=(160, 35), color=(51, 102, 255, 1))
         self.settings.bind(on_release=self.menu)
         self.settings_open = False
 
@@ -114,25 +114,25 @@ class Gauge(Widget):
                     size_hint=(0.25, (0.05*7)),
                     orientation='vertical')
 
-            PST = Button(text='Preset Themes')
+            PST = Button(text='PRESET THEMES')
             PST.bind(on_release=self.preset_themes_menu)
 
-            GBG = Button(text='Gauge Background')
+            GBG = Button(text='GAUGE BACKGROUND')
             GBG.bind(on_release=self.gauge_background_menu)
 
-            GDB = Button(text='Gauge Dial')
+            GDB = Button(text='GAUGE DIAL')
             GDB.bind(on_release=self.gauge_dial_menu)
 
-            GRB = Button(text='Gauge Rim')
+            GRB = Button(text='GAUGE RIM')
             GRB.bind(on_release=self.gauge_rim_menu)
 
-            GTC = Button(text='Text Color')
+            GTC = Button(text='TEXT COLOR')
             GTC.bind(on_release=self.gauge_text_menu)
 
-            delete = Button(text='[ --- DELETE --- ]')
+            delete = Button(text='[ ~ DELETE ~ ]', color = (1, 0, 0, 1))
             delete.bind(on_release=self.deleteGauge)
 
-            close = Button(text='[ CLOSE ]')
+            close = Button(text='[  CLOSE  ]', color = (1, 0.5, 0, 1))
             close.bind(on_release=self.close_menus)
 
             menu.add_widget(PST)
@@ -146,7 +146,8 @@ class Gauge(Widget):
             self.gmenu = menu
             self.Parent.appLayout.add_widget(menu)
             self.settings_open = True
-            self.settings.text = 'Close'
+            self.settings.text = '[  CLOSE  ]'
+            self.settings.color = (1, 0.5, 0, 1)
         else:
             self.close_menus()
 
@@ -175,9 +176,9 @@ class Gauge(Widget):
         B7 = Button(text='Style 7')
         B7.bind(on_release=self.style_7)
 
-        back = Button(text='[ BACK ]')
+        back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
         back.bind(on_release=self.back_to_menu)
-        close = Button(text='[ CLOSE ]')
+        close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
         close.bind(on_release=self.close_menus)
 
         theme_menu.add_widget(back)
@@ -219,9 +220,9 @@ class Gauge(Widget):
         BG7 = Button(text='RED')
         BG7.bind(on_release=self.bg_7)
 
-        back = Button(text='[ BACK ]')
+        back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
         back.bind(on_release=self.back_to_menu)
-        close = Button(text='[ CLOSE ]')
+        close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
         close.bind(on_release=self.close_menus)
 
         bg_menu.add_widget(back)
@@ -265,9 +266,9 @@ class Gauge(Widget):
         BD8 = Button(text='ORANGE')
         BD8.bind(on_release=self.dial_8)
 
-        back = Button(text='[ BACK ]')
+        back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
         back.bind(on_release=self.back_to_menu)
-        close = Button(text='[ CLOSE ]')
+        close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
         close.bind(on_release=self.close_menus)
 
         dial_menu.add_widget(back)
@@ -306,9 +307,9 @@ class Gauge(Widget):
         GD5 = Button(text='BLACK')
         GD5.bind(on_release=self.dial_5)
 
-        back = Button(text='[ BACK ]')
+        back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
         back.bind(on_release=self.back_to_menu)
-        close = Button(text='[ CLOSE ]')
+        close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
         close.bind(on_release=self.close_menus)
 
         rim_menu.add_widget(back)
@@ -350,9 +351,9 @@ class Gauge(Widget):
         GT8 = Button(text='PURPLE')
         GT8.bind(on_release=self.purple_font)
 
-        back = Button(text='[ BACK ]')
+        back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
         back.bind(on_release=self.back_to_menu)
-        close = Button(text='[ CLOSE ]')
+        close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
         close.bind(on_release=self.close_menus)
 
         text_menu.add_widget(back)
@@ -438,7 +439,8 @@ class Gauge(Widget):
         """
         self.Parent.appLayout.remove_widget(self.gmenu)
         self.settings_open = False
-        self.settings.text = 'Modify'
+        self.settings.text = 'EDIT'
+        self.settings.color = (1, 1, 1, 1)
         self.Parent.save_settings()
 
     def setBackground(self, imagesrc, *largs):

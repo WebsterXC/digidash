@@ -93,8 +93,8 @@ class AddGauge(Widget):
             instance.Parent.appLayout.remove_widget(instance.dButton)
             instance.dButton = None
 
-        digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,20))
-        digi.pos=(250,win_h-digi.size[1]-10)
+        digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,30))
+        digi.pos=(250,win_h-digi.size[1])
         digi.bind(on_release = partial(instance.makeGauge, val, 'digital'))
         instance.dButton = digi
         instance.Parent.appLayout.add_widget(digi)
@@ -103,8 +103,8 @@ class AddGauge(Widget):
             instance.Parent.appLayout.remove_widget(instance.aButton)
             instance.aButton = None
 
-        analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,20))
-        analo.pos=(400,win_h-analo.size[1]-10)
+        analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,30))
+        analo.pos=(400,win_h-analo.size[1])
         analo.bind(on_release = partial(instance.makeGauge, val, 'analog'))
         instance.aButton = analo
         instance.Parent.appLayout.add_widget(analo)

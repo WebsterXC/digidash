@@ -28,34 +28,34 @@ class Settings(Widget):
         win_w = Window.size[0]
         win_h = Window.size[1]
 
-        self.Values = ['Background Image','Background Color','Header/Footer Image','Connection']
+        #self.Values = ['Background Image','Background Color','Header/Footer Image','Connection']
         self.Parent = None
         self.setmenu = DropDown()
 
         self.imagebuttons = []
         self.brightbuttons = []
 
-        self.bibut = Button(text='Background Image', size_hint_y= None, height= 30)
+        self.bibut = Button(text='BACKGROUND IMAGE', size_hint_y= None, height= 30)
         self.bibut.bind(on_release=self.bibutpress)
         self.setmenu.add_widget(self.bibut)
 
-        self.bcbut = Button(text='Brightness', size_hint_y= None, height= 30)
+        self.bcbut = Button(text='BRIGHTNESS', size_hint_y= None, height= 30)
         self.bcbut.bind(on_release=self.bcbutpress)
         self.setmenu.add_widget(self.bcbut)
 
-        self.hfbut = Button(text='Header/Footer Color', size_hint_y= None, height= 30)
-        self.hfbut.bind(on_release=self.hfbutpress)
-        self.setmenu.add_widget(self.hfbut)
+        #self.hfbut = Button(text='Header/Footer Color', size_hint_y= None, height= 30)
+        #self.hfbut.bind(on_release=self.hfbutpress)
+        #self.setmenu.add_widget(self.hfbut)
 
-        self.conbut = Button(text='Connection', size_hint_y= None, height= 30)
-        self.conbut.bind(on_release=self.conbutpress)
-        self.setmenu.add_widget(self.conbut)
+        #self.conbut = Button(text='Connection', size_hint_y= None, height= 30)
+        #self.conbut.bind(on_release=self.conbutpress)
+        #self.setmenu.add_widget(self.conbut)
 
-        self.rotbut = Button(text='Reset Rotations', size_hint_y=None, height = 30)
+        self.rotbut = Button(text='RESET ROTATIONS', size_hint_y=None, height = 30)
         self.rotbut.bind(on_release=self.rotbutpress)
         self.setmenu.add_widget(self.rotbut)
 
-        self.exitbut = Button(text='Exit DigiDash', size_hint_y= None, height= 30)
+        self.exitbut = Button(text='[   EXIT   ]', size_hint_y= None, height= 30, color=(1, 0, 0, 1))
         self.exitbut.bind(on_release=self.exitbutpress)
         self.setmenu.add_widget(self.exitbut)
 
@@ -80,8 +80,8 @@ class Settings(Widget):
             
             instance.setmenu.add_widget(instance.bibut)
             instance.setmenu.add_widget(instance.bcbut)
-            instance.setmenu.add_widget(instance.hfbut)
-            instance.setmenu.add_widget(instance.conbut)
+            #instance.setmenu.add_widget(instance.hfbut)
+            #instance.setmenu.add_widget(instance.conbut)
             instance.setmenu.add_widget(instance.rotbut)
             instance.setmenu.add_widget(instance.exitbut)
     
@@ -94,8 +94,8 @@ class Settings(Widget):
     
         instance.setmenu.add_widget(instance.bibut)
         instance.setmenu.add_widget(instance.bcbut)
-        instance.setmenu.add_widget(instance.hfbut)
-        instance.setmenu.add_widget(instance.conbut)
+        #instance.setmenu.add_widget(instance.hfbut)
+        #instance.setmenu.add_widget(instance.conbut)
         instance.setmenu.add_widget(instance.rotbut)
         instance.setmenu.add_widget(instance.exitbut)   
         
@@ -104,8 +104,8 @@ class Settings(Widget):
         #remove main menu buttons from dropdown
         instance.setmenu.remove_widget(instance.bibut)
         instance.setmenu.remove_widget(instance.bcbut)
-        instance.setmenu.remove_widget(instance.hfbut)
-        instance.setmenu.remove_widget(instance.conbut)
+        #instance.setmenu.remove_widget(instance.hfbut)
+        #instance.setmenu.remove_widget(instance.conbut)
         instance.setmenu.remove_widget(instance.rotbut)
         instance.setmenu.remove_widget(instance.exitbut)
         
@@ -127,7 +127,7 @@ class Settings(Widget):
         imgbut6.bind(on_release=partial(instance.imgbutpress, 'Images/bgcgreen.jpg'))
         imgbut7 = Button(text='White', size_hint_y= None, height= 30)
         imgbut7.bind(on_release=partial(instance.imgbutpress, 'Images/bgcwhite.jpg'))
-        imgbut8 = Button(text='[Back]', size_hint_y= None, height= 30)
+        imgbut8 = Button(text='[Back]', size_hint_y= None, height= 30, color=(0, 1, 0, 1))
         imgbut8.bind(on_release=partial(instance.imgbutpress, 'none'))
         instance.imagebuttons = [imgbut0,imgbut1,imgbut2,imgbut3,imgbut4,imgbut5,imgbut6,imgbut7,imgbut8]
         
@@ -148,8 +148,8 @@ class Settings(Widget):
         #remove main menu buttons from dropdown
         instance.setmenu.remove_widget(instance.bibut)
         instance.setmenu.remove_widget(instance.bcbut)
-        instance.setmenu.remove_widget(instance.hfbut)
-        instance.setmenu.remove_widget(instance.conbut)
+        #instance.setmenu.remove_widget(instance.hfbut)
+        #instance.setmenu.remove_widget(instance.conbut)
         instance.setmenu.remove_widget(instance.rotbut)
         instance.setmenu.remove_widget(instance.exitbut)
         
@@ -164,7 +164,7 @@ class Settings(Widget):
         brightbut2.bind(on_release=partial(instance.brightbutpress, '196'))
         brightbut3 = Button(text='100%', size_hint_y= None, height= 30)
         brightbut3.bind(on_release=partial(instance.brightbutpress, '255'))
-        brightbut4 = Button(text='[Back]', size_hint_y= None, height= 30)
+        brightbut4 = Button(text='[Back]', size_hint_y= None, height= 30, color=(0, 1, 0, 1))
         brightbut4.bind(on_release=partial(instance.brightbutpress, 'back'))
         
         instance.brightbuttons = [brightbut00,brightbut0,brightbut1,brightbut2,brightbut3,brightbut4]
