@@ -46,7 +46,7 @@ class Gauge(Widget):
         self.style = 1
 
         #GAUGE DIAL
-        self.dialscat = Scatter(do_translation=False, do_scale=False)
+        self.dialscat = Scatter(do_translation=False, do_scale=False, do_rotation=False)
         self.dialscat.center = self.gauge.center
         self.dial = Image(source='Images/Gauges/dial_red.png', size=(300, 300), pos=(-105, -90))
         self.dialscat.add_widget(self.dial)

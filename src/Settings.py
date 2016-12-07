@@ -193,6 +193,7 @@ class Settings(Widget):
         self.Parent = p
     #GraphClass.graph()
     def exitbutpress(instance, *largs):
+        instance.Parent.save_settings()
         print('The button <%s> is being pressed' % instance.exitbut.text)
         App.get_running_app().stop()
     #sys.exit()

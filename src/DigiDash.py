@@ -53,7 +53,7 @@ class DigiDashApp(App):
 
             if(gtype == 'analog'):
                 curG = Gauge()
-                curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+                curGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
                 curGS.add_widget(curG)
                 Gauge.setParents(curG,self,curGS)
                 Gauge.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)
@@ -78,7 +78,7 @@ class DigiDashApp(App):
 
             else:
                 curG = GaugeDigital()
-                curGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+                curGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
                 curGS.add_widget(curG)
                 GaugeDigital.setParents(curG,self,curGS)
                 GaugeDigital.setGaugeParameters(curG, gmeasure, gmin, gmax, gunits)

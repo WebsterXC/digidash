@@ -135,7 +135,7 @@ class AddGauge(Widget):
 
             newG = GaugeDigital()
             newG.PID = gcode
-            newGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+            newGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
             newGS.add_widget(newG)
             GaugeDigital.setParents(newG,instance.Parent,newGS)
             GaugeDigital.setGaugeParameters(newG, gmeasure, gmin, gmax, gunits)
@@ -162,7 +162,7 @@ class AddGauge(Widget):
 
             newG = Gauge()
             newG.PID = gcode
-            newGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+            newGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
             newGS.add_widget(newG)
             Gauge.setParents(newG,instance.Parent,newGS)
             Gauge.setGaugeParameters(newG, gmeasure, gmin, gmax, gunits)
