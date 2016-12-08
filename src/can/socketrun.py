@@ -6,8 +6,8 @@ def send_recv(cmd): #send cmd parameter and return dongle response (ignores echo
     sock.send(cmd + "\r\n")
     c = sock.recv(32)
 
-    c.replace("\r", " ")
-    c.replace(">", " ")
+    c.replace("\r", "")
+    c.replace(">", "")
 
     print(c)
 
