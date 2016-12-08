@@ -4,21 +4,12 @@ import bluetooth #if you get an import error, then "sudo apt-get install python-
 
 def send_recv(cmd): #send cmd parameter and return dongle response (ignores echoes)
     sock.send(cmd + "\r\n")
-    time.sleep(0.1)
-    while 1:
-        buffer = ""
-        while 1:
-            c = sock.recv(1)
-            #print("c is:%s:", c)
-            if c == '\r' and len(buffer) > 0:
-                break
-            else:
-                if buffer != "\r" and c != ">":
-                    buffer = buffer + c
-        #print("Here!")
-        #print(buffer)
-        if buffer != "" and buffer != "\r" and buffer != cmd and buffer != (">" + cmd):
-            return buffer
+    c = sock.recv(32)
+
+    c.replace("\r", " ")
+    c.replace(">", " ")
+
+    print(c)
 
 myMAC = "00:1D:A5:00:03:4E" #Mark's dongle (ELM v1.5 aka shit chinese clone)
 #myMAC = ":::::" #Will's dongle (ELM v2.1 aka not CHINA CHINA CHINA)

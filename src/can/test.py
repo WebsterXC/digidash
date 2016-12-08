@@ -1,23 +1,18 @@
-from daemon import CANDaemon
-import canbus, pids
-import time
+import socketrun
+import blue
+import automath
 
-c = canbus.canbus()
+def main():
+	b = blue.Blue()
+	b.connect()
 
-# Uncomment for automatically grabbed pids
-#d = CANDaemon()
-#d.start()
+	res = send_recv("atz")
+	res = send_recv("ate0")
 
-for i in range(0, 100):
-	# Grab automatically updated PID
-	rpm = canbus.CANdata[pids.ENG_RPM]
+	for i in range(0, 100):
+		res = send_recv("010C")
+		r = res.split()
 
-	# Manually request PID
-	demand = canbus.send_pid(pids.ENG_TORQUE_DMD)
-	actual = canbus.send_pid(pids.ENG_TORQUE_ACT)
-	reference = canbus.send_pid(pids.ENG_TORQUE_REF)
+		automath.eng_rpm_conv(r[2], r[3])
 
-	print( rpm )
-	print( [demand, actual, reference] )
-
-	time.sleep(0.1)
+	b.disconnect()
