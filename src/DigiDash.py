@@ -19,6 +19,7 @@ import time
 import ast
 from functools import partial
 import ConfigParser
+import subprocess  
 
 from can import pids
 
@@ -30,6 +31,9 @@ class DigiDashApp(App):
         GaugeList= Config.sections()[1:]
 
         self.ActiveGauges=[]
+        
+        bright = Config.get('Application Settings','brightness')
+        subprocess.call(['sudo','./brightness.sh',str(brightstr)])
 
         #Initialize all Gauges from INI config file
         for g in GaugeList:
@@ -87,7 +91,7 @@ class DigiDashApp(App):
                 curG.VALUE.color = tc
 
                 curG.PID = PID
-				
+                
                 Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
 
         #Define application layout
@@ -100,19 +104,19 @@ class DigiDashApp(App):
 
         #Create header
         #head = Header()
-	#win_w = Window.size[0]
+    #win_w = Window.size[0]
         #win_h = Window.size[1]
-	#head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
+    #head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
 
         #Create footer and schedule clock and date functions
         foot = Footer()
         Footer.updatedate(foot)
         Clock.schedule_interval(partial(Footer.updatetime, foot), 1)
         Clock.schedule_interval(partial(Footer.updatedate, foot), 3600)
-	
+    
 
         #Add Background Header and Footer
-	#self.appLayout.add_widget(head)
+    #self.appLayout.add_widget(head)
         self.appLayout.add_widget(self.bg)
         self.appLayout.add_widget(foot)
 

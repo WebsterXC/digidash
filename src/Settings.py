@@ -88,7 +88,9 @@ class Settings(Widget):
     def brightbutpress(instance, brightstr, *largs):
         if brightstr != 'back':
             subprocess.call(['sudo','./brightness.sh',str(brightstr)])
-			
+            Config.set('Application_Settings','brightness',str(brightstr))
+            with open('Settings.ini', 'wb') as configfile:
+                Config.write(configfile)
         for but in instance.brightbuttons:
                 instance.setmenu.remove_widget(but)
     
