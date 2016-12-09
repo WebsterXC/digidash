@@ -70,11 +70,11 @@ class Blue:
         time.sleep(0.005)
         
 	while 1:
-	    c = sock.recv(64)
+        c = sock.recv(64)
         nocarriage = c.replace('\r', "")
         buffer = nocarriage.replace('>', "")
 
-	    if buffer != "" and buffer != cmd:
+        if buffer != "" and buffer != cmd:
             if buffer == "SEARCHING...":
                 continue
             if buffer == "?":
