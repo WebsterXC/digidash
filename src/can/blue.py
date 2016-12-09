@@ -69,27 +69,27 @@ class Blue:
         sock.send(cmd + "\r\n")
         time.sleep(0.005)
         
-	while 1:
-        c = sock.recv(64)
-        nocarriage = c.replace('\r', "")
-        buffer = nocarriage.replace('>', "")
+        while 1:
+            c = sock.recv(64)
+            nocarriage = c.replace('\r', "")
+            buffer = nocarriage.replace('>', "")
 
-        if buffer != "" and buffer != cmd:
-            if buffer == "SEARCHING...":
-                continue
-            if buffer == "?":
-                self.log.debug(''.join(("Command ", cmd, " is invalid.")))
-                raise InvalidCmdError("Command '%s' is invalid." % cmd)
-            if buffer == "NO DATA":
-                self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")))
-                raise NoDataError("Dongle returned 'NO DATA'.")
-            if buffer == "STOPPED":
-                self.log.warning(''.join(("ELM returned STOPPED")))
-                raise StoppedError("Dongle returned 'STOPPED'.")
-            if buffer == "UNABLE TO CONNECT":
-                self.log.warning.(''.join(("ELM returned UNABLE TO CONNECT")))
-                raise StoppedError("Dongle returned 'UNABLE TO CONNECT'")
-            return buffer
+            if buffer != "" and buffer != cmd:
+                if buffer == "SEARCHING...":
+                    continue
+                if buffer == "?":
+                    self.log.debug(''.join(("Command ", cmd, " is invalid.")))
+                    raise InvalidCmdError("Command '%s' is invalid." % cmd)
+                if buffer == "NO DATA":
+                    self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")))
+                    raise NoDataError("Dongle returned 'NO DATA'.")
+                if buffer == "STOPPED":
+                    self.log.warning(''.join(("ELM returned STOPPED")))
+                    raise StoppedError("Dongle returned 'STOPPED'.")
+                if buffer == "UNABLE TO CONNECT":
+                    self.log.warning(''.join(("ELM returned UNABLE TO CONNECT")))
+                    raise StoppedError("Dongle returned 'UNABLE TO CONNECT'")
+                return buffer
     '''
     def send_recv(self, cmd):  # send cmd parameter and return dongle response (ignores echoes)
         if self.state == 0:
