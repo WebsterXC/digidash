@@ -32,8 +32,8 @@ class DigiDashApp(App):
 
         self.ActiveGauges=[]
         
-        bright = Config.get('Application Settings','brightness')
-        subprocess.call(['sudo','./brightness.sh',str(brightstr)])
+        bright = Config.get('Application_Settings','Brightness')
+        subprocess.call(['sudo','./brightness.sh',str(bright)])
 
         #Initialize all Gauges from INI config file
         for g in GaugeList:
