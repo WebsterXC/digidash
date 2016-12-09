@@ -1,6 +1,5 @@
 # File defines methods to interact with the OBDII bluetooth receiver.
-# Used https://github.com/Pbartek/pyobd-pi and https://github.com/peterh/pyobd as guides
-# The OBD-II bluetooth reader we are deploying uses ELM327 protocol to communicate.
+# The OBDII bluetooth receiver we are deploying uses the ELM327 protocol to communicate.
 
 import logging
 import string
@@ -66,6 +65,32 @@ class Blue:
         self.sock.close()
 	self.log.debug(''.join(("Connection with ", myMAC, "closed.")) )
 
+    def send_recv(cmd): #send cmd parameter and return dongle response (ignores echoes)
+        sock.send(cmd + "\r\n")
+        time.sleep(0.005)
+        
+	while 1:
+	    c = sock.recv(64)
+        nocarriage = c.replace('\r', "")
+        buffer = nocarriage.replace('>', "")
+
+	    if buffer != "" and buffer != cmd:
+            if buffer == "SEARCHING...":
+                continue
+            if buffer == "?":
+                self.log.debug(''.join(("Command ", cmd, " is invalid.")))
+                raise InvalidCmdError("Command '%s' is invalid." % cmd)
+            if buffer == "NO DATA":
+                self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")))
+                raise NoDataError("Dongle returned 'NO DATA'.")
+            if buffer == "STOPPED":
+                self.log.warning(''.join(("ELM returned STOPPED")))
+                raise StoppedError("Dongle returned 'STOPPED'.")
+            if buffer == "UNABLE TO CONNECT":
+                self.log.warning.(''.join(("ELM returned UNABLE TO CONNECT")))
+                raise StoppedError("Dongle returned 'UNABLE TO CONNECT'")
+            return buffer
+    '''
     def send_recv(self, cmd):  # send cmd parameter and return dongle response (ignores echoes)
         if self.state == 0:
             raise StateError("Can't send/recv. You aren't connected.")
@@ -99,3 +124,4 @@ class Blue:
                 #print("Response is")
                 #print(buffer)
                 return buffer
+    '''
