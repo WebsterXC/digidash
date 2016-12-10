@@ -1,18 +1,22 @@
-# DigiDash: A plug-and-play digital dashboard and engine monitor. #
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
 
-# Entry point for DigiDash digital dashboard unit. #
+# [Summary]: File represents the entry point for the DigiDash unit. It starts debug logging and tries
+# to establish a connection with a vehicle's CAN bus (via bluetooth). This file also starts many of
+# DigiDash's background daemons and cleanup routines.
 
-# This is a class project for our software engineering class, CSE442 at University at Buffalo. The
-# code is provided as open-source under the GNU GPL V3 license, which can be found in the top level
-# directory. If you found our code useful, please give credit in your comments!
-
-# Authors:
+# Original Authors: #
 # David Evans
 # Ed Garwol
-# Joe Hanson
-# Mark Grassi
+# Joe Hanson 
+# Mark Grassi 
 # Will Burgin
-# Khan
 
 import time
 import subprocess
@@ -76,11 +80,11 @@ def main():
 		## If no, display warning and options.
 
 	# Vehicle available.
-	#d = daemon.CANDaemon()
-	#d.start()
-
-	d = daemon.ParserDaemon()
+	d = daemon.CANDaemon()
 	d.start()
+
+	#d = daemon.ParserDaemon()
+	#d.start()
 	#p = daemon.ParamDaemon()
 	#p.start()
 

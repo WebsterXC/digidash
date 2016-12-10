@@ -102,7 +102,7 @@ def can_process():
 			canbus.CANlock.acquire()
 			canbus.CANdata[pid] = automath.convert(pid, answer)
 			canbus.CANlock.release()
-			time.sleep(0)	# Yield
+			#time.sleep(0)	# Yield
 
 # Daemon logs engine data to a CSV .txt file
 class ParamDaemon(threading.Thread):
