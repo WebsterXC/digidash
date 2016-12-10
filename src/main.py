@@ -23,7 +23,7 @@ import subprocess
 import logging
 from can import canbus, daemon, pids, automath
 
-#from DigiDash import DigiDashApp
+from DigiDash import DigiDashApp
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'

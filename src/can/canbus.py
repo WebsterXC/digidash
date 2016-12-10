@@ -17,7 +17,6 @@ from blue import Blue, StoppedError, NoDataError, InvalidCmdError, StateError, C
 import blue
 import logging
 import threading
-<<<<<<< HEAD
 import pids
 
 # List contains PID codes that are automatically grabbed by the CANDaemon at boot.
