@@ -1,18 +1,22 @@
-# DigiDash: A plug-and-play digital dashboard and engine monitor. #
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
 
-# Entry point for DigiDash digital dashboard unit. #
+# [Summary]: File represents the entry point for the DigiDash unit. It starts debug logging and tries
+# to establish a connection with a vehicle's CAN bus (via bluetooth). This file also starts many of
+# DigiDash's background daemons and cleanup routines.
 
-# This is a class project for our software engineering class, CSE442 at University at Buffalo. The
-# code is provided as open-source under the GNU GPL V3 license, which can be found in the top level
-# directory. If you found our code useful, please give credit in your comments!
-
-# Authors:
+# Original Authors: #
 # David Evans
 # Ed Garwol
-# Joe Hanson
-# Mark Grassi
+# Joe Hanson 
+# Mark Grassi 
 # Will Burgin
-# Khan
 
 import time
 import subprocess
@@ -70,16 +74,6 @@ def main():
 	log.critical('Booting DigiDash...')
 
 	# Check dependencies using Bash script #
-	# Kivy (Ver: )
-	# Kivy Dependency List:
-	#
-	#
-
-
-	## KIVY START MENU HERE ##
-    	
-
-	##########################
 
 	# Test to ensure a valid bluetooth connection is even possible. #
 	c = canbus.canbus()		# Might need to uncomment Blue.connect() in canbus.py
@@ -101,30 +95,11 @@ def main():
 	
 	DigiDashApp().run()
 
-	#print(canbus.CANdata)
-
-	#for i in range(0, 50):
-	#	print(canbus.CANdata[0x0C])
-	#	time.sleep(0.1)
-
 	# If you got here, DigiDash exited from either an error or user-close.
 	# Run exit routines.
 	#exit_routine()
 	
 	# The following is for thread competition testing #
-'''	
-	# Parse the first 10 RPM values (for testing)
-	d = daemon.ParserDaemon()
-	d.start()
-	p = daemon.ParamDaemon()
-	p.start()
-	
-	for i in range(0, 50):
-		print(canbus.CANdata[0x0C])
-		time.sleep(0.1)
-'''	
-
-	
 
 if __name__ == "__main__":
 	main()

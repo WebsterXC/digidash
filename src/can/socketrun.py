@@ -4,24 +4,15 @@ import bluetooth #if you get an import error, then "sudo apt-get install python-
 
 def send_recv(cmd): #send cmd parameter and return dongle response (ignores echoes)
     sock.send(cmd + "\r\n")
-    time.sleep(0.1)
-    while 1:
-        buffer = ""
-        while 1:
-            c = sock.recv(1)
-            #print("c is:%s:", c)
-            if c == '\r' and len(buffer) > 0:
-                break
-            else:
-                if buffer != "\r" and c != ">":
-                    buffer = buffer + c
-        #print("Here!")
-        #print(buffer)
-        if buffer != "" and buffer != "\r" and buffer != cmd and buffer != (">" + cmd):
-            return buffer
+    time.sleep(0.005)
+    c = sock.recv(64)
+    nocarriage = c.replace('\r', " ")
+    final = nocarriage.replace('>', " ")
 
-myMAC = "00:1D:A5:00:03:4E" #Mark's dongle (ELM v1.5 aka shit chinese clone)
-#myMAC = ":::::" #Will's dongle (ELM v2.1 aka not CHINA CHINA CHINA)
+    return final
+
+#myMAC = "00:1D:A5:00:03:4E" #Mark's dongle (ELM v1.5 aka shit chinese clone)
+myMAC = "00:1D:A5:68:98:8A" #Will's dongle (ELM v2.1 aka not CHINA CHINA CHINA)
 print("Opening Bluetooth socket...")
 
 while 1:
@@ -49,22 +40,25 @@ print("ate0 response is:")
 print(res)
 
 #-------------------
-#SEND COMMAND "0100" to ready dongle for communication
-res = send_recv("0100")
-print("0100 response is:")
-print(res)
-
-#-------------------
 #RPM LOOP
 while 1:
     res = send_recv("010C")
+    '''
     print("Should be RPM. Response is:")
-    print(res)
+    '''
     data = res.split()
-    a = int(data[2], 16)
-    b = int(data[3], 16)
+    if len(data) > 3:
+        try:
+    	    a = int(data[2], 16)
+    	    b = int(data[3], 16)
+        except ValueError:
+            continue		
+    else:
+        continue
+
     rpm = ((256 * a) + b) / 4
-    print("RPM is %d" % rpm)
-    time.sleep(1)
+    print("RPM is:")
+    print(rpm)
+    #time.sleep(1)
 
 sock.close()

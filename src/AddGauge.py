@@ -89,14 +89,22 @@ class AddGauge(Widget):
     def userSelect(instance, val, *largs):
         win_h = Window.size[1]
 
-        digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,20))
-        digi.pos=(250,win_h-digi.size[1]-10)
+        if (instance.dButton != None):
+            instance.Parent.appLayout.remove_widget(instance.dButton)
+            instance.dButton = None
+
+        digi = Button(text='Digital Gauge', size_hint = (None, None), size = (150,30))
+        digi.pos=(250,win_h-digi.size[1])
         digi.bind(on_release = partial(instance.makeGauge, val, 'digital'))
         instance.dButton = digi
         instance.Parent.appLayout.add_widget(digi)
-            
-        analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,20))
-        analo.pos=(400,win_h-analo.size[1]-10)
+          
+        if (instance.aButton != None):
+            instance.Parent.appLayout.remove_widget(instance.aButton)
+            instance.aButton = None
+
+        analo = Button(text='Analog Gauge', size_hint = (None, None), size = (150,30))
+        analo.pos=(400,win_h-analo.size[1])
         analo.bind(on_release = partial(instance.makeGauge, val, 'analog'))
         instance.aButton = analo
         instance.Parent.appLayout.add_widget(analo)
@@ -105,8 +113,9 @@ class AddGauge(Widget):
         #print(gtype)
     def makeGauge(instance, val, diana, *largs):
         instance.Parent.appLayout.remove_widget(instance.aButton)
+        instance.aButton = None
         instance.Parent.appLayout.remove_widget(instance.dButton)
-
+        instance.dButton = None
         if (diana == 'digital'):
             
             gstyle = 1
@@ -126,7 +135,7 @@ class AddGauge(Widget):
 
             newG = GaugeDigital()
             newG.PID = gcode
-            newGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+            newGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
             newGS.add_widget(newG)
             GaugeDigital.setParents(newG,instance.Parent,newGS)
             GaugeDigital.setGaugeParameters(newG, gmeasure, gmin, gmax, gunits)
@@ -153,7 +162,7 @@ class AddGauge(Widget):
 
             newG = Gauge()
             newG.PID = gcode
-            newGS = Scatter(scale=gscale, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
+            newGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
             newGS.add_widget(newG)
             Gauge.setParents(newG,instance.Parent,newGS)
             Gauge.setGaugeParameters(newG, gmeasure, gmin, gmax, gunits)

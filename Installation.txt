@@ -1,0 +1,84 @@
+Hello. This file steps you through how to setup a Raspberry Pi running Raspbian Jessie to use DigiDash.
+
+First, the following is a list of required hardware:
+-Raspberry Pi 3 Model B
+-Official Raspberry Pi 7" Touchscreen Display
+-MicroSD card (Preferably at least 8GB)
+-ELM327 OBDII Bluetooth Adapter (Preferably running the ELM327 v2.1 protocol)
+-Micro USB cable (for powering the Pi)
+-USB Keyboard (for setup only)
+
+The following is a list of useful, additional hardware:
+-12V to USB Car Adapter (required if your car does not already have a USB port. Preferably at least 2 Amps.)
+-iOttie Easy One Touch 2 Car Mount for iPhone & Smartphones
+-Case for Raspberry Pi Official 7" Touchscreen Display (3D printer files included in DigiDash repository)
+-8 M3x6 screws
+
+Once all hardware is gathered and assembled, it's time to setup the Pi. If this is your first time using your Pi, you must first install the Raspbian Jessie OS on your MicroSD card. If you want the fastest possible boot time for your Pi, it is highly recommended that you do not use NOOBS to install Raspbian.
+Once Raspbian is installed, it will presumably boot into its desktop GUI. If it does not, simply enter the following line into the command line interface to boot the GUI:
+    startx
+If your screen is upside-down, edit the file /boot/config.txt and add this line:
+    lcd_rotate=2
+If you see an undervoltage warning on the top-right of your screen and would like to make it disappear, add this line to the same file:
+    avoid_warnings=1
+For these changes take effect, you must reboot your system by entering the following command:
+    sudo reboot
+
+Next, you should make sure that your Pi's localization settings are correct (otherwise, you may have trouble typing in later commands). Open the Pi's home drop-down menu, then choose Preferences->Raspberry Pi Configuration. Choose the Localization tab, then ensure that all options match your preferences. Save your changes by hitting OK, and reboot your Pi if prompted.
+
+Next, you must install the packages that DigiDash requires to run. Make sure that your Pi is connected to the internet. Then, open the terminal and enter the following lines:
+    sudo apt-get install git
+    sudo apt-get install python-bluez
+
+To install Kivy:
+    sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev cython
+    sudo pip install --upgrade cython
+    sudo pip install git+https://github.com/kivy/kivy.git@master
+To configure Kivy to use the touchscreen as an input source, edit the file ~/.kivy/config.ini and go to the [input] section. Add this:
+    mouse = mouse
+    mtdev_%(name)s = probesysfs,provider=mtdev
+    hid_%(name)s = probesysfs,provider=hidinput
+Please note: If this file doesn't exist, then save this step for later. After running DigiDash (or any other program that uses Kivy), the file will be created.
+
+All required packages have now been installed! To ensure that everything on your Pi is up-to-date, enter the following commands in your terminal:
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get dist-upgrade
+    sudo apt-get autoremove
+    sudo rpi-update
+Then reboot:
+    sudo reboot
+
+To download DigiDash itself, open the terminal and enter the following commands:
+    cd
+    mkdir repositories
+    cd repositories
+    git clone https://github.com/WebsterXC/digidash.git
+
+Next, it's time to pair your bluetooth dongle to your Pi and add its MAC address to DigiDash (this step requires you to be in or near a car). First, plug your dongle into your car's OBDII port. If you don't see any LEDs on your dongle light up, then either your dongle is broken or your car's battery is dead. Now on your Pi, click on the bluetooth icon in the taskbar, then select "Add Device..." Your dongle should pop up (most likely as "OBDII"), and you should now select the dongle and hit "Pair." If you're prompted for a pairing code, enter it (it's most likely either "1234" or "0000"). If you now get a message saying that your dongle is paired but unusable, just ignore it.
+Now, keep this terminal open and open another. In the first terminal, enter:
+    bluetoothctl
+This lists the bluetooth devices saved on your Pi. Look for your dongle in this list and note its MAC address. Now in the second terminal, enter the following:
+    nano ~/repositories/digidash/src/can/blue.py
+In line 26, you should see something similar to 'myMAC = "XX:XX:XX:XX:XX:XX"' where these X's are some alphanumeric characters. Alter this line to include your own dongle's MAC address. Save your changes and exit this terminal with the following command:
+    exit
+You should now be back in your first terminal. Enter the following command to exit bluetoothctl:
+    quit
+
+It's now time to add a custom shell command to run DigiDash:
+    cd /usr/local/bin
+    sudo nano digidash
+In this new file, add the following two lines and then save:
+    #!/bin/bash
+    sh -c 'cd ~/repositories/digidash/src/ && exec python main.py'
+Now, make this file executable:
+    sudo chmod +x digidash
+
+To set DigiDash to auto-run on startup:
+    sudo nano /etc/profile
+Scroll to the bottom and add the following line:
+    digidash
+
+Lastly, you must set your Pi to boot to the command line. Not only does this speed up boot time, but it also solves an issue that results when DigiDash runs halfway through the desktop GUI booting. This occurs if your Pi autoruns Digidash while booting to the desktop GUI. Open the Pi's home drop-down menu, then choose Preferences->Raspberry Pi Configuration. Select "Boot: TO CLI" and then hit OK.
+
+You're now good to go! Reboot you Pi and experience some good ol' DigiDash fun!
