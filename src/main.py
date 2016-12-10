@@ -21,9 +21,9 @@
 import time
 import subprocess
 import logging
-from can import canbus, daemon
+from can import canbus, daemon, pids, automath
 
-from DigiDash import DigiDashApp
+#from DigiDash import DigiDashApp
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'
@@ -71,7 +71,7 @@ def main():
 	# Initialise the global logger
 	logger_init()
 
-	log.critical('Booting DigiDash...')
+	#log.critical('Booting DigiDash...')
 
 	# Check dependencies using Bash script #
 
@@ -99,7 +99,5 @@ def main():
 	# Run exit routines.
 	#exit_routine()
 	
-	# The following is for thread competition testing #
-
 if __name__ == "__main__":
 	main()

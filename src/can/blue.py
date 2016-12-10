@@ -27,7 +27,7 @@ class Blue:
 
     state = 0  # state is 1 if connected, 0 if disconnected
     sock = None
-    delay = 0.017 #WE NEED TO TEST THIS VALUE!!! 11/6
+    delay = 0.005 #WE NEED TO TEST THIS VALUE!!! 11/6
     log = None
 
     def __init__(self):
@@ -56,7 +56,7 @@ class Blue:
                 print ("Could not connect: ", error, "; Retrying in 5 seconds...")
                 time.sleep(5)
         print("Socket successfully opened!")
-	self.log.debug(''.join(("Socket connected with ", myMAC)) )
+	#self.log.debug(''.join(("Socket connected with ", self.myMAC)) )
 
     def disconnect(self):
         if self.state == 0:
@@ -120,7 +120,7 @@ class Blue:
                 if buffer == "STOPPED":
 		    self.log.warning(''.join(("ELM returned STOPPED")) )
                     raise StoppedError("Dongle returned 'STOPPED'.")
-                sock.recv(2) # get rid of "\r>" that's still waiting to be received
+                self.sock.recv(2) # get rid of "\r>" that's still waiting to be received
                 #print("Response is")
                 #print(buffer)
                 return buffer
