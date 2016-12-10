@@ -1,10 +1,16 @@
-# File defines methods for reading and troubleshooting DTCs (Diagnostic Trouble Codes)
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
 
-class dtc_view:
-    def __init__(self):
-        print("dtc_view class not implemented") 
+# [Summary]: This file holds a dictionary where eack key is a string representing a diagnostic
+# trouble code (DTC) and the corresponding value is a short sentence explaining what malfunction
+# the code represents.
 
-# DTC dictionary
 dtc_dict = {
     # P - Powertrain
     "P0001": "Fuel Volume Regulator Control Circuit/Open",

@@ -93,7 +93,7 @@ def send_pid(pid):
 # specific commands (like turning echoes off), or DTC commands (mode 03 gathering).
 # Modes are defined in can/pids.py.
 def send_command(mode, pid):
-	
+
 	# ELM commands and DTC commands are formatted differently
 	if mode == pids.MODE_ELM:
 		command = pid

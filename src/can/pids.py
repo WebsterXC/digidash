@@ -1,5 +1,16 @@
-# File defines hexadecimal PIDs (Parameter IDs) to request specific data from the CAN bus.
-# The bluetooth serial package sends individual characters, so all PIDs are defined as strings.
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]: This file represents the standard vehicle PID codes as defined by
+# the OBD-II standard. PIDs are represented as strings, because the underlying
+# bluetooth communication sends/receives ASCII characters. In addition, macros
+# for OBD-II mode and ELM327 mode are offered as well.
 
 ##### General #####
 SPEED            = "0x0D"

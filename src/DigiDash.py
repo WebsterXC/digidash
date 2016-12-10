@@ -1,3 +1,14 @@
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]:
+
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.image import Image
@@ -52,10 +63,6 @@ class DigiDashApp(App):
             tc = ast.literal_eval(str(Config.get(g,'textcolor')))
             dl = Config.get(g,'dialcolor')
 
-            #print(g)
-            #print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
-
-
             if(gtype == 'analog'):
                 curG = Gauge()
                 curGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
@@ -101,12 +108,11 @@ class DigiDashApp(App):
         bg_path = Config.get('Application_Settings','Background')
         self.bg = Image(source=bg_path, pos=(0,0), size=(Window.size[0],Window.size[1]))
 
-
         #Create header
         #head = Header()
-    #win_w = Window.size[0]
+        #win_w = Window.size[0]
         #win_h = Window.size[1]
-    #head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
+        #head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
 
         #Create footer and schedule clock and date functions
         foot = Footer()
@@ -116,7 +122,7 @@ class DigiDashApp(App):
     
 
         #Add Background Header and Footer
-    #self.appLayout.add_widget(head)
+        #self.appLayout.add_widget(head)
         self.appLayout.add_widget(self.bg)
         self.appLayout.add_widget(foot)
 
@@ -127,7 +133,7 @@ class DigiDashApp(App):
         self.gaugeMenu = AddGauge()
         AddGauge.set_parent(self.gaugeMenu, self)
         self.appLayout.add_widget(self.settingMenu)
-        self.appLayout.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
+        self.appLayout.add_widget(self.gaugeMenu) #DONT MOVE
 
         #Add Gauges
         for ag in self.ActiveGauges:
@@ -161,12 +167,12 @@ class DigiDashApp(App):
             for sec in remove_sec:
                 instance.Config.remove_section(sec)
 
-        i=0 #COUNTER FOR SECTION NAME
+        i=0 # Counter for section name
         for ga in instance.ActiveGauges:
-            g = ga.children[0]  #Get the gauge class from the scatter
+            g = ga.children[0]  # Get the gauge class from the scatter
             i+=1
 
-            #DEFINITIONS FOR SAVING
+            # Definitions for saving
             gname = 'Gauge_'+str(i)
             bg = g.gauge.source
             tc = g.MTitle.color
