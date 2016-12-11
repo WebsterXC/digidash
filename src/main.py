@@ -72,15 +72,13 @@ def main():
 	# Initialise the global logger
 	logger_init()
 
-	# Check dependencies using Bash script #
-
 	# Test to ensure a valid bluetooth connection is even possible. #
 	c = canbus.canbus()		# Might need to uncomment Blue.connect() in canbus.py
 
 	# Vehicle available. Start automated data gathering.
+	
 	#d = daemon.CANDaemon()
 	#d.start()
-
 	d = daemon.ParserDaemon()
 	d.start()
 

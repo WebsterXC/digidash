@@ -145,11 +145,26 @@ that this function has a much slower runtime than the individual functions, and 
 make a connection between PID and engine parameter name.
 
 ### Diagnostic Trouble Codes ###
+Central to any OBD-II interfacing device is the ability to clear the pesky check engine light on the physical vehicle
+dashboard.
 
 #### Reading Codes ####
+DigiDash has the ability to read DTC codes and look up an English translation for what caused
+the fault. To get the currently active trouble codes:
+
+		dtc.dtc_scan()
+
+The method takes no arguments and returns a list of DTC codes in the standard trouble code format (one character plus a
+4-digit code). 
 
 #### Clearing Check Engine Light ####
+To clear the active codes, including the check engine light, simply call:
 
+		dtc.dtc_clear()
+
+Again, this method takes no arguements and tells the vehicle to clear all current DTC trouble codes, and to turn off all
+MILs (including the check-engine light). The method provides a 0.5 second delay to give the vehicle's CAN bus a chance to
+finish clearing all codes in memory, and then returns nothing.
 
 ### Dynamometer Functions ###
 
