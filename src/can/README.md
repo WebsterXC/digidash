@@ -9,8 +9,8 @@ directory also includes files to convert and store engine parameters read from t
 * blue.py: Coordniates bluetooth communication by sending ASCII chars over a socket connection.
 * canbus.py: Class holds all engine data and provides abstractions for the Bluetooth conenction.
 * canfunctions.py: Contains functions used to simulate dynamometer/tuning results.
-* daemon.py: Contains background threads that perform cyclic I/O bound tasks.
-* dtc.py: Handles vehicle status and  gathering / clearing of diagnostic trouble codes.
+* daemon.py: Contains background threads that perform cyclic, I/O-bound tasks.
+* dtc.py: Handles vehicle status and gathering / clearing of diagnostic trouble codes.
 * pids.py: Establishes macros for common OBDII PID codes.
 
 ### Bluetooth Communication ###
@@ -169,4 +169,33 @@ to group all necessary shutdown tasks in case DigiDash must close in an exceptio
 
 The current format of the log messages is [timestamp] | [message], but can be changed in main.py.
 
-troubleshooting messages
+#### Offline Development & Vehicle Simulation ####
+Most of us realized very quickly that programming inside of, or near your vehicle can be difficult or impossible, especially in
+adverse weather conditions. To enable development without a vehicle, /can/data/data.txt provides a set of sample input data that 
+can be fed into DigiDash's data structures to simulate a real vehicle driving.
+
+The ParserDaemon is a background daemon offered for just this purpose. It takes the place of the CANDaemon - the parser fills the
+global CANdata dictionary structure in the same way the CANDaemon does, but instead of using a Bluetooth connection to the vehicle, 
+it uses values found in the CSV text file. The result is the ability to test new code intended for realtime deployment, unchanged 
+on a local system. To enable offline development, a few steps are required.
+
+First, we need to turn off Bluetooth. If you don't do this, DigiDash will exit due to a nonexistent connection. In canbus.py, lines 42
+and 43 should look like:
+
+		#BlueObject.connect()
+		print("Fake Connection!")
+
+This allows DigiDash to continue without trying to establish a bluetooth connection. The print statement is required, since it's now
+the only line inside of a try-except block.
+
+Next we need to replace the CANDaemon with the ParserDaemon, but only temporarily. In main.py, comment the two lines that start the
+CANDaemon and uncomment the lines that start the ParserDaemon. It should look like:
+
+		#d = daemon.CANDaemon()
+		#d.start()
+		d = daemon.ParserDaemon()
+		d.dstart()
+
+Of course, this should be changed back when deploying DigiDash to a real vehicle again.
+
+### Troubleshooting, etc... ###

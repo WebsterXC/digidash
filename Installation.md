@@ -51,9 +51,9 @@ Then, open the terminal and enter the following lines:
 
 To install Kivy:
     
-	sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev \
-    	libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} \
-    	gstreamer1.0-{omx,alsa} python-dev cython
+	sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config \
+	libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core \
+	gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev cython
 
 Then enter:
 
@@ -130,7 +130,7 @@ It's now time to add a custom shell command to run DigiDash:
 In this new file, add the following two lines and then save:
     
 	#!/bin/bash
-    	sh -c 'cd ~/repositories/digidash/src/ && exec python main.py'
+	sh -c 'cd ~/repositories/digidash/src/ && exec python main.py'
 
 Now, make this file executable:
     
