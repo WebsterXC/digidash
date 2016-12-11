@@ -27,11 +27,12 @@ except serial.SerialException as e:
 
 #-------------------
 #SEND COMMAND "atz" to clear all
+#The 'atz' command is used to retrieve the ELM version of the Bluetooth Dongle. 
 if port:
     port.flushOutput()
     port.flushInput()
     for c in "atz":
-        port.write(c)
+        port.write(c) #writes to port in characters
     port.write("\r\n")
 else:
     print("Can't send command.")
@@ -67,8 +68,8 @@ if port:
                 buffer = buffer + c
         #ELMver = buffer
 else:
-    print("No Port! Can't get result.")
-print("Should be ELM version. Buffer is:")
+    print("No Port! Can't get result.") #displayed if the port is empty
+print("Should be ELM version. Buffer is:") #ELM 2.1 is found to be compatible with the project
 print(buffer)
 
 #-------------------
@@ -77,7 +78,7 @@ if port:
     port.flushOutput()
     port.flushInput()
     for c in "ate0":
-        port.write(c)
+        port.write(c) #sends commands in characters
     port.write("\r\n")
 else:
     print("Can't send command.")
@@ -102,6 +103,7 @@ print(buffer)
 
 #-------------------
 #SEND COMMAND "0100" to ready dongle for communication
+#This command initializes the bluetooth dongle to send and receive commands from the user
 if port:
     port.flushOutput()
     port.flushInput()
@@ -126,8 +128,8 @@ if port:
                 buffer = buffer + c
 else:
     print("No Port! Can't get result.")
-print("Should say 41 00 BE 1F B8 10 or the like. Buffer is:")
-print(buffer)
+print("Should say 41 00 BE 1F B8 10 or the like. Buffer is:") #expected output from dongle
+print(buffer) #displays actual output from dongle in HEX
 #-------------------
 
 #-------------------
@@ -136,7 +138,7 @@ while 1:
     if port:
         port.flushOutput()
         port.flushInput()
-        for c in "010C":
+        for c in "010C": #command to request RPM values from the bluetooth dongle 
             port.write(c)
         port.write("\r\n")
     else:
@@ -147,7 +149,7 @@ while 1:
         buffer = ""
         while 1:
             c = port.read(1)
-            if c == '\r' and len(buffer) > 0:
+            if c == '\r' and len(buffer) > 0: #returns characters until the end of message
                 break
             else:
                 if buffer != "" or c != ">":  # if something is in buffer, add everything
@@ -158,9 +160,9 @@ while 1:
     print(buffer)
     #temp = eval("0x" + buffer, {}, {})
     data = buffer.split()
-    a = int(data[2], 16)
+    a = int(data[2], 16) 
     b = int(data[3], 16)
-    rpm = ((256*a) + b)/4
+    rpm = ((256*a) + b)/4 #computes the RPM value from data received from the dongle
     print("RPM is %d" % rpm)
     time.sleep(1)
 
