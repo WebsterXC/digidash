@@ -18,17 +18,15 @@
 # Mark Grassi 
 # Will Burgin
 
-import time
 import subprocess
 import logging
-from can import canbus, daemon, pids, automath
+from can import canbus, daemon, blue
 
 from DigiDash import DigiDashApp
 
 # Initialise global logging
 logpath = 'can/data/digidash.log'
 log = None
-
 def logger_init():
 	logger = logging.getLogger('digilogger')
 	logger.setLevel(logging.DEBUG)	
@@ -46,22 +44,16 @@ def logger_init():
 	global log
 	log = logger
 
-	logger.info('Logger started.')
+	logger.debug('Logger started.')
 
 def exit_routine():
 	log.critical('Exiting DigiDash...')
  
 	# Close bluetooth socket
 	try:
-		print("Disconnect bluetooth")
-		# Leave commented for development with no vehicle
-		#canbus.BlueObject.disconnect()
-	except StateError:
+		canbus.BlueObject.disconnect()
+	except blue.StateError:
 		log.debug("Tried to close an already closed socket.")
-
-	# Remove previous log file	
-	subprocess.call(['rm', logpath])
-	# UNCOMMENT above for deployment
 
 	# Close logging
 	logging.shutdown()

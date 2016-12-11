@@ -12,7 +12,7 @@
 # gathering and are therefore offered as nonclass methods.
 
 import canbus, pids
-import time
+import time, logging
 
 sysmask	= 192 	# Bitmask for the first DTC character (P/C/B/U)
 twomask = 48 	# Bitmask for second DTC character
@@ -22,13 +22,18 @@ fourmask = 15 	# Fourth DTC character
 # Request all trouble codes from the vehicle and return a list of trouble codes. This
 # method returns DTCs in their standard format P/C/B/U + XXXX.
 def dtc_scan():
+	log = logging.getLogger('digilogger')
+
 	dtcstr = canbus.send_command(pids.MODE_DTC, "0x00")	
 
 	# Get bytes in a list
 	dtc_list = dtcstr.split()
-	
+	numfaults = len(dtc_list) / 2	
+
 	print("Raw DTC return:")
 	print(dtc_list)
+	log.info(''.join(("DTC scan returned ", numfaults, " fault codes.")) )
+	log.debug(''.join(("DTC request: ", dtcstr)) )
 
 	dtc_codes = []
 	iterator = 0

@@ -168,6 +168,8 @@ finish clearing all codes in memory, and then returns nothing.
 
 ### Dynamometer Functions ###
 
+#### Drivetime Logging ####
+
 #### Running Tests ####
 
 

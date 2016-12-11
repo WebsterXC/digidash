@@ -27,24 +27,25 @@ from GaugeClass import Gauge
 from GaugeClassDigital import GaugeDigital
 from can import pids
 from can import canbus 
-import time
+import time, logging
 import platform
 import ConfigParser
 
 gaugeName = " "
 
 class AddGauge(Widget):
+    log = None
     def __init__(self, **kwargs):
         super(AddGauge, self).__init__(**kwargs)
-
+	
+	self.log = logging.getLogger('digilogger')
 
         win_w = Window.size[0]
         win_h = Window.size[1]
         if(platform.platform()=='Linux-4.1.19-v7+-armv7l-with-Ubuntu-16.04-xenial'):
             win_h= 480
 
-        self.Parent = None
-        
+        self.Parent = None        
         self.dButton = None
         self.aButton = None
 
@@ -53,15 +54,6 @@ class AddGauge(Widget):
         reads = read()
         self.typeDict = read.readIn(reads, "AddGauge.csv")
 
-        #self.Values= ['Engine Load',
-         #        'Fuel Pressure',
-          #       'Tachometer',
-           #     'Speedometer',
-            #    'MAF',
-             #   'Throttle Pos',
-              #  'Boost Pressure']
-
-        #self.rage = DropDown()
         self.codetype = DropDown()
        
         for x in self.typeDict.keys():
@@ -139,7 +131,8 @@ class AddGauge(Widget):
             instance.Parent.ActiveGauges.append(newGS)
             instance.Parent.appLayout.add_widget(newGS)
                             
-            Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.0625)
+            Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.005)
+	    self.log.debug(''.join(("Created new digital gauge: ", gmeasure)) )
 
         else:
             gstyle = 1
@@ -162,4 +155,6 @@ class AddGauge(Widget):
             instance.Parent.ActiveGauges.append(newGS)
             instance.Parent.appLayout.add_widget(newGS)
                             
-            Clock.schedule_interval(partial(Gauge.setVALUE, newG), 0.0625)
+            Clock.schedule_interval(partial(Gauge.setVALUE, newG), 0.005)
+	    self.log.debug(''.join(("Created new analog gauge: ", gmeasure)) )
+

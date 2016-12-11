@@ -64,11 +64,12 @@ class Blue:
                 self.sock.close()
                 count += 1
                 if count == 5:
-		    self.log.critical("Failed to open socket connection.")
+		    self.log.error("Failed to open socket connection.")
                     raise ConnectFailureError("Connect failed 5 times. I give up.")
                 print ("Could not connect: ", error, "; Retrying in 5 seconds...")
                 time.sleep(5)
 
+	self.log.info(''.join(("Socket opened with MAC address [", self.myMAC, "]")) )
         print("Socket successfully opened!")
 
     # Disconnect from the open socket, if one is connected.
@@ -77,7 +78,7 @@ class Blue:
             raise StateError("Can't disconnect. You aren't connected.")
         self.state = 0
         self.sock.close()
-	self.log.debug(''.join(("Connection with ", myMAC, "closed.")) )
+	self.log.info(''.join(("Connection with [", myMAC, "] closed.")) )
 
     # Send characters to the ELM327 dongle and grab <=64 response characters.
     def send_recv(cmd):
@@ -94,13 +95,13 @@ class Blue:
                 if buffer == "SEARCHING...":
                     continue
                 if buffer == "?":
-                    self.log.debug(''.join(("Command ", cmd, " is invalid.")))
+                    self.log.info(''.join(("Command ", cmd, " is invalid.")))
                     raise InvalidCmdError("Command '%s' is invalid." % cmd)
                 if buffer == "NO DATA":
-                    self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")))
+                    self.log.info(''.join(("Command ", cmd, " produced NO DATA.")))
                     raise NoDataError("Dongle returned 'NO DATA'.")
                 if buffer == "STOPPED":
-                    self.log.warning(''.join(("ELM returned STOPPED")))
+                    self.log.info(''.join(("ELM returned STOPPED")))
                     raise StoppedError("Dongle returned 'STOPPED'.")
                 if buffer == "UNABLE TO CONNECT":
                     self.log.warning(''.join(("ELM returned UNABLE TO CONNECT")))

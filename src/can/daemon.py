@@ -36,19 +36,18 @@ class ParserDaemon(threading.Thread):
 	self.log = logging.getLogger('digilogger')
 
     def run(self):
-	self.log.debug('Parser process starting...')            
+	self.log.debug('ParserDaemon started.')            
  
         # Begin reading data
         parser_process()
 
-	self.log.debug('Parser process finished.')            
+	self.log.debug('ParserDaemon exited.')            
 
     # Return a piece of data given a PID code
     def get_data(self, dat):
         return canbus.CANdata.get(dat)
 
 def parser_process():
-
         # 100 readthroughs of data file as a max timeout
         for i in range(0, 100):
             with open(csv_file, 'rb') as csvf:  # Open the file
@@ -103,9 +102,9 @@ class CANDaemon(threading.Thread):
 
     def run(self):
         # Begin reading data
-	self.log.debug("CAN Daemon started...")
+	self.log.debug("CANDaemon started")
         can_process()
-	self.log.debug("CAN Daemon finished.")
+	self.log.debug("CANDaemon exited.")
 
 def can_process():
 	while 1:
@@ -123,12 +122,16 @@ def can_process():
 # to the CSV file as it's gathered - rather it's all stored in RAM until the data gathering
 # time period has elapsed.
 class LoggerDaemon(threading.Thread):
+    log = None
     def __init__(self):
         threading.Thread.__init__(self)
-	#self.setDaemon(True)
+	self.setDaemon(True)
+	self.log = logging.getLogger('digilogger')		
 
     def run(self):
+	self.log.debug("LoggerDaemon started.")
 	canlogging_process()
+	self.log.debug("LoggerDaemon exited.")
 
 # Grab data and store in CSV
 def canlogging_process():

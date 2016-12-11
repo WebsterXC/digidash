@@ -20,15 +20,18 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from functools import partial
-import time
+import time, logging
 from kivy.uix import floatlayout
 from operator import pos
 from can import canbus, daemon
 
 
 class GaugeDigital(Widget):
+	log = None
 	def __init__(self, **kwargs):
 		super(GaugeDigital, self).__init__(**kwargs)
+
+		self.log = logging.getLogger('digilogger')
 
 		#REF TO MAIN CLASS
 		self.Parent = None
@@ -326,6 +329,8 @@ class GaugeDigital(Widget):
 			Gauges are stored in the scatter in the main class in both the active gauge list
         	and the appLayout visually. Remove from both to delete current gauge
 		"""
+
+		self.log.debug(''.join((self.MTitle.text, " gauge deleted.")) )	
 		self.Parent.appLayout.remove_widget(self.gmenu)
         	self.Parent.appLayout.remove_widget(self.Scat)
 		self.Parent.ActiveGauges.remove(self.Scat)
@@ -333,8 +338,8 @@ class GaugeDigital(Widget):
 
 	"""
 	 ____________________________________________________________
-	|                                                            						|
-	|                    THEME FUNCTIONS                        			|
+	|                                                            |
+	|                    THEME FUNCTIONS                         |
 	|                                                            |
 	|    THEME DEFINES BACKGROUND, DIAL, FONT COLOR, AND RIM     |
 	|                                                            |
@@ -347,6 +352,7 @@ class GaugeDigital(Widget):
 		self.MTitle.color = (0, 0, 0, 1)
 		self.MUnits.color = (0, 0, 0, 1)
 		self.VALUE.color = (0, 0, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 1.")) )
 
 	def style_2(self, *largs):
 		""" Theme style 2 """
@@ -354,6 +360,7 @@ class GaugeDigital(Widget):
 		self.MTitle.color = (0, 1, 0, 1)
 		self.MUnits.color = (0, 1, 0, 1)
 		self.VALUE.color = (0, 1, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 2.")) )
 
 	def style_3(self, *largs):
 		""" Theme style 3 """
@@ -361,6 +368,7 @@ class GaugeDigital(Widget):
 		self.MTitle.color = (1, 1, 1, 1)
 		self.MUnits.color = (1, 1, 1, 1)
 		self.VALUE.color = (1, 1, 1, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 3.")) )
 
 	def style_4(self, *largs):
 		""" Theme style 4 """
@@ -368,6 +376,7 @@ class GaugeDigital(Widget):
         	self.MTitle.color = (1, 0, 0, 1)
         	self.MUnits.color = (1, 0, 0, 1)
         	self.VALUE.color = (1, 0, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 4.")) )
 
 	def style_5(self, *largs):
 		""" Theme style 5 """
@@ -375,6 +384,7 @@ class GaugeDigital(Widget):
         	self.MTitle.color = (1, 0.5, 0, 1)
         	self.MUnits.color = (1, 0.5, 0, 1)
         	self.VALUE.color = (1, 0.5, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 5.")) )
 
 	def style_6(self, *largs):
 		""" Theme style 6 """
@@ -382,6 +392,7 @@ class GaugeDigital(Widget):
         	self.MTitle.color = (0.4, 0, 1, 1)
         	self.MUnits.color = (0.4, 0, 1, 1)
         	self.VALUE.color = (0.4, 0, 1, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 6.")) )
 
 	def style_7(self, *largs):
 		""" Theme style 7 """
@@ -389,6 +400,7 @@ class GaugeDigital(Widget):
         	self.MTitle.color = (1, 0.8, 0, 1)
         	self.MUnits.color = (1, 0.8, 0, 1)
 		self.VALUE.color = (1, 0.8, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 7.")) )
 
 
 	"""

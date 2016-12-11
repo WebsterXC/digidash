@@ -19,8 +19,7 @@ import logging
 import threading
 import pids
 
-# List contains PID codes that are automatically grabbed by the CANDaemon at boot.
-PIDcodes = [pids.ENG_RPM, pids.SPEED, pids.INTAKE_PRESS, pids.INTAKE_TEMP, pids.INTAKE_MAF, pids.THROTTLE_REQ]
+PIDcodes = [] 		# List contains PID codes that are automatically grabbed by the CANDaemon at boot.
 CANdata = { }		# Dictionary holding the most recent { PID, value } pinged from the vehicle.
 BlueObject = None	# Bluetooth object 
 
@@ -40,15 +39,13 @@ class canbus(object):
 	
 	try:
 		#BlueObject.connect()
-		print("Fake Connection!")
+		canbus.log.info("DigiDash is now operating in OFFLINE mode.")
 	except ConnectFailureError:
-		canbus.log.error("Unable establish a CAN connection.")	
+		canbus.log.warning("Unable establish a CAN connection.")	
 		return
 	except StateError:
 		canbus.log.info("Tried to reconnect with an open connection?")
 		return	
-
-	canbus.log.debug('CAN connection established.')
 
 	# Initial value for all auto-update PIDs
 	for code in PIDcodes:
@@ -72,13 +69,13 @@ def send_pid(pid):
 		global BlueObject
 		result = BlueObject.send_recv(command)
 	except StateError:
-		canbus.log.error(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
+		canbus.log.info(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
 		return ""
 	except InvalidCmdError:
 		canbus.log.info(''.join(("Sent invalid PID ", pid)) ) 
 		return ""
 	except StoppedError:
-		canbus.log.error(''.join(("Connection STOPPED after sending: ", pid)) )
+		canbus.log.info(''.join(("Connection STOPPED after sending: ", pid)) )
 		return ""
 	except NoDataError:
 		canbus.log.info(''.join(("Sending PID ", pid, " return NO DATA.")) )
@@ -103,17 +100,17 @@ def send_command(mode, pid):
 		command = ((mode).split('x'))[1] + ((pid).split('x'))[1]
 		
 
-	# Send / Receive the result
+	# Send / receive the result
 	try:
 		result = BlueObject.send_recv(command)
 	except StateError:
-		canbus.log.error(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
+		canbus.log.info(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
 		return
 	except InvalidCmdError:
 		canbus.log.info(''.join(("Sent invalid PID ", pid)) ) 
 		return
 	except StoppedError:
-		canbus.log.error(''.join(("Connection STOPPED after sending: ", pid)) )
+		canbus.log.info(''.join(("Connection STOPPED after sending: ", pid)) )
 		return
 	except NoDataError:
 		canbus.log.info(''.join(("Sending PID ", pid, " return NO DATA.")) )
@@ -121,8 +118,6 @@ def send_command(mode, pid):
 	
 	canbus.log.debug(''.join(("Sent command: ", command, " in mode ", mode)) )
 	canbus.log.debug(''.join(("Returned: ", result)) )
-
-	time.sleep(0.1)
 
 	return result
 
@@ -140,3 +135,4 @@ def subscribe(pid):
 
 		global PIDcodes
 		PIDcodes.append(pid)
+		canbus.log.debug(''.join(("Added [", pid, "] to auto-update PID list.")) )
