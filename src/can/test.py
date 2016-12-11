@@ -1,23 +1,13 @@
-from daemon import CANDaemon
-import canbus, pids
-import time
+import dtc
 
-c = canbus.canbus()
+def main():
+	# One DTC code (P2468) is set.
+	ret = dtc.dtc_scan("SEARCHING... 43 00 24 68")
+	print(ret)
 
-# Uncomment for automatically grabbed pids
-#d = CANDaemon()
-#d.start()
+	# No DTC codes are set.
+	ret = dtc.dtc_scan("SEARCHING... 43 00")
+	print(ret)
 
-for i in range(0, 100):
-	# Grab automatically updated PID
-	rpm = canbus.CANdata[pids.ENG_RPM]
-
-	# Manually request PID
-	demand = canbus.send_pid(pids.ENG_TORQUE_DMD)
-	actual = canbus.send_pid(pids.ENG_TORQUE_ACT)
-	reference = canbus.send_pid(pids.ENG_TORQUE_REF)
-
-	print( rpm )
-	print( [demand, actual, reference] )
-
-	time.sleep(0.1)
+if __name__ == "__main__":
+	main()

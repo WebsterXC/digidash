@@ -1,3 +1,14 @@
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]:
+
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.image import Image
@@ -9,15 +20,18 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from functools import partial
-import time
+import time, logging
 from kivy.uix import floatlayout
 from operator import pos
 from can import canbus, daemon
 
 
 class GaugeDigital(Widget):
+	log = None
 	def __init__(self, **kwargs):
 		super(GaugeDigital, self).__init__(**kwargs)
+
+		self.log = logging.getLogger('digilogger')
 
 		#REF TO MAIN CLASS
 		self.Parent = None
@@ -38,7 +52,7 @@ class GaugeDigital(Widget):
 		self.VALUE = Label(text='0', font_size='120sp', pos=(150, 160), color=(0, 0, 0, 1))
 
 		#SETTINGS MENU BUTTON
-		self.settings = Button(text='Modify', pos=(155, 40), size=(80, 30), color=(51, 102, 255, 1))
+		self.settings = Button(text='EDIT', pos=(120, 13), size=(160, 50), color=(51, 102, 255, 1))
 		self.settings.bind(on_release=self.menu)
 		self.settings_open = False
 
@@ -78,23 +92,26 @@ class GaugeDigital(Widget):
 			Creates a menu to modify gauge style
 		"""
 		if(self.settings_open == False):
+			#Closes all other open menus
+			self.Parent.close_all_gauge_menus()
+			
 			menu = BoxLayout(
 						size_hint=(0.25, (0.05*7)),
 						orientation='vertical')
 
-			PST = Button(text='Preset Themes')
+			PST = Button(text='PRESET THEMES')
 			PST.bind(on_release=self.preset_themes_menu)
 
-			GBG = Button(text='Gauge Background')
+			GBG = Button(text='GAUGE BACKGROUND')
 			GBG.bind(on_release=self.gauge_background_menu)
 
-			GTC = Button(text='Text Color')
+			GTC = Button(text='TEXT COLOR')
 			GTC.bind(on_release=self.gauge_text_menu)
 
-			delete = Button(text='[ --- DELETE --- ]')
+			delete = Button(text='[ ~ DELETE ~ ]', color = (1, 0, 0, 1))
 			delete.bind(on_release=self.deleteGauge)
 
-			close = Button(text='[ CLOSE ]')
+			close = Button(text='[  CLOSE  ]', color = (1, 0.5, 0, 1))
 			close.bind(on_release=self.close_menus)
 
 			menu.add_widget(PST)
@@ -107,7 +124,8 @@ class GaugeDigital(Widget):
 			self.gmenu=menu
 			self.Parent.appLayout.add_widget(menu)
 			self.settings_open=True
-			self.settings.text='Close'
+			self.settings.text = '[  CLOSE  ]'
+			self.settings.color = (1, 0.5, 0, 1)
 		else:
 			self.close_menus()
 
@@ -136,9 +154,9 @@ class GaugeDigital(Widget):
 		B7 = Button(text='Style 7')
 		B7.bind(on_release=self.style_7)
 
-		back = Button(text='[ BACK ]')
+		back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
 		back.bind(on_release=self.back_to_menu)
-		close = Button(text='[ CLOSE ]')
+		close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
 		close.bind(on_release=self.close_menus)
 
 		theme_menu.add_widget(back)
@@ -180,9 +198,9 @@ class GaugeDigital(Widget):
 		BG7 = Button(text='RED')
 		BG7.bind(on_release=self.bg_7)
 
-		back = Button(text='[ BACK ]')
+		back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
 		back.bind(on_release=self.back_to_menu)
-		close = Button(text='[ CLOSE ]')
+		close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
 		close.bind(on_release=self.close_menus)
 
 
@@ -228,9 +246,9 @@ class GaugeDigital(Widget):
 		GT8 = Button(text='PURPLE')
 		GT8.bind(on_release=self.purple_font)
 
-		back = Button(text='[ BACK ]')
+		back = Button(text='[ BACK ]', color=(0, 1, 0, 1))
 		back.bind(on_release=self.back_to_menu)
-		close = Button(text='[ CLOSE ]')
+		close = Button(text='[ CLOSE ]', color=(1, 0.5, 0, 1))
 		close.bind(on_release=self.close_menus)
 
 		text_menu.add_widget(back)
@@ -296,7 +314,9 @@ class GaugeDigital(Widget):
        		 """
         	self.Parent.appLayout.remove_widget(self.gmenu)
         	self.settings_open = False
-        	self.settings.text = 'Modify'
+        	self.settings.text = 'EDIT'
+        	self.settings.color = (1, 1, 1, 1)
+        	self.Parent.save_settings()
 
 	def setBackground(self, imagesrc, *largs):
 		"""
@@ -309,6 +329,8 @@ class GaugeDigital(Widget):
 			Gauges are stored in the scatter in the main class in both the active gauge list
         	and the appLayout visually. Remove from both to delete current gauge
 		"""
+
+		self.log.debug(''.join((self.MTitle.text, " gauge deleted.")) )	
 		self.Parent.appLayout.remove_widget(self.gmenu)
         	self.Parent.appLayout.remove_widget(self.Scat)
 		self.Parent.ActiveGauges.remove(self.Scat)
@@ -316,8 +338,8 @@ class GaugeDigital(Widget):
 
 	"""
 	 ____________________________________________________________
-	|                                                            						|
-	|                    THEME FUNCTIONS                        			|
+	|                                                            |
+	|                    THEME FUNCTIONS                         |
 	|                                                            |
 	|    THEME DEFINES BACKGROUND, DIAL, FONT COLOR, AND RIM     |
 	|                                                            |
@@ -330,13 +352,15 @@ class GaugeDigital(Widget):
 		self.MTitle.color = (0, 0, 0, 1)
 		self.MUnits.color = (0, 0, 0, 1)
 		self.VALUE.color = (0, 0, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 1.")) )
 
 	def style_2(self, *largs):
 		""" Theme style 2 """
 		self.setBackground('Images/Gauges/GaugeSquare2.png')
-		self.MTitle.color = (1, 1, 1, 1)
-		self.MUnits.color = (1, 1, 1, 1)
-		self.VALUE.color = (1, 1, 1, 1)
+		self.MTitle.color = (0, 1, 0, 1)
+		self.MUnits.color = (0, 1, 0, 1)
+		self.VALUE.color = (0, 1, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 2.")) )
 
 	def style_3(self, *largs):
 		""" Theme style 3 """
@@ -344,34 +368,39 @@ class GaugeDigital(Widget):
 		self.MTitle.color = (1, 1, 1, 1)
 		self.MUnits.color = (1, 1, 1, 1)
 		self.VALUE.color = (1, 1, 1, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 3.")) )
 
 	def style_4(self, *largs):
 		""" Theme style 4 """
 		self.setBackground('Images/Gauges/GaugeSquare4.png')
-        	self.MTitle.color = (0, 0, 0, 1)
-        	self.MUnits.color = (0, 0, 0, 1)
-        	self.VALUE.color = (0, 0, 0, 1)
+        	self.MTitle.color = (1, 0, 0, 1)
+        	self.MUnits.color = (1, 0, 0, 1)
+        	self.VALUE.color = (1, 0, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 4.")) )
 
 	def style_5(self, *largs):
 		""" Theme style 5 """
         	self.setBackground('Images/Gauges/GaugeSquare5.png')
-        	self.MTitle.color = (1, 1, 1, 1)
-        	self.MUnits.color = (1, 1, 1, 1)
-        	self.VALUE.color = (1, 1, 1, 1)
+        	self.MTitle.color = (1, 0.5, 0, 1)
+        	self.MUnits.color = (1, 0.5, 0, 1)
+        	self.VALUE.color = (1, 0.5, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 5.")) )
 
 	def style_6(self, *largs):
 		""" Theme style 6 """
         	self.setBackground('Images/Gauges/GaugeSquare6.png')
-        	self.MTitle.color = (0, 0, 0, 1)
-        	self.MUnits.color = (0, 0, 0, 1)
-        	self.VALUE.color = (0, 0, 0, 1)
+        	self.MTitle.color = (0.4, 0, 1, 1)
+        	self.MUnits.color = (0.4, 0, 1, 1)
+        	self.VALUE.color = (0.4, 0, 1, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 6.")) )
 
 	def style_7(self, *largs):
 		""" Theme style 7 """
         	self.setBackground('Images/Gauges/GaugeSquare7.png')
-        	self.MTitle.color = (1, 1, 1, 1)
-        	self.MUnits.color = (1, 1, 1, 1)
-		self.VALUE.color = (1, 1, 1, 1)
+        	self.MTitle.color = (1, 0.8, 0, 1)
+        	self.MUnits.color = (1, 0.8, 0, 1)
+		self.VALUE.color = (1, 0.8, 0, 1)
+		self.log.debug(''.join((self.MTitle.text, " changed to style 7.")) )
 
 
 	"""

@@ -1,12 +1,21 @@
-# TODO: Find an accurate value for torque in Nm. (TORQUE_REF * TORQUE_ACT)?
-#	Establish good thresholds for the waitfor_ functions
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
 
+# [Summary]: This file defines methods that perform the actual data gathering required from different runtime
+# vehcile tests. These functions should coordinate data gathering only, and should not perform computationally
+# complex calculations or I/O bound tasks.
+
+# NOTE: Due to time constraints, these functions are untested. They are offered as a reference for future development.
 
 import logging
 import time
 import canbus, pids
-
-## Blocking functions that wait for specific engine events. ##
 
 # Wait for engine idle (no throttle and low RPM)
 def waitfor_idle(name):
