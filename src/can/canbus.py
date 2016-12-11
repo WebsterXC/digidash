@@ -39,7 +39,8 @@ class canbus(object):
 	BlueObject = blue.Blue()
 	
 	try:
-		BlueObject.connect()
+		#BlueObject.connect()
+		print("Fake Connection!")
 	except ConnectFailureError:
 		canbus.log.error("Unable establish a CAN connection.")	
 		return
@@ -72,16 +73,16 @@ def send_pid(pid):
 		result = BlueObject.send_recv(command)
 	except StateError:
 		canbus.log.error(''.join(("Tried to send ", pid, " with no Bluetooth connection.")) )
-		return
+		return ""
 	except InvalidCmdError:
 		canbus.log.info(''.join(("Sent invalid PID ", pid)) ) 
-		return
+		return ""
 	except StoppedError:
 		canbus.log.error(''.join(("Connection STOPPED after sending: ", pid)) )
-		return
+		return ""
 	except NoDataError:
 		canbus.log.info(''.join(("Sending PID ", pid, " return NO DATA.")) )
-		return
+		return ""
 
 	canbus.log.debug(''.join(("Sent PID: ", pid)) )
 	canbus.log.debug(''.join(("Returned: ", result)) )
@@ -92,11 +93,11 @@ def send_pid(pid):
 # specific commands (like turning echoes off), or DTC commands (mode 03 gathering).
 # Modes are defined in can/pids.py.
 def send_command(mode, pid):
-	
+
 	# ELM commands and DTC commands are formatted differently
-	if mode == MODE_ELM:
+	if mode == pids.MODE_ELM:
 		command = pid
-	elif mode == MODE_DTC:
+	elif mode == pids.MODE_DTC:
 		command = mode		# cmd arguement doesn't matter if mode is 0x03
 	else:
 		command = ((mode).split('x'))[1] + ((pid).split('x'))[1]
@@ -120,6 +121,8 @@ def send_command(mode, pid):
 	
 	canbus.log.debug(''.join(("Sent command: ", command, " in mode ", mode)) )
 	canbus.log.debug(''.join(("Returned: ", result)) )
+
+	time.sleep(0.1)
 
 	return result
 
