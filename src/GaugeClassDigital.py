@@ -78,6 +78,9 @@ class GaugeDigital(Widget):
 			Creates a menu to modify gauge style
 		"""
 		if(self.settings_open == False):
+			#Closes all other open menus
+			self.Parent.close_all_gauge_menus()
+			
 			menu = BoxLayout(
 						size_hint=(0.25, (0.05*7)),
 						orientation='vertical')
@@ -337,9 +340,9 @@ class GaugeDigital(Widget):
 	def style_2(self, *largs):
 		""" Theme style 2 """
 		self.setBackground('Images/Gauges/GaugeSquare2.png')
-		self.MTitle.color = (1, 1, 1, 1)
-		self.MUnits.color = (1, 1, 1, 1)
-		self.VALUE.color = (1, 1, 1, 1)
+		self.MTitle.color = (0, 1, 0, 1)
+		self.MUnits.color = (0, 1, 0, 1)
+		self.VALUE.color = (0, 1, 0, 1)
 
 	def style_3(self, *largs):
 		""" Theme style 3 """
@@ -351,30 +354,30 @@ class GaugeDigital(Widget):
 	def style_4(self, *largs):
 		""" Theme style 4 """
 		self.setBackground('Images/Gauges/GaugeSquare4.png')
-        	self.MTitle.color = (0, 0, 0, 1)
-        	self.MUnits.color = (0, 0, 0, 1)
-        	self.VALUE.color = (0, 0, 0, 1)
+        	self.MTitle.color = (1, 0, 0, 1)
+        	self.MUnits.color = (1, 0, 0, 1)
+        	self.VALUE.color = (1, 0, 0, 1)
 
 	def style_5(self, *largs):
 		""" Theme style 5 """
         	self.setBackground('Images/Gauges/GaugeSquare5.png')
-        	self.MTitle.color = (1, 1, 1, 1)
-        	self.MUnits.color = (1, 1, 1, 1)
-        	self.VALUE.color = (1, 1, 1, 1)
+        	self.MTitle.color = (1, 0.5, 0, 1)
+        	self.MUnits.color = (1, 0.5, 0, 1)
+        	self.VALUE.color = (1, 0.5, 0, 1)
 
 	def style_6(self, *largs):
 		""" Theme style 6 """
         	self.setBackground('Images/Gauges/GaugeSquare6.png')
-        	self.MTitle.color = (0, 0, 0, 1)
-        	self.MUnits.color = (0, 0, 0, 1)
-        	self.VALUE.color = (0, 0, 0, 1)
+        	self.MTitle.color = (0.4, 0, 1, 1)
+        	self.MUnits.color = (0.4, 0, 1, 1)
+        	self.VALUE.color = (0.4, 0, 1, 1)
 
 	def style_7(self, *largs):
 		""" Theme style 7 """
         	self.setBackground('Images/Gauges/GaugeSquare7.png')
-        	self.MTitle.color = (1, 1, 1, 1)
-        	self.MUnits.color = (1, 1, 1, 1)
-		self.VALUE.color = (1, 1, 1, 1)
+        	self.MTitle.color = (1, 0.8, 0, 1)
+        	self.MUnits.color = (1, 0.8, 0, 1)
+		self.VALUE.color = (1, 0.8, 0, 1)
 
 
 	"""
