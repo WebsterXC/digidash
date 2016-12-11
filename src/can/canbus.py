@@ -38,8 +38,8 @@ class canbus(object):
 	BlueObject = blue.Blue()
 	
 	try:
-		#BlueObject.connect()
-		canbus.log.info("DigiDash is now operating in OFFLINE mode.")
+		BlueObject.connect()
+		#canbus.log.info("DigiDash is now operating in OFFLINE mode.")
 	except ConnectFailureError:
 		canbus.log.warning("Unable establish a CAN connection.")	
 		return
