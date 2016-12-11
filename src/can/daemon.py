@@ -135,7 +135,7 @@ class LoggerDaemon(threading.Thread):
 
     def run(self):
 	self.log.debug("LoggerDaemon started.")
-	canlogging_process(64, 0.01)
+	canlogging_process(64, 0.1)
 	self.log.debug("LoggerDaemon exited.")
 
 # Grab data and store in CSV

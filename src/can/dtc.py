@@ -24,23 +24,32 @@ fourmask = 15 	# Fourth DTC character
 def dtc_scan():
 	log = logging.getLogger('digilogger')
 
+	# Pinging for all active DTC codes takes much longer than request a realtime
+	# PID, and to compensate the ELM327 fills the return buffer with "SEARCHING..."
+	# while it compiles the return list. Therefore, we call the send_command method
+	# twice - the first time initiates the DTC scan and results in "SEARCHING...".
+	# The second send_command function will returned the combined buffer (SEARCHING...
+	# and the DTC scan response.
+	dtcstr = canbus.send_command(pids.MODE_DTC, "0x00")	
+	time.sleep(0.5)
 	dtcstr = canbus.send_command(pids.MODE_DTC, "0x00")	
 
-	# Get bytes in a list
-	dtc_list = dtcstr.split()
-	numfaults = len(dtc_list) / 2	
+	dtc_list = dtcstr.split()	# List should always begin with: ["SEARCHING...", "43", "00"]
+	if len(dtc_list) < 4:
+		log.info("DTC scan returned no active fault codes.")
+		return []
 
-	print("Raw DTC return:")
-	print(dtc_list)
-	log.info(''.join(("DTC scan returned ", numfaults, " fault codes.")) )
+	dtc_list.pop(0)			# Remove "SEARCHING..."
+	numfaults = len(dtc_list) / 2		
+	log.info(''.join(("DTC scan returned ", str(numfaults), " fault codes.")) )
 	log.debug(''.join(("DTC request: ", dtcstr)) )
 
 	dtc_codes = []
-	iterator = 0
+	iterator = 2
 	while iterator < len(dtc_list)-1:
 		# Each DTC code takes 2 bytes (2 list items) to represent
-		firstbyte = dtc_list[iterator]
-		secondbyte = dtc_list[iterator+1]
+		firstbyte = int(dtc_list[iterator], 16)
+		secondbyte = int(dtc_list[iterator+1], 16)
 
 		# Get all five DTC characters
 		first = (firstbyte & sysmask) >> 6
@@ -60,22 +69,20 @@ def dtc_scan():
 			subsystem = "U"
 		
 		# Build the DTC trouble code
-		subsystem += second
-		subsystem += third
-		subsystem += fourth
-		subsystem += fifth
+		subsystem += str(second)
+		subsystem += str(third)
+		subsystem += str(fourth)
+		subsystem += str(fifth)
 		dtc_codes.append(subsystem)
 		
 		# Increment by "2 bytes"
 		iterator += 2	
 	
-	print("Generated codes: ")
-	print(dtc_codes)
-
 	return dtc_codes
 
-# Clear all DTCs, including the check-engine light.
+# Clear all DTCs, including the check-engine light. The ELM327 dongle will
+# return NO DATA regardless of if the command was successful or not.
 def dtc_clear():
 	canbus.send_command(pids.MODE_DTC_CLR, "0x00")
-	time.sleep(0.5)		# Buffer to ensure all clearing has been completed on vehicle-side.
+	time.sleep(1)		# Buffer to ensure all clearing has been completed on vehicle-side.
 	return

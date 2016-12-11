@@ -94,7 +94,7 @@ def send_command(mode, pid):
 	# ELM commands and DTC commands are formatted differently
 	if mode == pids.MODE_ELM:
 		command = pid
-	elif mode == pids.MODE_DTC:
+	elif mode == pids.MODE_DTC or mode == pids.MODE_DTC_CLR:
 		command = mode		# cmd arguement doesn't matter if mode is 0x03
 	else:
 		command = ((mode).split('x'))[1] + ((pid).split('x'))[1]
