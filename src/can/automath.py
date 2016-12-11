@@ -74,7 +74,7 @@ def convert(pid, raw):
 		print(pid)
 
 ##### General #####
-def speed_conv(data): #speed in mhp
+def speed_conv(data): #speed in mph -(miles per hour)
     return data
 
 def rtes_conv(byteA, byteB):
