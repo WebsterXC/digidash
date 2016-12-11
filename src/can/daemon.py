@@ -17,11 +17,9 @@
 import time
 import threading
 import csv
-import canbus, pids
-import automath
 import logging
+import canbus, pids, automath
 
-csv_file = 'can/data/data.txt'                                  # Sample data file to open
 inparams = ["0x1F", "0x0C", "0x0D", "0x0F", "0x0B", "0x10", "0x11", "0x5D"] # Columns in sample data CSV
 
 # Parser daemon reads recorded data from a CSV file and places it in the CANdata dictionary. 
@@ -48,6 +46,8 @@ class ParserDaemon(threading.Thread):
         return canbus.CANdata.get(dat)
 
 def parser_process():
+	csv_file = 'can/data/data.txt'                                  # Sample data file to open
+
         # 100 readthroughs of data file as a max timeout
         for i in range(0, 100):
             with open(csv_file, 'rb') as csvf:  # Open the file
@@ -117,12 +117,17 @@ def can_process():
 
 			canbus.CANdata[pid] = automath.convert(pid, answer)
 
+
 # This daemon gathers engine data for a specified period of time and then writes it to a CSV file.
+# It references the PIDs added to the canbus.PIDcodes list and creates lines of data to write. The
+# daemon adds the relative system timestamp to each line of the CSV.
+
 # WARNING: This daemon can easily force an out-of-memory condition since the data is not written
 # to the CSV file as it's gathered - rather it's all stored in RAM until the data gathering
 # time period has elapsed.
 class LoggerDaemon(threading.Thread):
     log = None
+
     def __init__(self):
         threading.Thread.__init__(self)
 	self.setDaemon(True)
@@ -130,28 +135,28 @@ class LoggerDaemon(threading.Thread):
 
     def run(self):
 	self.log.debug("LoggerDaemon started.")
-	canlogging_process()
+	canlogging_process(64, 0.01)
 	self.log.debug("LoggerDaemon exited.")
 
 # Grab data and store in CSV
-def canlogging_process():
+def canlogging_process(writedelay, readdelay):
 	log_data_to_file = "can/data/runtime.txt"
-	#ms_to_record = 60000 * 3			# 3 Minutes
-	ms_to_record = 30
-	records = []
 
-	while (ms_to_record - time.clock()) > 0:
-		data = []
-		#print(ms_to_record - time.clock())
-		data.append(time.clock())
-		# Grab a "line" of data
-		for param in canbus.PIDcodes:
-			data.append(canbus.CANdata[param])
-		
-		records.append(data)
-		
-	with open(log_data_to_file, 'wb') as csvfile:
-       		csv_writer = csv.writer(csvfile, delimiter=",", quotechar="|")
+	while 1:
+		records = []
+		# Get writedelay number of lines
+		for i in range(0, writedelay):
+			data = []
+			# Get an entire line of data
+			for param in canbus.PIDcodes:
+				data.append(canbus.CANdata[param])
+			
+			records.append(data)
+			time.sleep(readdelay)
 	
-		for line in records:
-			csv_writer.writerow(line)
+		# Write lines in buffer to the actual CSV file.
+		with open(log_data_to_file, 'wb') as csvfile:
+       			csv_writer = csv.writer(csvfile, delimiter=",", quotechar="|")
+	
+			for line in records:
+				csv_writer.writerow(line)

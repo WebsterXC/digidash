@@ -1,6 +1,7 @@
 import string
 import time
 import bluetooth #if you get an import error, then "sudo apt-get install python-bluez"
+import dtc
 
 def send_recv(cmd): #send cmd parameter and return dongle response (ignores echoes)
     sock.send(cmd + "\r\n")
@@ -41,6 +42,7 @@ print(res)
 
 #-------------------
 #RPM LOOP
+'''
 while 1:
     res = send_recv("010C")
     '''
@@ -60,5 +62,9 @@ while 1:
     print("RPM is:")
     print(rpm)
     #time.sleep(1)
+'''
+
+res = send_recv("0300")
+print(res)
 
 sock.close()
