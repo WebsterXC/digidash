@@ -37,6 +37,7 @@ your Raspberry Pi in no time!
 * Ed Garwol
 * Mark Grassi
 * Joe Hanson
+* Khan
 
 ### Contributing ###
 Dev team communication is done through a private Slack Channel. We welcome contributors, but 
