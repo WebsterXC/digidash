@@ -110,6 +110,9 @@ class Gauge(Widget):
 
     def menu(self, *largs):
         if self.settings_open == False:
+            #Closes all other open menus
+            self.Parent.close_all_gauge_menus()
+            
             menu = BoxLayout(
                     size_hint=(0.25, (0.05*7)),
                     orientation='vertical')
@@ -472,6 +475,7 @@ class Gauge(Widget):
         """ Theme style 1 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead1.png')
+        self.dial.source = 'Images/Gauges/dial_black.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
             l.color = (0, 0, 0, 1)
@@ -483,17 +487,19 @@ class Gauge(Widget):
         """ Theme style 2 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead2.png')
+        self.dial.source = 'Images/Gauges/dial_green.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color = (1, 1, 1, 1)
+            l.color = (0, 1, 0, 1)
         #String Identifiers
-        self.MTitle.color = (1, 1, 1, 1)
-        self.MUnits.color = (1, 1, 1, 1)
+        self.MTitle.color = (0, 1, 0, 1)
+        self.MUnits.color = (0, 1, 0, 1)
 
     def style_3(self, *largs):
         """ Theme style 3 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead3.png')
+        self.dial.source = 'Images/Gauges/dial_white.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
             l.color = (1, 1, 1, 1)
@@ -505,45 +511,49 @@ class Gauge(Widget):
         """ Theme style 4 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead4.png')
+        self.dial.source = 'Images/Gauges/dial_red.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color = (0, 0, 0, 1)
+            l.color = (1, 0, 0, 1)
         #String Identifiers
-        self.MTitle.color = (0, 0, 0, 1)
-        self.MUnits.color = (0, 0, 0, 1)
+        self.MTitle.color = (1, 0, 0, 1)
+        self.MUnits.color = (1, 0, 0, 1)
 
     def style_5(self, *largs):
         """ Theme style 5 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead5.png')
+        self.dial.source = 'Images/Gauges/dial_orange.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color = (1, 1, 1, 1)
+            l.color = (1, 0.5, 0, 1)
         #String Identifiers
-        self.MTitle.color = (1, 1, 1, 1)
-        self.MUnits.color = (1, 1, 1, 1)
+        self.MTitle.color = (1, 0.5, 0, 1)
+        self.MUnits.color = (1, 0.5, 0, 1)
 
     def style_6(self, *largs):
         """ Theme style 6 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead6.png')
+        self.dial.source = 'Images/Gauges/dial_purple.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color = (0, 0, 0, 1)
+            l.color = (0.4, 0, 1, 1)
         #String Identifiers
-        self.MTitle.color = (0, 0, 0, 1)
-        self.MUnits.color = (0, 0, 0, 1)
+        self.MTitle.color = (0.4, 0, 1, 1)
+        self.MUnits.color = (0.4, 0, 1, 1)
 
     def style_7(self, *largs):
         """ Theme style 7 """
         #Theme Background Image
         self.setBackground('Images/Gauges/GaugeHead7.png')
+        self.dial.source = 'Images/Gauges/dial_yellow.png'
         #Unit Measure Colors
         for l in self.UnitScaleLabels:
-            l.color = (1, 1, 1, 1)
+            l.color = (1, 0.8, 0, 1)
         #String Identifiers
-        self.MTitle.color = (1, 1, 1, 1)
-        self.MUnits.color = (1, 1, 1, 1)
+        self.MTitle.color = (1, 0.8, 0, 1)
+        self.MUnits.color = (1, 0.8, 0, 1)
 
     """
      ____________________________________________________________

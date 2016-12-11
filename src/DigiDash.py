@@ -150,6 +150,15 @@ class DigiDashApp(App):
         Header.__resize__(self.head)
         Footer.__resize__(self.foot)
 
+
+    def close_all_gauge_menus(instance):
+    	#Loops through all active gauges and closes menus that are open
+    	for g in instance.ActiveGauges:
+    		ga = g.children[0]
+    		if ga.settings_open== True:
+    			ga.close_menus()
+
+
     def save_settings(instance):
         confile = open("Settings.ini",'w') #might want to be one in home directory so ini doesnt write over in commits
         
