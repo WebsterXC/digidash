@@ -1,15 +1,13 @@
-# Readme File for Software #
+# DigiDash for Developers #
+---------------------------
+It seems you've dug further than the top level directory with the deployment binaries. We like your style!
+The /src directory and it's subdirectories contain technical README documentation that will get
+you contributing to the DigiDash project in no time!
 
-### Software Notes ###
- * /can - Contains files for grabbing data from the CAN bus. It includes files that enable
-	bluetooth connectivity, raw data conversions, and bus scheduling.
+## Manual Installation Instructions ##
 
- * /gui - Contains files for GUI operation.
 
- * /images - Source images for the GUI and touchscreen functionality.
-
- * /modules - Folder containing support packages and import modules for DigiDash
-
- * /runtime - Core files for Digidash. This folder contains the program entry point, along
-	with files that establish static data structures, such as the DTC dictionay.
-
+### GUI ###
+Most of the GUI files reside in this directory. DigiDash is built using sets of widgets that operate independely
+of each other, allowing for the ability to create custom gauges based on input range, background styles, or even
+rotation style.

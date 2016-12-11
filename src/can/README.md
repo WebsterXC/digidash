@@ -1,32 +1,18 @@
-# CAN Communication #
----------------------
-Hardware:
-* ELM327 Bluetooth Receiver
-* Raspberry Pi 3 - Onboard bluetooth module
+# CAN Communication and Data Storage #
+--------------------------------------
+This directory handles all communication with the ELM327 Blueooth dongle. It provides a simple
+abstraction to quickly and easily connect and read data from a vehicle's CAN bus. The /can
+directory also includes files to convert and store engine parameters read from the vehicle.
 
+### Connecting via Bluetooth ###
+Connecting to the vehicle is done automatically by the canbus class on startup. DigiDash creates
+a socket with the ELM327 dongle and repeatedly tries to establish a connection. While socket
+programming offers a reliable connection one established, it's not uncommon for the Bluetooth
+driver to require a couple of tries to open the socket.
 
-### Bluetooth ###
------------------
-The Raspberry Pi 3's onboard bluetooth module was perfect wireless solution to connect to our vehicle. Traditional OBDII cables are large
-and often get in the way of a driver trying to shift or brake. A generic, ELM327 OBDII unit from Amazon.com with built in bluetooth 
-manages the messaging on the vehicle-side.
+### Interfacing with the ELM327 Dongle ###
 
-We had a lot of problems trying to get the ELM327 units and Raspberry Pi 3 to stay connected and communicate. After trying nearly every
-combination of possible solutions, we finally settled on socket programming to be the best and most reliable way to communicate.
+### Sending / Receiving PIDS ###
 
+### Converting Raw Data ###
 
-### CAN Data ###
-----------------
-Once the DigiDash unit boots it's GUI, the code checks for a valid bluetooth connection. If it finds one, it begins a background daemon that
-automatically gathers vehicle data parameters (based on a preset list of common PID codes). Parameter data is stored in a global dictionary
-that other files access my importing the canbus module and reading from the global dictionary. CAN data can also be gathered manually, and
-the background daemon is guaranteed to yield to an explicit parameter request.
-
-Other daemons may be started, depending on user configurations and current operating modes. These daemons utilize the Raspberry Pi's support
-of multithreaded programming and process data in the background. 
-
-
-### DTC Codes ###
------------------
-DigiDash not only supports the gathering and translation of Diagnostic Trouble Codes (DTC), it also offers background monitoring to alert
-of possible problems as soon as they're stored in the ECU.

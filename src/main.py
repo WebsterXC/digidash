@@ -28,6 +28,7 @@ from DigiDash import DigiDashApp
 # Initialise global logging
 logpath = 'can/data/digidash.log'
 log = None
+
 def logger_init():
 	logger = logging.getLogger('digilogger')
 	logger.setLevel(logging.DEBUG)	
@@ -71,33 +72,23 @@ def main():
 	# Initialise the global logger
 	logger_init()
 
-	#log.critical('Booting DigiDash...')
-
 	# Check dependencies using Bash script #
 
 	# Test to ensure a valid bluetooth connection is even possible. #
 	c = canbus.canbus()		# Might need to uncomment Blue.connect() in canbus.py
-		## If no, display warning and options.
 
-	# Vehicle available.
+	# Vehicle available. Start automated data gathering.
 	#d = daemon.CANDaemon()
 	#d.start()
 
 	d = daemon.ParserDaemon()
 	d.start()
-	#p = daemon.ParamDaemon()
-	#p.start()
 
-	#l = daemon.LoggerDaemon()
-	#l.start()
-
-	# Kivy Main Screen ("Infinite Loop for GUI")
-	
+	# Start main GUI runtime.	
 	DigiDashApp().run()
 
-	# If you got here, DigiDash exited from either an error or user-close.
-	# Run exit routines.
-	#exit_routine()
+	# User-close or fatal error. Run exit routines.
+	exit_routine()
 	
 if __name__ == "__main__":
 	main()
