@@ -3,7 +3,7 @@
 
 ## A plug-and-play digital dashboard and engine monitor. ##
 
-### About ### 
+### About
 DigiDash is an auxilliary dashboard made from a Raspberry Pi and 7" RGB touchscreen, compatible with 
 all OBDI-II compliant vehicles. Using a standard ELM327 OBD-II Bluetooth dongle found on sites like 
 Amazon.com, users can use a Raspberry Pi to quickly and easily read and record data from their vehicle. DigiDash provides an easy to use GUI that
@@ -37,6 +37,7 @@ your Raspberry Pi in no time!
 * Ed Garwol
 * Mark Grassi
 * Joe Hanson
+* Mohd Khan
 
 ### Contributing ###
 Dev team communication is done through a private Slack Channel. We welcome contributors, but 
