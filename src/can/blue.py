@@ -64,12 +64,12 @@ class Blue:
                 self.sock.close()
                 count += 1
                 if count == 5:
-		    self.log.error("Failed to open socket connection.")
+                    self.log.error("Failed to open socket connection.")
                     raise ConnectFailureError("Connect failed 5 times. I give up.")
                 print ("Could not connect: ", error, "; Retrying in 5 seconds...")
                 time.sleep(5)
 
-	self.log.info(''.join(("Socket opened with MAC address [", self.myMAC, "]")) )
+        self.log.info(''.join(("Socket opened with MAC address [", self.myMAC, "]")) )
         print("Socket successfully opened!")
 
     # Disconnect from the open socket, if one is connected.
@@ -78,7 +78,7 @@ class Blue:
             raise StateError("Can't disconnect. You aren't connected.")
         self.state = 0
         self.sock.close()
-	self.log.info(''.join(("Connection with [", myMAC, "] closed.")) )
+        self.log.info(''.join(("Connection with [", myMAC, "] closed.")) )
 
     # Send characters to the ELM327 dongle and grab <=64 response characters.
     def send_recv(cmd):
