@@ -69,13 +69,13 @@ def main():
 
 	# Vehicle available. Start automated data gathering.
 	
-	#d = daemon.CANDaemon()
-	#d.start()
-	d = daemon.ParserDaemon()
+	d = daemon.CANDaemon()
 	d.start()
+	#d = daemon.ParserDaemon()
+	#d.start()
 
-	p = daemon.LoggerDaemon()
-	p.start()
+	#p = daemon.LoggerDaemon()
+	#p.start()
 
 	# Start main GUI runtime.	
 	DigiDashApp().run()
