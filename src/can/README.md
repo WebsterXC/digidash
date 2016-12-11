@@ -170,6 +170,7 @@ finish clearing all codes in memory, and then returns nothing.
 
 #### Drivetime Logging ####
 
+
 #### Running Tests ####
 
 
@@ -184,7 +185,13 @@ Starting the logging module to log to a file happens at first boot, and the clos
 if DigiDash is not closed properly or an error is not handled, the log file may not save.Therefore, an exit routine method is offered 
 to group all necessary shutdown tasks in case DigiDash must close in an exception handler.
 
-The current format of the log messages is [timestamp] | [message], but can be changed in main.py.
+The current format of the log messages is [timestamp] | [message], but can be changed in main.py. Please use the following priority
+conventions:
+	* log.debug (Priority 10): Reserved for writing raw data to the logging file. (Example: raw bytes from a CAN message)
+	* log.info (Priority 20): Generic DigiDash messages.
+	* log.warning (Priority 30): Messages more important than log.info, but would not cause DigiDash to exit or stop running.
+	* log.error (Priority 40): Messages that could possibly cause DigiDash to stop running if not handled correctly. 
+	* log.critical (Priority 50): Events that prevent DigiDash from continuing to run.
 
 #### Offline Development & Vehicle Simulation ####
 Most of us realized very quickly that programming inside of, or near your vehicle can be difficult or impossible, especially in

@@ -132,7 +132,6 @@ class AddGauge(Widget):
             instance.Parent.appLayout.add_widget(newGS)
                             
             Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.005)
-	    self.log.debug(''.join(("Created new digital gauge: ", gmeasure)) )
 
         else:
             gstyle = 1
@@ -156,5 +155,4 @@ class AddGauge(Widget):
             instance.Parent.appLayout.add_widget(newGS)
                             
             Clock.schedule_interval(partial(Gauge.setVALUE, newG), 0.005)
-	    self.log.debug(''.join(("Created new analog gauge: ", gmeasure)) )
 
