@@ -169,7 +169,30 @@ finish clearing all codes in memory, and then returns nothing.
 ### Dynamometer Functions ###
 
 #### Drivetime Logging ####
+DigiDash supports drivetime logging to a text or CSV file, and references the same canbus.PIDcodes list that the CANDaemon
+does. This allows users to go for a drive and have the ability to review their data when their finished using DigiDash.
+The LoggerDaemon has a completely configurable sample time for various applications and a resizable RAM buffer to delay 
+the length I/O transactions that writes incur. The current implementation writes a line of data to a comma-delimited (CSV) 
+text file, where each line contains the data for each PID in canbus.PIDcodes.
 
+To start the basic logging service, navigate to main.py and uncomment the two lines that start the LoggerDaemon:
+
+		p = daemon.LoggeerDaemon()
+		p.start()
+
+However, for many applications, the file location may vary or need to be changed. Navigate to the /can directory
+and open the daemon.py file. The file location is defined on line 143:
+
+		log_data_to_file = "can/data/runtime.txt"
+
+To change the sampling time or size of the RAM buffer, the arguments for the logging thread should be changed. In the
+LoggerDaemon class, on line
+		
+		canlogging_process(64, 0.1)
+		
+The first argument (64) specifies the number of CSV lines to store in RAM before initiating a write flush for the entire
+buffer. The second argument (0.1) specifies the sampling time - a line of data is recorded from canbus.CANdata every 0.1
+seconds.
 
 #### Running Tests ####
 

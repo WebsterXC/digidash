@@ -47,12 +47,26 @@ gauges on the screen. Gauges are automatically updated by reading from the globa
 should *never* request data from the CAN bus explicitly.
 
 #### Adding Custom Backgrounds ####
+Any .jpg or .png image can be used as a home screen background for DigiDash. The software will automatically scale the
+image to the appropriate physical size if it's not exactly 800x480, however the aspect ratio is not maintained. For
+optimal results, use an exact-fit image for the home screen.
 
-#### Creating Custom Gauges ####
+To add a background, place the image in:
+		/src/Images
+
+Create Gauge background button/dropdown in Settings.py
+Add an instance of the BG afterwards
+
+#### Adding New Gauges ####
+
 
 #### Changing Analog Gauge Increments ####
 
+
 #### Adding Dropdown Menu Buttons ####
+Add Button needs a remove line for submenus
+
+
 
 
 ### DigiDash 3D Printed Case ###

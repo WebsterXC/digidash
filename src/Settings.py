@@ -24,9 +24,6 @@ import sys
 import subprocess
 import ConfigParser
 
-# sudo apt-get install python-matplotlib
-#import matplotlib.pyplot as plt
-
 class Settings(Widget):
     
     def __init__(self, **kwargs):
@@ -158,7 +155,6 @@ class Settings(Widget):
         instance.setmenu.open
     
     def bcbutpress(instance, *largs):
-        
         #remove main menu buttons from dropdown
         instance.setmenu.remove_widget(instance.bibut)
         instance.setmenu.remove_widget(instance.bcbut)
@@ -195,19 +191,13 @@ class Settings(Widget):
     def conbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.conbut.text)
 
-    #plt.plot([1,2,3,4])
-    #plt.ylabel('some numbers')
-    #plt.show()
-
     def rotbutpress(instance, *largs):
         print('The button <%s> is being pressed' % instance.rotbut.text)
         for ker in instance.Parent.ActiveGauges:
             ker.rotation = 0
     def set_parent(self, p):
         self.Parent = p
-    #GraphClass.graph()
     def exitbutpress(instance, *largs):
         instance.Parent.save_settings()
         print('The button <%s> is being pressed' % instance.exitbut.text)
         App.get_running_app().stop()
-    #sys.exit()
