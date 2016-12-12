@@ -18,7 +18,7 @@ you contributing to the DigiDash project in no time!
 ### GUI ###
 Most of the GUI files reside in this directory. DigiDash is built using sets of widgets that operate independely
 of each other, allowing for the ability to create custom gauges based on input range, background styles, or even
-rotation style.
+rotation style. DigiDash uses Kivy, an open-source Python GUI library to handle all touch and display events.
 
 #### Settings Initialization File ####
 The Settings.ini file is used to populate the GUI on every boot. The file defines each gauge that should be placed

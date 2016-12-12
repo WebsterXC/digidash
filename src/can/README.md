@@ -195,7 +195,21 @@ buffer. The second argument (0.1) specifies the sampling time - a line of data i
 seconds.
 
 #### Running Tests ####
+It's possible to simulate the functions of a standalone tuning dynamometer using many of the runtime tests found in canfunctions.py,
+including estimated torque-to-weight ratios, optimal upshift points for each gear, and max horsepower. Runtime tests take
+over the home screen with their own window, and are active during the duration of the test. In an effort to make the dyno
+tests as simple as possible, many of them can be started from any engine state, and wait for specific vehicle sensor values
+before continuing. Possible tests and calculations include:
 
+* Simulating a 4th gear dyno pull to calculate max horsepower. 
+* Optimal shift points (in RPM) for each gear.
+* 0-60MPH acceleration time.
+* Quarter mile pull time, speed, and approximate max horsepower.
+* Dynamometer correction factor (for use on a real tuning dyno).
+
+Note that since many other forces are at play driving on the road versus a dyno, the calculations performed by canfunctions.py
+should be considered estimates. A standard tuning dynamometer provides near-optimal traction and low resistance which our math
+does not compensate for.
 
 ### Additional Development Utilities ###
 
@@ -246,3 +260,22 @@ CANDaemon and uncomment the lines that start the ParserDaemon. It should look li
 Of course, this should be changed back when deploying DigiDash to a real vehicle again.
 
 ### Troubleshooting, etc... ###
+
+##### My Bluetooth dongle won't connect! #####
+We've found that the messages returned by the Bluetooth socket module are pretty much garbage.
+Similarly, the standard Amazon.com "OBD-II Bluetooth Dongle" is a generic OEM clone of the same
+product, any many brand new units don't communicate correctly.
+
+* Check to ensure the MAC address you entered for your Bluetooth dongle in blue.py is correct. If
+you never performed this step, check out Installation.md in the top-level directory for detailed
+instructions on how to do this.
+
+* Try rebooting your Raspberry Pi. If DigiDash closes without running it's exit routines, occasionaly
+the Bluetooth socket does not close correctly and makes reconnecting very troublesome. Sometimes
+closing the terminal that DigiDash is running in (if applicable) will force the socket closed without
+needed a reboot.
+
+* Try getting closer to the vehicle. If you're like us, and developing DigiDash in the comfort of our 
+homes, it's very easy to not be able to connect on the first couple of tries since you're so far away.
+Distance, walls, foliage, and weather can all affect your connection to the Bluetooth dongle, all of
+which would not exist inside a vehicle.

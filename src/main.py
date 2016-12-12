@@ -74,8 +74,8 @@ def main():
 	d = daemon.ParserDaemon()
 	d.start()
 
-	p = daemon.LoggerDaemon()
-	p.start()
+	#p = daemon.LoggerDaemon()
+	#p.start()
 
 	# Start main GUI runtime.	
 	DigiDashApp().run()
