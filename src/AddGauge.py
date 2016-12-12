@@ -1,3 +1,14 @@
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]:
+
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.image import Image
@@ -16,27 +27,25 @@ from GaugeClass import Gauge
 from GaugeClassDigital import GaugeDigital
 from can import pids
 from can import canbus 
-import time
+import time, logging
 import platform
 import ConfigParser
 
 gaugeName = " "
 
 class AddGauge(Widget):
-    #global typeDict
-
+    log = None
     def __init__(self, **kwargs):
         super(AddGauge, self).__init__(**kwargs)
-
+	
+	self.log = logging.getLogger('digilogger')
 
         win_w = Window.size[0]
         win_h = Window.size[1]
         if(platform.platform()=='Linux-4.1.19-v7+-armv7l-with-Ubuntu-16.04-xenial'):
             win_h= 480
 
-        #REF TO PARENT CLASS
-        self.Parent = None
-        
+        self.Parent = None        
         self.dButton = None
         self.aButton = None
 
@@ -44,23 +53,9 @@ class AddGauge(Widget):
 
         reads = read()
         self.typeDict = read.readIn(reads, "AddGauge.csv")
-        #print(self.typeDict)
 
-        #self.Values= ['Engine Load',
-         #        'Fuel Pressure',
-          #       'Tachometer',
-           #     'Speedometer',
-            #    'MAF',
-             #   'Throttle Pos',
-              #  'Boost Pressure']
-
-        #self.rage = DropDown()
         self.codetype = DropDown()
        
-       
-        #print(val)   
-        #print(self.typeDict.keys())
-        #for n in range(0,1):
         for x in self.typeDict.keys():
                 
                 #self.digi = Button(text='Digital Gauge', size_hint_y = None, height = 25)
@@ -109,8 +104,6 @@ class AddGauge(Widget):
         instance.aButton = analo
         instance.Parent.appLayout.add_widget(analo)
 
-        #gtype = 'digital'
-        #print(gtype)
     def makeGauge(instance, val, diana, *largs):
         instance.Parent.appLayout.remove_widget(instance.aButton)
         instance.aButton = None
@@ -123,13 +116,9 @@ class AddGauge(Widget):
             gposy = 250
             gscale = 0.35
             gmeasure = instance.typeDict.get(val)[0]
-            #print(gmeasure)
             gunits = instance.typeDict.get(val)[3]
-            #print(gunits)
             gmin = float(instance.typeDict.get(val)[1])
-            #print(gmin)
             gmax = float(instance.typeDict.get(val)[2])
-            #print(gmax)
             gcode = str(instance.typeDict.get(val)[4])
             canbus.subscribe(gcode)
 
@@ -142,7 +131,7 @@ class AddGauge(Widget):
             instance.Parent.ActiveGauges.append(newGS)
             instance.Parent.appLayout.add_widget(newGS)
                             
-            Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.0625)
+            Clock.schedule_interval(partial(GaugeDigital.setVALUE, newG), 0.005)
 
         else:
             gstyle = 1
@@ -150,13 +139,9 @@ class AddGauge(Widget):
             gposy = 220
             gscale = 0.35
             gmeasure = instance.typeDict.get(val)[0]
-            #print(gmeasure)
             gunits = instance.typeDict.get(val)[3]
-            #print(gunits)
             gmin = float(instance.typeDict.get(val)[1])
-            #print(gmin)
             gmax = float(instance.typeDict.get(val)[2])
-            #print(gmax)
             gcode = str(instance.typeDict.get(val)[4])
             canbus.subscribe(gcode)
 
@@ -169,4 +154,5 @@ class AddGauge(Widget):
             instance.Parent.ActiveGauges.append(newGS)
             instance.Parent.appLayout.add_widget(newGS)
                             
-            Clock.schedule_interval(partial(Gauge.setVALUE, newG), 0.0625)
+            Clock.schedule_interval(partial(Gauge.setVALUE, newG), 0.005)
+

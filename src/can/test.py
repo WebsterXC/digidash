@@ -1,20 +1,13 @@
-import socketrun
-import blue
-import automath
+import dtc
 
 def main():
-	b = blue.Blue()
-	b.connect()
+	# One DTC code (P2468) is set.
+	ret = dtc.dtc_scan("SEARCHING... 43 00 24 68")
+	print(ret)
 
-	res = send_recv("atz")
-	res = send_recv("ate0")
+	# No DTC codes are set.
+	ret = dtc.dtc_scan("SEARCHING... 43 00")
+	print(ret)
 
-	for i in range(0, 50):
-		res = send_recv("010C")
-		r = res.split()
-		if len(r) > 3:
-			automath.eng_rpm_conv(r[2], r[3])
-		else:
-			continue
-
-	b.disconnect()
+if __name__ == "__main__":
+	main()

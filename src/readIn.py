@@ -1,8 +1,15 @@
-#Supporting code for Add Gauge 
-#reads .csv into dictionary
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]: Supporting code for Add Gauge reads .csv into dictionary
 
 import csv
-
 
 types = {}
 values = []

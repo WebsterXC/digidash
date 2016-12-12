@@ -1,3 +1,14 @@
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]:
+
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.image import Image
@@ -15,16 +26,18 @@ from AddGauge import AddGauge
 from Header import Header
 from Footer import Footer
 from kivy.uix.dropdown import DropDown
-import time
+import time, logging
 import ast
 from functools import partial
 import ConfigParser
 import subprocess  
 
-from can import pids
+from can import pids, canbus
 
 class DigiDashApp(App):
+    log = None
     def build(self):
+	self.log = logging.getLogger('digilogger')
 
         Config = ConfigParser.ConfigParser()
         Config.read("Settings.ini")
@@ -34,6 +47,7 @@ class DigiDashApp(App):
         
         bright = Config.get('Application_Settings','Brightness')
         subprocess.call(['sudo','./brightness.sh',str(bright)])
+	self.log.debug(''.join(("System brightness changed to ", bright)) )
 
         #Initialize all Gauges from INI config file
         for g in GaugeList:
@@ -51,10 +65,6 @@ class DigiDashApp(App):
             bg = Config.get(g,'background')
             tc = ast.literal_eval(str(Config.get(g,'textcolor')))
             dl = Config.get(g,'dialcolor')
-
-            #print(g)
-            #print(gtype,gstyle,gposx,gposy,gscale,gmeasure,gunits,gmin,gmax)
-
 
             if(gtype == 'analog'):
                 curG = Gauge()
@@ -74,8 +84,10 @@ class DigiDashApp(App):
 
                 curG.PID = PID
 
-                Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.0625)
-
+                Clock.schedule_interval(partial(Gauge.setVALUE, curG), 0.005)
+		canbus.subscribe(PID)
+	    	self.log.debug(''.join(("Created new analog gauge: ", gmeasure)) )
+		
             else:
                 curG = GaugeDigital()
                 curGS = Scatter(scale=gscale, scale_min=0.25, scale_max=1.5, size_hint=(None,None), size=(400,400), pos=(gposx,gposy))
@@ -92,21 +104,23 @@ class DigiDashApp(App):
 
                 curG.PID = PID
                 
-                Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.0625)
+                Clock.schedule_interval(partial(GaugeDigital.setVALUE, curG), 0.005)
+		canbus.subscribe(PID)
+	    	self.log.debug(''.join(("Created new digital gauge: ", gmeasure)) )
 
         #Define application layout
         self.appLayout = FloatLayout(size=(800,600))
+	self.log.debug("System resolution set to 800x600.")
 
         #Background loaded from ini file
         bg_path = Config.get('Application_Settings','Background')
         self.bg = Image(source=bg_path, pos=(0,0), size=(Window.size[0],Window.size[1]))
 
-
         #Create header
         #head = Header()
-    #win_w = Window.size[0]
+        #win_w = Window.size[0]
         #win_h = Window.size[1]
-    #head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
+        #head = Image(source='Images/StatusBar.png', size=(win_w,win_h/12), pos=(0,win_h-60))
 
         #Create footer and schedule clock and date functions
         foot = Footer()
@@ -116,7 +130,7 @@ class DigiDashApp(App):
     
 
         #Add Background Header and Footer
-    #self.appLayout.add_widget(head)
+        #self.appLayout.add_widget(head)
         self.appLayout.add_widget(self.bg)
         self.appLayout.add_widget(foot)
 
@@ -127,12 +141,14 @@ class DigiDashApp(App):
         self.gaugeMenu = AddGauge()
         AddGauge.set_parent(self.gaugeMenu, self)
         self.appLayout.add_widget(self.settingMenu)
-        self.appLayout.add_widget(self.gaugeMenu) #DONT MOVE, GETS FUCKED REAL QUICK
+        self.appLayout.add_widget(self.gaugeMenu) #DONT MOVE
+
 
         #Add Gauges
         for ag in self.ActiveGauges:
             self.appLayout.add_widget(ag)
 
+	self.log.debug("DigiDash home screen started.")
 
         #piself.bind(size=self.__resize__)
         #Change to default touchscreen resolution
@@ -142,6 +158,7 @@ class DigiDashApp(App):
 
     def on_resize(width,height):
         print('RESIZED:' + str(width) + ' ' + str(height))
+	self.log.debug(''.join(("Window resized to ", width, "x", height)) )
 
     def __resize__(instance, val):
         print('RESIZE TRIGGERED: '+str(Window.size))
@@ -149,7 +166,6 @@ class DigiDashApp(App):
         AddGauge.__resize__(self.gaugeMenu)
         Header.__resize__(self.head)
         Footer.__resize__(self.foot)
-
 
     def close_all_gauge_menus(instance):
     	#Loops through all active gauges and closes menus that are open
@@ -170,12 +186,12 @@ class DigiDashApp(App):
             for sec in remove_sec:
                 instance.Config.remove_section(sec)
 
-        i=0 #COUNTER FOR SECTION NAME
+        i=0 # Counter for section name
         for ga in instance.ActiveGauges:
-            g = ga.children[0]  #Get the gauge class from the scatter
+            g = ga.children[0]  # Get the gauge class from the scatter
             i+=1
 
-            #DEFINITIONS FOR SAVING
+            # Definitions for saving
             gname = 'Gauge_'+str(i)
             bg = g.gauge.source
             tc = g.MTitle.color
@@ -217,7 +233,6 @@ class DigiDashApp(App):
 
         instance.Config.write(confile)
         confile.close()
-
 
 if __name__ == '__main__':
     DigiDashApp().run()

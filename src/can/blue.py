@@ -1,5 +1,17 @@
-# File defines methods to interact with the OBDII bluetooth receiver.
-# The OBDII bluetooth receiver we are deploying uses the ELM327 protocol to communicate.
+#################################################
+#   ======    =====    ======   =====
+#   ||	 \\     |     //	  |
+#   ||    \\    |    // 	  |
+#   ||    //    |    ||  =====	  |   --------
+#   ||   //     |    \\     //	  |
+#   ======    =====   ======    =====
+##################################################
+
+# [Summary]: This file manages and abstracts the communication with the ELM327 dongle. Using a Bluetooth
+# socket, the Blue class manages the sending and receiving of characters through the ELM327 command set.
+# Whether the command be for the underlying vehicle or the dongle itself, the ELM327 chip expects to
+# receive ASCII characters. There are many possible return statements from the ELM327 dongle that
+# aren't valid data; a set of exceptions is provided to handle the specific events.
 
 import logging
 import string
@@ -22,24 +34,25 @@ class StoppedError(Exception):
     pass
 
 class Blue:
-    #myMAC = "00:1D:A5:00:03:4E"  # Mark's dongle (ELM v1.5 aka shit chinese clone)
-    myMAC = "00:1D:A5:68:98:8A" #Will's dongle (ELM v2.1 aka not CHINA CHINA CHINA)
+    myMAC = "00:1D:A5:68:98:8A" # ELM327 Bluetooth Dongle MAC Address
 
     state = 0  # state is 1 if connected, 0 if disconnected
     sock = None
-    delay = 0.017 #WE NEED TO TEST THIS VALUE!!! 11/6
+    delay = 0.005
     log = None
 
     def __init__(self):
 	self.log = logging.getLogger('digilogger')
         print("Bluetooth object generated.")
 
+    # Create a bluetooth socket with the MAC address provided
     def connect(self):
         if self.state == 1:
             raise StateError("Can't connect. You're already connected.")
 
         print("Opening Bluetooth socket...")
         count = 0
+	# Try to open a bluetooth socket 5 times, spaced 5 seconds apart before giving up completely.
         while 1:
             try:
                 self.state = 1
@@ -51,21 +64,24 @@ class Blue:
                 self.sock.close()
                 count += 1
                 if count == 5:
-		    self.log.critical("Failed to open socket connection.")
+                    self.log.error("Failed to open socket connection.")
                     raise ConnectFailureError("Connect failed 5 times. I give up.")
                 print ("Could not connect: ", error, "; Retrying in 5 seconds...")
                 time.sleep(5)
-        print("Socket successfully opened!")
-	self.log.debug(''.join(("Socket connected with ", myMAC)) )
 
+        self.log.info(''.join(("Socket opened with MAC address [", self.myMAC, "]")) )
+        print("Socket successfully opened!")
+
+    # Disconnect from the open socket, if one is connected.
     def disconnect(self):
         if self.state == 0:
             raise StateError("Can't disconnect. You aren't connected.")
         self.state = 0
         self.sock.close()
-	self.log.debug(''.join(("Connection with ", myMAC, "closed.")) )
+        self.log.info(''.join(("Connection with [", myMAC, "] closed.")) )
 
-    def send_recv(cmd): #send cmd parameter and return dongle response (ignores echoes)
+    # Send characters to the ELM327 dongle and grab <=64 response characters.
+    def send_recv(cmd):
         sock.send(cmd + "\r\n")
         time.sleep(0.005)
         
@@ -74,54 +90,20 @@ class Blue:
             nocarriage = c.replace('\r', "")
             buffer = nocarriage.replace('>', "")
 
+	    # Handle erronous responses
             if buffer != "" and buffer != cmd:
                 if buffer == "SEARCHING...":
                     continue
                 if buffer == "?":
-                    self.log.debug(''.join(("Command ", cmd, " is invalid.")))
+                    self.log.info(''.join(("Command ", cmd, " is invalid.")))
                     raise InvalidCmdError("Command '%s' is invalid." % cmd)
                 if buffer == "NO DATA":
-                    self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")))
+                    self.log.info(''.join(("Command ", cmd, " produced NO DATA.")))
                     raise NoDataError("Dongle returned 'NO DATA'.")
                 if buffer == "STOPPED":
-                    self.log.warning(''.join(("ELM returned STOPPED")))
+                    self.log.info(''.join(("ELM returned STOPPED")))
                     raise StoppedError("Dongle returned 'STOPPED'.")
                 if buffer == "UNABLE TO CONNECT":
                     self.log.warning(''.join(("ELM returned UNABLE TO CONNECT")))
                     raise StoppedError("Dongle returned 'UNABLE TO CONNECT'")
                 return buffer
-    '''
-    def send_recv(self, cmd):  # send cmd parameter and return dongle response (ignores echoes)
-        if self.state == 0:
-            raise StateError("Can't send/recv. You aren't connected.")
-        self.sock.send(cmd + "\r\n")
-        time.sleep(self.delay)
-        while 1:
-            buffer = ""
-            while 1:
-                c = self.sock.recv(1)
-                #print("c is:%s:", c)
-                if (c == '\r' or c == '>') and len(buffer) > 0:
-                    break
-                else:
-                    if c != "\r" and c != ">":
-                        buffer = buffer + c
-            # print("Here!")
-            # print(buffer)
-            if buffer != "" and buffer != "\r" and buffer != cmd and buffer != (">" + cmd):
-                if buffer == "SEARCHING...":
-                    continue
-                if buffer == "?":
-		    self.log.debug(''.join(("Command ", cmd, " is invalid.")) )
-                    raise InvalidCmdError("Command '%s' is invalid." % cmd)
-                if buffer == "NO DATA":
-		    self.log.debug(''.join(("Command ", cmd, " produced NO DATA.")) )
-                    raise NoDataError("Dongle returned 'NO DATA'.")
-                if buffer == "STOPPED":
-		    self.log.warning(''.join(("ELM returned STOPPED")) )
-                    raise StoppedError("Dongle returned 'STOPPED'.")
-                sock.recv(2) # get rid of "\r>" that's still waiting to be received
-                #print("Response is")
-                #print(buffer)
-                return buffer
-    '''
