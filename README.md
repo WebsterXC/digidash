@@ -27,10 +27,42 @@ In addition, we found the following items helpful during development:
 * 3D Printer Access (3D printer files for DigiDash case are offered)
 
 ### Downloading and Installing DigiDash ###
-Thanks for downloading DigiDash! Please refer to Installation.md for detailed installation
-instructions. We'll walk you through getting your hardware set up and DigiDash running on
-your Raspberry Pi in no time!
+Thanks for downloading DigiDash! We'll walk you through getting your hardware set up 
+and DigiDash running on your Raspberry Pi in no time!
 
+For more detailed instructions, please refer to Installation.md.
+
+### Quick Setup ###
+This installation assumes you've installed Raspbian on your Raspberry Pi, and the touchscreen is
+powered and connected.
+
+Download the install_digidash.sh file. This script will take care of installing all the necessary
+software that DigiDash relies on. To run this file, you can double-click it in your file directory,
+or in a terminal type the following commands:
+
+		chmod +x install_digidash.sh
+		sudo ./install_digidash
+
+During the install process, the script will update your system, and may prompt you to download
+archives. Type "Y" to continue.
+
+		Need to get 8,689 kB of archives.
+		After this operation, 9,630 kB of additional disk space will be used.
+		Do you want to continue? [Y/n] Y
+
+Similarly, it may prompt you to remove old archives. Type "Y" to continue.
+
+		After this operation, 887 MB disk space will be freed.
+		Do you want to continue? [Y/n]
+
+Wait for the script to finish running completely. Once it finishes, you can now open up a terminal and
+type:
+
+		digidash
+
+which will start the DigiDash program. Happy driving!
+
+=====================================================
 ### Group Members ###
 * Will Burgin
 * David Evans
