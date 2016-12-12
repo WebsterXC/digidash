@@ -42,14 +42,10 @@ mkdir repositories
 cd repositories
 git clone https://github.com/WebsterXC/digidash.git
 
-# Create a custom command by adding digidash to /usr/bin
+# Create a custom command by adding digidash to /bin
 cd /bin
 if [ ! -e digidash.sh ]; then
-    python repositories/digidash/src/main.py >> digidash.sh
+    sed -i 'python repositories/digidash/src/main.py' digidash.sh
 fi
 
 chmod +x digidash.sh
-
-#We should really do a reboot now but then we cant run digidash automatically
-#Maybe before reboot setup the auto start stuff
-#sudo reboot
