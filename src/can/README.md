@@ -200,6 +200,10 @@ including estimated torque-to-weight ratios, optimal upshift points for each gea
 over the home screen with their own window, and are active during the duration of the test. In an effort to make the dyno
 tests as simple as possible, many of them can be started from any engine state, and wait for specific vehicle sensor values
 before continuing. Possible tests and calculations include:
+<<<<<<< HEAD
+=======
+
+>>>>>>> a8280114f7641c6ee0fdd3d16bebdaa8bdec8abc
 * Simulating a 4th gear dyno pull to calculate max horsepower. 
 * Optimal shift points (in RPM) for each gear.
 * 0-60MPH acceleration time.
