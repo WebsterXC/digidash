@@ -34,14 +34,19 @@ For more detailed instructions, please refer to Installation.md.
 
 ### Quick Setup ###
 This installation assumes you've installed Raspbian on your Raspberry Pi, and the touchscreen is
-powered and connected.
+powered and connected. The DigiDash quick install is completely automated, and will take care of
+downloading and installing all necessary software.
 
-Download the install_digidash.sh file. This script will take care of installing all the necessary
-software that DigiDash relies on. To run this file, you can double-click it in your file directory,
-or in a terminal type the following commands:
+Begin by clicking on the "Clone or Download" button in the top right corner of this repository.
+Navigiate to the downloaded .zip file and extract it to any directory of your choosing.
 
-		chmod +x install_digidash.sh
-		sudo ./install_digidash
+Open the folder with the extracted DigiDash files. Double-click on the file:
+
+		install_digidash.sh
+
+Which may prompt to to either execute the script, or execute in terminal. The first-time
+installation process can take up to 10 minutes as packages are downloaded, so we reccommend
+selecting "Execute In Terminal" to view the progress.
 
 During the install process, the script will update your system, and may prompt you to download
 archives. Type "Y" to continue.
@@ -50,10 +55,10 @@ archives. Type "Y" to continue.
 		After this operation, 9,630 kB of additional disk space will be used.
 		Do you want to continue? [Y/n] Y
 
-Similarly, it may prompt you to remove old archives. Type "Y" to continue.
+Similarly, it may prompt you to remove old archives. This is normal, again type "Y" to continue.
 
 		After this operation, 887 MB disk space will be freed.
-		Do you want to continue? [Y/n]
+		Do you want to continue? [Y/n] Y
 
 Wait for the script to finish running completely. Once it finishes, you can now open up a terminal and
 type:
