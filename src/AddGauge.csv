@@ -1,19 +1,16 @@
-Tachometer,0,9000,RPM,0x0C
-Speedometer,0,300,KMH,0x0D
+Ambient Temp,-30,60,C,0x46
+Ambient Pres,-40,100,kPa,0x33 
 Boost,-30,50,kPa,0x6F
-Ambient Air Pres,-40,100,kPa,0x33 
-Fuel Pres,0,100,kPa,0x0A
-MAF,0.0,500.0,g/s,0x10
-MAP,-15,50,kPa,0x0B
-F/A Ratio,0.0,2.0, ,0x34
-F/A Ratio 2,0.0,2.0, ,0x35
-Throttle Pos,0,100,%,0x11
-Accel Pedal Pos,0,100,%,0x5A
-Calc Load Val,0,100,%,0x04
-Intake Temp,35,125,C,0x0F
-Coolant Temp,35,125,C,0x05
-Oil Temp,35,125,C,0x5C
-Ambient Air Temp,-30,60,C,0x46
-O2 Sensor,0.1,1.0,V,0x14
-O2 Sensor 2,0.1,1.0,V,0x15
+Coolant,35,125,C,0x05
+Engine Load,0,100,%,0x04
 Engine Torque,0,1500,N/m,0x62
+Fuel:Air,0.0,2.0, ,0x24
+Fuel Pres,0,100,kPa,0x0A
+Intake,35,125,C,0x0F
+MAP,-15,50,kPa,0x0B
+MAF,0.0,500.0,g/s,0x10
+Oil,35,125,C,0x5C
+Pedal,0,100,%,0x5A
+Speed,0,300,KMH,0x0D
+Tach,0,9000,RPM,0x0C
+Throttle,0,100,%,0x11
