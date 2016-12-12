@@ -69,10 +69,10 @@ def main():
 
 	# Vehicle available. Start automated data gathering.
 	
-	#d = daemon.CANDaemon()
-	#d.start()
-	d = daemon.ParserDaemon()
+	d = daemon.CANDaemon()
 	d.start()
+	#d = daemon.ParserDaemon()
+	#d.start()
 
 	#p = daemon.LoggerDaemon()
 	#p.start()
