@@ -152,4 +152,11 @@ Lastly, you must set your Pi to boot to the command line. Not only does this spe
 as the master GUI frame to avoid conflictions with the underlying desktop. Open the Pi's home drop-down menu, then choose 
 "Preferences"->"Raspberry Pi Configuration". Select "Boot: TO CLI" and then hit OK.
 
+Should you want to run DigiDash manually from it's entry point, navigate to the /src directory and type:
+
+		sudo python main.py
+
+Which will invoke DigiDash manually. Note that DigiDash can be run without superuser priveledge, however it will annoyingly ask
+you if you'd like to remove the previous .log file (of course you do!).
+
 ### You're now good to go! Reboot you Pi and experience some good ol' DigiDash fun! ###

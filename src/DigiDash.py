@@ -149,12 +149,9 @@ class DigiDashApp(App):
             self.appLayout.add_widget(ag)
 
 	self.log.debug("DigiDash home screen started.")
-
-        #piself.bind(size=self.__resize__)
-        #Change to default touchscreen resolution
-        #Window.size = (800,600)
         self.Config = Config #Create a class reff to Config Parser used in startup
-        return self.appLayout
+        
+	return self.appLayout
 
     def on_resize(width,height):
         print('RESIZED:' + str(width) + ' ' + str(height))

@@ -1,9 +1,8 @@
 # DigiDash #
 
-============
 ## A plug-and-play digital dashboard and engine monitor. ##
 
-### About
+### About ###
 DigiDash is an auxilliary dashboard made from a Raspberry Pi and 7" RGB touchscreen, compatible with 
 all OBDI-II compliant vehicles. Using a standard ELM327 OBD-II Bluetooth dongle found on sites like 
 Amazon.com, users can use a Raspberry Pi to quickly and easily read and record data from their vehicle. DigiDash provides an easy to use GUI that
@@ -45,8 +44,9 @@ Open the folder with the extracted DigiDash files. Double-click on the file:
 		install_digidash.sh
 
 Which may prompt to to either execute the script, or execute in terminal. The first-time
-installation process can take up to 10 minutes as packages are downloaded, so we reccommend
-selecting "Execute In Terminal" to view the progress.
+installation process can easily take over 20 minutes to complete, so we reccommend
+selecting "Execute In Terminal" to view the progress and ensure your RPi hasn't locked
+up halfway through.
 
 During the install process, the script will update your system, and may prompt you to download
 archives. Type "Y" to continue.

@@ -5,15 +5,16 @@ The /src directory and it's subdirectories contain technical README documentatio
 you contributing to the DigiDash project in no time!
 
 ### File Map ###
-* AddGauge.py: 
-* DigiDash.py:
-* Footer.py:
-* GaugeClass.py:
-* GaugeClassDigital.py:
-* Header.py:
-* readIn.py:
-* Settings.py:
-* Settings.ini:
+* AddGauge.py: Provides utilities to build individual gauge objects for each PID. 
+* AddGauge.csv: Defines all the possible gauges that DigiDash supports (for menu integration).
+* DigiDash.py: GUI boot point. File takes all built objects and places them on the screen.
+* Footer.py: File defines the time/date footer that's on DigiDash's home screen.
+* GaugeClass.py: File defines the analog gauge class, gauge appearences, and functions to interact with it.
+* GaugeClassDigital.py:	File defines the digital gauge class, gauge appearences, and functions to interact with it.
+* Header.py: File is used to create an optional header for the DigiDash home screen. It is currently disabled.
+* readIn.py: Contains a utility to read in data to DigiDash from various CSV files.
+* Settings.py: All the methods bound to the buttons in the Settings dropdown menu. 
+* Settings.ini: File that defines the state of gauges on the home screen at boot time.
 
 ### GUI ###
 Most of the GUI files reside in this directory. DigiDash is built using sets of widgets that operate independely

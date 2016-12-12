@@ -56,15 +56,7 @@ class AddGauge(Widget):
 
         self.codetype = DropDown()
        
-        for x in self.typeDict.keys():
-                
-                #self.digi = Button(text='Digital Gauge', size_hint_y = None, height = 25)
-                #self.digi.bind(on_release = partial(self.userSelect, x, 'digital'))
-                #self.rage.add_widget(self.digi)
-            
-                #self.analo = Button(text='Analog Gauge', size_hint_y = None, height = 25)
-                #self.analo.bind(on_release = partial(self.userSelect, x, 'analog'))
-                #self.rage.add_widget(self.analo)
+        for x in self.typeDict.keys():    
             self.cur = Button(text=x, size_hint_y= None, height= 30)
             self.cur.bind(on_release = partial(self.userSelect, x))  
             self.codetype.add_widget(self.cur)  

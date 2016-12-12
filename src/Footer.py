@@ -43,8 +43,6 @@ class Footer(Widget):
         self.add_widget(self.time)
 
         self.size = self.bg.size
-        #print(self.size)
-        #print(self.bg.size)
 
     def updatetime(self, *largs):
         self.time.text= time.strftime("%H:%M:%S") + ' EST'

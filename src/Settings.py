@@ -28,15 +28,10 @@ class Settings(Widget):
     
     def __init__(self, **kwargs):
         super(Settings, self).__init__(**kwargs)
-        
-        #global Config
-        #Config = ConfigParser.ConfigParser()
-        #Config.read("Settings.ini")
-        
+         
         win_w = Window.size[0]
         win_h = Window.size[1]
 
-        #self.Values = ['Background Image','Background Color','Header/Footer Image','Connection']
         self.Parent = None
         self.setmenu = DropDown()
 
@@ -187,17 +182,17 @@ class Settings(Widget):
         instance.setmenu.add_widget(brightbut4)
         
     def hfbutpress(instance, *largs):
-        print('The button <%s> is being pressed' % instance.hfbut.text)
+        print('The button <%s> is depricated.' % instance.hfbut.text)
     def conbutpress(instance, *largs):
-        print('The button <%s> is being pressed' % instance.conbut.text)
+        print('The button <%s> is depricated.' % instance.conbut.text)
 
     def rotbutpress(instance, *largs):
-        print('The button <%s> is being pressed' % instance.rotbut.text)
+        print('The button <%s> is depricated.' % instance.rotbut.text)
         for ker in instance.Parent.ActiveGauges:
             ker.rotation = 0
     def set_parent(self, p):
         self.Parent = p
     def exitbutpress(instance, *largs):
         instance.Parent.save_settings()
-        print('The button <%s> is being pressed' % instance.exitbut.text)
+        print('The button <%s> is depricated.' % instance.exitbut.text)
         App.get_running_app().stop()

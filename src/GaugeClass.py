@@ -412,7 +412,6 @@ class Gauge(Widget):
         #SHOULD BE:
         val = canbus.CANdata[self.PID]
         angle = 360 - (scale*val)
-        #print('Range:' + str(val_range) + '  Scale:' + str(scale) + '  Value:' + str(val) + '  Angle:'+ str(angle))
         self.dialscat.rotation = angle
 
 
